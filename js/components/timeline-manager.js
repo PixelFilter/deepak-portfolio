@@ -5,11 +5,8 @@ class TimelineManager {
         this.currentItemIndex = 0; // Start with the first item
         this.isScrolling = false;
         this.scrollTimer = null;
-        this.transitionTimer = null;
-        this.transitionResetTimer = null; // Timer for resetting incomplete transitions
         this.lastScrollY = 0; // Track scroll direction
         this.isClickScrolling = false; // Track if scroll is from click
-        this.transitionResetDelay = 2000; // 2 seconds timeout for transition reset
         this.keyboardListenerAdded = false; // Track if keyboard listener is added
         this.wheelDebounceTimer = null; // Timer for debouncing wheel events
         // Auto-transition properties
@@ -72,7 +69,6 @@ class TimelineManager {
         // Scroll event listener
         window.addEventListener('scroll', () => {
             this.handleScroll();
-            this.handleScrollEffects();
         });
         // Wheel event listener for smooth navigation-like scrolling
         window.addEventListener('wheel', (e) => {
@@ -133,113 +129,9 @@ class TimelineManager {
         }
         return -1; // Year not found
     }
-    handleScrollEffects() {
-        // Don't apply blur effects during click-initiated scrolling or auto-transitions
-        if (this.isClickScrolling || this.isAutoTransitioning) {
-            return;
-        }
-        // Reset auto-transition timer since user is scrolling
-        this.resetAutoTransitionTimer();
-        // Clear existing transition reset timer since user is scrolling
-        if (this.transitionResetTimer) {
-            clearTimeout(this.transitionResetTimer);
-            this.transitionResetTimer = null;
-        }
-        const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-        const segmentSize = 1 / this.timelineItems.length;
-        const currentSegmentIndex = Math.floor(scrollPercentage * this.timelineItems.length);
-        // Clamp the segment index to prevent going beyond the last item
-        const clampedSegmentIndex = Math.max(0, Math.min(currentSegmentIndex, this.timelineItems.length - 1));
-        // If we're at or past the last item, reset blur and return
-        if (clampedSegmentIndex >= this.timelineItems.length - 1) {
-            this.resetBlurToNormal();
-            return;
-        }
-        // Determine scroll direction
-        const scrollDirection = window.scrollY > this.lastScrollY ? 'down' : 'up';
-        this.lastScrollY = window.scrollY;
-        // Calculate progress within current segment
-        let segmentProgress = (scrollPercentage % segmentSize) / segmentSize;
-        // If we're at the exact boundary (segmentProgress very close to 0), reset blur
-        if (segmentProgress < 0.02) {
-            this.resetBlurToNormal();
-            return;
-        }
-        // Apply blur effect based on proximity to segment boundaries
-        let blurProgress = 0;
-        // Handle boundary cases for first and last segments
-        if (clampedSegmentIndex === 0) {
-            // First segment: only blur when scrolling down and approaching end
-            if (scrollDirection === 'down') {
-                blurProgress = segmentProgress;
-            } else {
-                blurProgress = 0; // No blur when at the very beginning
-            }
-        } else {
-            // Middle segments: normal bidirectional blur
-            if (scrollDirection === 'down') {
-                blurProgress = segmentProgress;
-            } else {
-                blurProgress = 1 - segmentProgress;
-            }
-        }
-        // If blur progress is very low, reset immediately
-        if (blurProgress < 0.05) {
-            this.resetBlurToNormal();
-            return;
-        }
-        // Accelerate the progress for faster visual feedback
-        blurProgress = Math.pow(blurProgress, 1.5); // Exponential acceleration
-        // Apply proportional motion blur based on accelerated scroll progress
-        this.applyProportionalMotionBlur(blurProgress);
-        // Set timeout to reset transition if user stops scrolling mid-transition
-        // Reduced timeout for faster reset
-        if (blurProgress > 0) {
-            this.transitionResetTimer = setTimeout(() => {
-                this.resetBlurToNormal();
-            }, 800); // Reduced from 2000ms to 800ms
-        }
-    }
-    applyProportionalMotionBlur(progress) {
-        const backgroundText = document.getElementById('backgroundText');
-        const videoBackground = document.getElementById('video-background');
-        const infoPanel = document.getElementById('infoPanel');
-        // Calculate motion blur based on progress (0 to 1)
-        // Continuously increase blur as we progress through the segment
-        const motionBlur = progress * 3; // Max 3px blur at end of segment
-        const textOpacity = 1 - (progress * 1.0); // Complete fade to 0 opacity
-        if (backgroundText) {
-            backgroundText.style.filter = `blur(${motionBlur}px)`;
-            backgroundText.style.opacity = `${textOpacity}`;
-            const title = backgroundText.querySelector('.background-title');
-            const description = backgroundText.querySelector('.background-description');
-            if (title) {
-                title.style.filter = `blur(${motionBlur * 0.8}px)`;
-            }
-            if (description) {
-                description.style.filter = `blur(${motionBlur * 0.6}px)`;
-            }
-        }
-        // Apply same effects to info panel
-        if (infoPanel) {
-            infoPanel.style.filter = `blur(${motionBlur}px)`;
-            infoPanel.style.opacity = `${textOpacity}`;
-        }
-        // Keep video zoom effect as it works well
-        if (videoBackground) {
-            const videoZoomScale = 1 + (progress * 0.05); // Max 5% zoom
-            const videoIframeZoomScale = 1.15 + (progress * 0.05); // Base 1.15 + max 5% zoom
-            videoBackground.style.transform = `scale(${videoZoomScale})`;
-            const iframe = videoBackground.querySelector('iframe');
-            if (iframe) {
-                iframe.style.transform = `scale(${videoIframeZoomScale})`;
-                iframe.style.filter = `blur(${0.5 - (progress * 0.3)}px) saturate(${0.9 + (progress * 0.2)}) brightness(${0.8 + (progress * 0.2)})`;
-            }
-        }
-    }
     fadeOutCurrentContent(callback) {
-        // Use progressive blur/fade animation similar to scroll effect
-        this.animateClickTransition(callback);
+        // Simple immediate callback - no blur animations
+        callback();
     }
     animateClickTransition(callback) {
         const backgroundText = document.getElementById('backgroundText');
@@ -302,72 +194,6 @@ class TimelineManager {
             }
         }
     }
-    easeOutQuad(t) {
-        return t * (2 - t);
-    }
-    resetBlurToNormal() {
-        // Clear transition reset timer
-        if (this.transitionResetTimer) {
-            clearTimeout(this.transitionResetTimer);
-            this.transitionResetTimer = null;
-        }
-        const backgroundText = document.getElementById('backgroundText');
-        const videoBackground = document.getElementById('video-background');
-        const infoPanel = document.getElementById('infoPanel');
-        if (backgroundText) {
-            // Force immediate removal of any blur effects
-            backgroundText.style.filter = 'none';
-            backgroundText.style.opacity = '1';
-            const title = backgroundText.querySelector('.background-title');
-            const description = backgroundText.querySelector('.background-description');
-            if (title) {
-                title.style.filter = 'none';
-            }
-            if (description) {
-                description.style.filter = 'none';
-            }
-            // Add faster transition for quicker resets
-            backgroundText.style.transition = 'transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.15s ease, filter 0.15s ease';
-            if (title) {
-                title.style.transition = 'transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.15s ease';
-            }
-            if (description) {
-                description.style.transition = 'transform 0.15s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.15s ease';
-            }
-            // Reset to normal transition after animation
-            setTimeout(() => {
-                backgroundText.style.transition = 'opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.2s ease';
-                if (title) title.style.transition = 'transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.2s ease';
-                if (description) description.style.transition = 'transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.2s ease';
-            }, 150);
-        }
-        // Reset info panel blur effects
-        if (infoPanel) {
-            infoPanel.style.filter = 'none';
-            infoPanel.style.opacity = '1';
-            infoPanel.style.transition = 'all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            // Reset to normal transition after animation
-            setTimeout(() => {
-                infoPanel.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-            }, 150);
-        }
-        if (videoBackground) {
-            videoBackground.style.transition = 'all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            videoBackground.style.transform = 'scale(1)';
-            videoBackground.style.opacity = '1';
-            const iframe = videoBackground.querySelector('iframe');
-            if (iframe) {
-                iframe.style.transition = 'all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1)';
-                iframe.style.transform = 'scale(1.15)'; // Reset to base scale
-                iframe.style.filter = 'blur(0.5px) saturate(0.9) brightness(0.8)'; // Reset to base filter
-            }
-            // Reset to normal transition after animation
-            setTimeout(() => {
-                videoBackground.style.transition = 'all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)';
-                if (iframe) iframe.style.transition = 'all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            }, 150);
-        }
-    }
     setInitialActiveItem() {
         if (this.timelineItems.length === 0) {
             console.warn('No timeline items found');
@@ -416,8 +242,7 @@ class TimelineManager {
         // Determine scroll direction for better transition handling
         const scrollDirection = window.scrollY > this.lastScrollY ? 'down' : 'up';
         if (clampedIndex !== this.currentItemIndex) {
-            // Immediately reset blur effects as soon as we switch items
-            this.resetBlurToNormal();
+            // Item changed - update immediately without blur effects
             this.timelineItems[this.currentItemIndex].classList.remove('active');
             this.timelineItems[clampedIndex].classList.add('active');
             this.currentItemIndex = clampedIndex;
@@ -425,18 +250,12 @@ class TimelineManager {
             this.updateNavigationButtons();
             this.scrollTimelineToActiveItem(clampedIndex);
             this.updateItemContent(clampedIndex);
-            // Ensure blur is reset again after content update
-            setTimeout(() => {
-                this.resetBlurToNormal();
-            }, 50);
         }
     }
     handleItemClick(index) {
         if (this.timelineItems.length === 0) return;
         // Reset auto-transition timer since user is actively clicking
         this.resetAutoTransitionTimer();
-        // Immediately reset blur effects when clicking
-        this.resetBlurToNormal();
         // Create black overlay immediately to cover any flash
         this.createClickOverlay();
         this.timelineItems.forEach(item => item.classList.remove('active'));
@@ -458,10 +277,9 @@ class TimelineManager {
         setTimeout(() => {
             this.removeClickOverlay();
         }, 400);
-        // Clear the click scrolling flag after instant scroll and ensure blur is reset
+        // Clear the click scrolling flag after instant scroll
         setTimeout(() => {
             this.isClickScrolling = false;
-            this.resetBlurToNormal(); // Final blur reset
         }, 100); // Much shorter delay since scroll is instant
     }
     createClickOverlay() {
@@ -599,8 +417,6 @@ class TimelineManager {
     }
     transitionToItem(index, isAutoTransition = false) {
         if (this.timelineItems.length === 0) return;
-        // Immediately reset blur effects when transitioning to a new item
-        this.resetBlurToNormal();
         // Set flag to prevent scroll effects during auto-transition
         if (isAutoTransition) {
             this.isClickScrolling = true; // Reuse this flag to prevent scroll effects
@@ -629,7 +445,6 @@ class TimelineManager {
         if (isAutoTransition) {
             setTimeout(() => {
                 this.isClickScrolling = false;
-                this.resetBlurToNormal(); // Ensure text is not blurred
                 this.removeAutoTransitionOverlay();
             }, 1000); // Wait for scroll animation to complete
         }
@@ -738,10 +553,6 @@ class TimelineManager {
         if (this.autoTransitionTimer) {
             clearTimeout(this.autoTransitionTimer);
             this.autoTransitionTimer = null;
-        }
-        if (this.transitionResetTimer) {
-            clearTimeout(this.transitionResetTimer);
-            this.transitionResetTimer = null;
         }
         if (this.wheelDebounceTimer) {
             clearTimeout(this.wheelDebounceTimer);
@@ -855,8 +666,6 @@ class TimelineManager {
         }
         // Reset auto-transition timer since user is actively navigating
         this.resetAutoTransitionTimer();
-        // Immediately reset blur effects when clicking
-        this.resetBlurToNormal();
         // Update active states immediately
         this.timelineItems.forEach(item => item.classList.remove('active'));
         this.timelineItems[index].classList.add('active');
@@ -874,10 +683,9 @@ class TimelineManager {
             top: scrollPosition,
             behavior: 'instant'
         });
-        // Clear the click scrolling flag after instant scroll and ensure blur is reset
+        // Clear the click scrolling flag after instant scroll
         setTimeout(() => {
             this.isClickScrolling = false;
-            this.resetBlurToNormal(); // Final blur reset
         }, 200); // Increased delay to ensure scroll events settle
     }
     updateNavigationButtons() {
