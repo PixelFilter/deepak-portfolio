@@ -1,23 +1,16 @@
-/* Custom Scrollbar Component */
+/* Custom Scrollbar Component - DISABLED */
 .custom-scrollbar {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 200px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    z-index: var(--z-header);
-    transition: var(--transition-fast);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    pointer-events: none;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .custom-scrollbar.visible {
-    opacity: 1;
-    pointer-events: auto;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .custom-scrollbar:hover {

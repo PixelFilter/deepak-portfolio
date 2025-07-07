@@ -5,36 +5,40 @@
     box-sizing: border-box;
 }
 
-/* Hide browser scrollbars - use custom scrollbar only */
-html {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+/* Aggressively hide all scrollbars */
+html, body {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
 }
 
-html::-webkit-scrollbar {
-    display: none; /* WebKit */
-}
-
-body {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
+html::-webkit-scrollbar, 
 body::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none !important; /* WebKit */
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
 }
 
-/* Hide scrollbars for specific elements, but not info panel */
-.content-panel::-webkit-scrollbar,
-.year-timeline::-webkit-scrollbar {
-    display: none;
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    display: none !important;
 }
 
-body,
-.content-panel,
-.year-timeline {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    display: none !important;
+}
+
+/* Hide scrollbars for all elements except info panel */
+*:not(.info-panel-content)::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+*:not(.info-panel-content) {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
 }
 
 /* Base body styles */
@@ -47,4 +51,5 @@ body {
     align-items: center;
     font-family: 'Arial', sans-serif;
     overflow-x: hidden;
+    /* overflow-y will be set by JavaScript */
 }

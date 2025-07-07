@@ -53,14 +53,16 @@ class TimelineManager {
     setupScrollableBody() {
         // Only enable scrolling if loading is complete
         if (!document.querySelector('.loading') || document.querySelector('.loading').style.display === 'none') {
-            document.body.style.overflow = 'auto';
+            document.body.style.overflowY = 'auto';
+            document.body.style.overflowX = 'hidden';
             // Adjust scroll height based on number of games
             const totalGames = this.timelineItems.length;
             document.body.style.height = `${(totalGames * 100) + 100}vh`;
         }
     }
     enableScrolling() {
-        document.body.style.overflow = 'auto';
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
         // Adjust scroll height based on number of games
         const totalGames = this.timelineItems.length;
         document.body.style.height = `${(totalGames * 100) + 100}vh`;
