@@ -103,13 +103,13 @@
     transform: translate(-50%, -50%);
     width: 35vw;
     height: 55vh;
-    object-fit: contain;
+    object-fit: contain; /* Back to contain to avoid cropping */
     opacity: 0;
     z-index: var(--z-background-text);
     pointer-events: none;
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-    border-radius: 8px;
+    clip-path: inset(0 round 16px); /* Use clip-path for rounded corners */
 }
 
 .background-project-image.visible {
@@ -125,34 +125,37 @@
 .background-project-image[src*="spectral_eq"] {
     width: 31.5vw; /* 10% smaller than 35vw */
     height: 49.5vh; /* 10% smaller than 55vh */
+    clip-path: inset(0 round 16px); /* Use clip-path for rounded corners */
 }
 
 .background-project-image[src*="eclipse_synth"] {
     width: 28vw; /* 20% smaller than 35vw */
     height: 44vh; /* 20% smaller than 55vh */
+    clip-path: inset(0 round 16px); /* Use clip-path for rounded corners */
 }
 
 .background-project-image[src*="R2D2IZER"] {
     width: 17.5vw; /* 50% smaller than 35vw */
     height: 27.5vh; /* 50% smaller than 55vh */
+    clip-path: inset(0 round 16px); /* Use clip-path for rounded corners */
 }
 
 /* Pedal Stack keeps the default size (perfect as is) */
 
-/* Responsive adjustments */
+/* Responsive adjustments - Base styles that will be overridden by responsive-override.css */
 @media (max-width: 1024px) {
     .background-text {
         width: 100vw !important;
-        padding: 15vh 5vw 2vh 5vw !important; /* Top padding for filter bar */
+        padding: 140px 5vw 60px 5vw !important; /* Safe padding for filter bar */
         align-items: center !important;
         text-align: center !important;
         left: 0 !important;
         right: 0 !important;
         top: 0 !important;
-        height: auto !important;
-        position: relative !important; /* Change from fixed to relative */
-        justify-content: flex-start !important;
-        margin-bottom: 3vh; /* Space between text and image */
+        height: 100vh !important;
+        position: fixed !important; /* Use fixed positioning for consistency */
+        justify-content: center !important; /* Center the content vertically */
+        margin-bottom: 0 !important; /* Remove margin for fixed positioning */
     }
     
     /* Project Image for Mobile - positioned after background text */
@@ -163,14 +166,15 @@
         left: auto !important;
         right: auto !important;
         transform: none !important;
-        max-width: 75vw;
-        max-height: 35vh;
-        width: auto;
-        height: auto;
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 30vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Preserve aspect ratio, no cropping */
         filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
         transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         margin: 3vh auto 6vh auto !important; /* Space above and below image, auto centers horizontally */
         display: block !important;
+        border-radius: 8px !important; /* Match desktop rounding */
+        overflow: hidden !important; /* Ensure border-radius clips the image */
     }
     
     .background-project-image:hover {
@@ -203,20 +207,33 @@
         text-align: center !important;
     }
 
-    /* Individual project image size adjustments for mobile */
+    /* Individual project image size adjustments for mobile - consistent sizing */
     .background-project-image[src*="spectral_eq"] {
-        max-width: 130vw; /* Much larger than default 75vw */
-        max-height: 60vh; /* Much larger than default 35vh */
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 30vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
     }
 
     .background-project-image[src*="eclipse_synth"] {
-        max-width: 130vw; /* Much larger than default 75vw */
-        max-height: 60vh; /* Much larger than default 35vh */
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 30vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
     }
 
     .background-project-image[src*="R2D2IZER"] {
-        max-width: 112.5vw; /* 50% larger than 75vw */
-        max-height: 52.5vh; /* 50% larger than 35vh */
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 30vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
+    }
+
+    .background-project-image[src*="pedal_stack"] {
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 30vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
     }
 
     /* Reduced zoom effect on mobile for better performance */
@@ -244,24 +261,40 @@
     }
     
     .background-project-image {
-        max-width: 85vw;
-        max-height: 30vh;
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 25vh !important; /* Fixed height */
+        object-fit: contain !important; /* Scale proportionally without cropping */
         margin: 2vh auto 4vh auto !important; /* Reduced spacing for small screens */
+        border-radius: 8px !important; /* Match desktop rounding */
+        overflow: hidden !important; /* Ensure border-radius clips the image */
     }
     
     .background-project-image[src*="spectral_eq"] {
-        max-width: 140vw; /* Much larger than default 85vw */
-        max-height: 50vh; /* Much larger than default 30vh */
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 25vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
     }
 
     .background-project-image[src*="eclipse_synth"] {
-        max-width: 140vw; /* Much larger than default 85vw */
-        max-height: 50vh; /* Much larger than default 30vh */
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 25vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
     }
 
     .background-project-image[src*="R2D2IZER"] {
-        max-width: 127.5vw; /* 50% larger than 85vw */
-        max-height: 45vh; /* 50% larger than 30vh */
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 25vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
+    }
+
+    .background-project-image[src*="pedal_stack"] {
+        width: auto !important; /* Auto width to maintain aspect ratio */
+        height: 25vh !important; /* Fixed height for consistency */
+        object-fit: contain !important; /* Scale proportionally without cropping */
+        border-radius: 8px !important; /* Match desktop rounding */
     }
     
     .background-title {
@@ -394,16 +427,19 @@ body .background-text {
     .background-project-image[src*="spectral_eq"] {
         width: 36vw; /* 10% smaller than 40vw */
         height: 54vh; /* 10% smaller than 60vh */
+        border-radius: 8px; /* Match desktop rounding */
     }
 
     .background-project-image[src*="eclipse_synth"] {
         width: 32vw; /* 20% smaller than 40vw */
         height: 48vh; /* 20% smaller than 60vh */
+        border-radius: 8px; /* Match desktop rounding */
     }
 
     .background-project-image[src*="R2D2IZER"] {
         width: 20vw; /* 50% smaller than 40vw */
         height: 30vh; /* 50% smaller than 60vh */
+        border-radius: 8px; /* Match desktop rounding */
     }
 }
 
@@ -431,15 +467,18 @@ body .background-text {
     .background-project-image[src*="spectral_eq"] {
         width: 31.5vw; /* 10% smaller than 35vw */
         height: 58.5vh; /* 10% smaller than 65vh */
+        border-radius: 8px; /* Match desktop rounding */
     }
 
     .background-project-image[src*="eclipse_synth"] {
         width: 28vw; /* 20% smaller than 35vw */
         height: 52vh; /* 20% smaller than 65vh */
+        border-radius: 8px; /* Match desktop rounding */
     }
 
     .background-project-image[src*="R2D2IZER"] {
         width: 17.5vw; /* 50% smaller than 35vw */
         height: 32.5vh; /* 50% smaller than 65vh */
+        border-radius: 8px; /* Match desktop rounding */
     }
 }

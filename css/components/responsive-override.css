@@ -1,10 +1,11 @@
-/* Responsive Override - Force centering on smaller screens */
+/* Responsive Override - Ensure background text doesn't intersect with filter bar */
 
 /* High specificity rules to override any existing styles */
 html body .background-text {
     transition: all 0.2s ease-out !important;
 }
 
+/* Fix intersection with filter bar on mobile and tablet screens */
 @media screen and (max-width: 1024px) {
     html body .background-text {
         position: fixed !important;
@@ -19,7 +20,7 @@ html body .background-text {
         justify-content: center !important;
         align-items: center !important;
         text-align: center !important;
-        padding: 0 5vw !important;
+        padding: 140px 5vw 60px 5vw !important; /* Top padding for header+filter, bottom for timeline */
         margin: 0 !important;
         box-sizing: border-box !important;
     }
@@ -41,10 +42,10 @@ html body .background-text {
     }
 }
 
-/* Additional breakpoints for safety */
+/* Adjustments for medium screens (tablets) */
 @media screen and (max-width: 768px) {
     html body .background-text {
-        padding: 0 3vw !important;
+        padding: 130px 3vw 60px 3vw !important; /* Adjusted for medium screen filter positioning */
     }
     
     /* Further reduce description width on smaller screens */
@@ -53,9 +54,10 @@ html body .background-text {
     }
 }
 
+/* Adjustments for small screens (mobile phones) */
 @media screen and (max-width: 480px) {
     html body .background-text {
-        padding: 0 2vw !important;
+        padding: 120px 2vw 60px 2vw !important; /* Adjusted for small screen spacing */
     }
     
     /* Most constrained description width on mobile */
