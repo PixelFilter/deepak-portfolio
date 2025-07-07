@@ -88,7 +88,7 @@
     /* Show mobile menu on medium screens and below */
     .mobile-menu-toggle {
         display: flex;
-        transform: translateY(-4px); /* Stronger upward adjustment for mobile alignment */
+        transform: translateY(-8px); /* Much stronger upward adjustment for mobile alignment */
     }
     
     .nav-menu {
