@@ -172,6 +172,11 @@
     transform: scale(1.1);
 }
 
+.social-link.email .social-icon {
+    width: 24px;
+    height: 24px;
+}
+
 .contact-card-close {
     position: absolute;
     top: 1rem;
