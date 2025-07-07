@@ -25,6 +25,21 @@ html body .background-text {
         box-sizing: border-box !important;
     }
     
+    /* Hide project image in responsive mode when no image is present (music/games) */
+    html body .background-project-image:not(.visible) {
+        display: none !important;
+    }
+    /* Hide project image in responsive mode when no image is present (music/games) */
+    html body .background-project-image:not(.visible) {
+        display: none !important;
+    }
+    
+    /* Perfect centering for music/games modes (no project images) */
+    html body .background-text.no-project-image {
+        justify-content: center !important;
+        padding: 80px 5vw !important; /* Reduced padding for perfect centering */
+    }
+    
     html body .background-text .background-title,
     html body .background-text .background-description,
     html body .background-text .background-role,

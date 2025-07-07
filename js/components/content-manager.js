@@ -123,26 +123,48 @@ class ContentManager {
                         backgroundProjectImage.src = projectImage;
                         backgroundProjectImage.style.display = 'block';
                         backgroundProjectImage.classList.add('visible');
+                        // Remove no-image class when image is visible
+                        if (backgroundText) {
+                            backgroundText.classList.remove('no-project-image');
+                        }
                     };
                     img.onerror = () => {
                         console.warn('Failed to load project image:', projectImage);
                         backgroundProjectImage.classList.remove('visible');
                         backgroundProjectImage.style.display = 'none';
+                        // Add no-image class when image fails to load
+                        if (backgroundText) {
+                            backgroundText.classList.add('no-project-image');
+                        }
                     };
                     img.src = projectImage;
                 } else {
                     // Image is already loaded, just show it
                     backgroundProjectImage.style.display = 'block';
                     backgroundProjectImage.classList.add('visible');
+                    // Remove no-image class when image is visible
+                    if (backgroundText) {
+                        backgroundText.classList.remove('no-project-image');
+                    }
                 }
             } else {
+                // No project image - hide completely
                 backgroundProjectImage.classList.remove('visible');
-                setTimeout(() => {
-                    if (!backgroundProjectImage.classList.contains('visible')) {
-                        backgroundProjectImage.style.display = 'none';
-                        backgroundProjectImage.src = ''; // Clear the src to avoid unnecessary loading
-                    }
-                }, 500); // Wait for fade transition
+                backgroundProjectImage.style.display = 'none';
+                backgroundProjectImage.src = ''; // Clear the src to avoid unnecessary loading
+                
+                // Add class to background text for responsive centering
+                if (backgroundText) {
+                    backgroundText.classList.add('no-project-image');
+                }
+                
+                // In responsive mode, remove from DOM to prevent layout interference
+                const isMobile = window.innerWidth <= 1024;
+                if (isMobile && backgroundProjectImage.parentNode) {
+                    backgroundProjectImage.remove();
+                    // Re-append to body to keep it available for future use
+                    document.body.appendChild(backgroundProjectImage);
+                }
             }
         }
         if (backgroundText && title && description) {
@@ -458,6 +480,13 @@ class ContentManager {
         if (window.portfolioData && window.portfolioData.setActiveFilter) {
             window.portfolioData.setActiveFilter(filterId);
         }
+        
+        // Reset background text state for new category
+        const backgroundText = document.getElementById('backgroundText');
+        if (backgroundText) {
+            backgroundText.classList.remove('no-project-image');
+        }
+        
         // Update the filter buttons UI
         this.setActiveFilter(filterId);
         // Rebuild the timeline and content for the new category
@@ -486,17 +515,26 @@ class ContentManager {
             
             if (backgroundProjectImage && backgroundText) {
                 const isMobile = window.innerWidth <= 1024;
+                const hasVisibleImage = backgroundProjectImage.classList.contains('visible');
                 
                 if (isMobile) {
-                    // Move to background text container
-                    if (backgroundProjectImage.parentNode !== backgroundText) {
+                    // Move to background text container if has visible image
+                    if (hasVisibleImage && backgroundProjectImage.parentNode !== backgroundText) {
                         backgroundText.appendChild(backgroundProjectImage);
                     }
+                    // Ensure proper class management for centering
+                    if (!hasVisibleImage) {
+                        backgroundText.classList.add('no-project-image');
+                    } else {
+                        backgroundText.classList.remove('no-project-image');
+                    }
                 } else {
-                    // Move to body
+                    // Move to body on desktop
                     if (backgroundProjectImage.parentNode !== document.body) {
                         document.body.appendChild(backgroundProjectImage);
                     }
+                    // Remove mobile-specific class on desktop
+                    backgroundText.classList.remove('no-project-image');
                 }
             }
         });
