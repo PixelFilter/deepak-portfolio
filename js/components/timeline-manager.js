@@ -187,6 +187,7 @@ class TimelineManager {
     }
     applyClickTransitionEffect(progress) {
         const backgroundText = document.getElementById('backgroundText');
+        const backgroundProjectImage = document.getElementById('backgroundProjectImage');
         const videoBackground = document.getElementById('video-background');
         const infoPanel = document.getElementById('infoPanel');
         // Use easing function for smoother transition
@@ -205,6 +206,11 @@ class TimelineManager {
             if (description) {
                 description.style.filter = `blur(${motionBlur * 0.6}px)`;
             }
+        }
+        // Apply same effects to project image
+        if (backgroundProjectImage) {
+            backgroundProjectImage.style.filter = `blur(${motionBlur}px)`;
+            backgroundProjectImage.style.opacity = `${textOpacity}`;
         }
         // Apply same effects to info panel
         if (infoPanel) {
@@ -554,6 +560,7 @@ class TimelineManager {
                     tempCard.dataset.buttonURL = gameData.buttonURL;
                     tempCard.dataset.infoPanelHeader = gameData.infoPanelHeader;
                     tempCard.dataset.infoPanelData = gameData.infoPanelData;
+                    tempCard.dataset.projectImage = activeItem.dataset.projectImage || '';
                     window.contentManager.showBackgroundText(tempCard, isInstant);
                 }
             }, delay);

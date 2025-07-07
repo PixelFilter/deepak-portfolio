@@ -312,6 +312,7 @@ const portfolioData = {
                             videoStart: 0,
                             videoEnd: 60,
                             zoomVideo: false,
+                            projectImage: "assets/images/apps/spectral_eq.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
                             infoPanelData: [
@@ -337,6 +338,7 @@ const portfolioData = {
                             videoStart: 0,
                             videoEnd: 60,
                             zoomVideo: false,
+                            projectImage: "assets/images/apps/pedal_stack.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
                             infoPanelData: [                                
@@ -361,6 +363,7 @@ const portfolioData = {
                             videoStart: 1,
                             videoEnd: 12,
                             zoomVideo: true,
+                            projectImage: "assets/images/apps/eclipse_synth.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
                             infoPanelData: [                                
@@ -381,6 +384,7 @@ const portfolioData = {
                             videoStart: 19,
                             videoEnd: 50,
                             zoomVideo: false,
+                            projectImage: "assets/images/apps/R2D2IZER.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
                             infoPanelData: [                

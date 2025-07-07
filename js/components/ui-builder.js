@@ -296,6 +296,7 @@ class UIBuilder {
                 dotItem.dataset.buttonURL = gameData.buttonURL || '';
                 dotItem.dataset.infoPanelHeader = gameData.infoPanelHeader || '';
                 dotItem.dataset.infoPanelData = JSON.stringify(gameData.infoPanelData || []);
+                dotItem.dataset.projectImage = gameData.projectImage || '';
                 dotsContainer.appendChild(dotItem);
                 gameIndex++;
             });
@@ -351,9 +352,17 @@ class UIBuilder {
         // Store data for background text display and video
         card.dataset.title = item.title;
         card.dataset.description = item.description;
+        card.dataset.company = item.company || '';
+        card.dataset.role = item.role || '';
         card.dataset.trailerUrl = item.trailerUrl || '';
         card.dataset.videoStart = item.videoStart || '';
         card.dataset.videoEnd = item.videoEnd || '';
+        card.dataset.zoomVideo = item.zoomVideo !== undefined ? item.zoomVideo : 'true';
+        card.dataset.buttonLabel = item.buttonLabel || 'View Contributions';
+        card.dataset.buttonURL = item.buttonURL || '';
+        card.dataset.infoPanelHeader = item.infoPanelHeader || '';
+        card.dataset.infoPanelData = JSON.stringify(item.infoPanelData || []);
+        card.dataset.projectImage = item.projectImage || '';
         return card;
     }
     buildCustomScrollbar() {
@@ -399,6 +408,17 @@ class UIBuilder {
             backgroundText.appendChild(company);
             backgroundText.appendChild(contributionsBtn); // Add button back to the stack
             document.body.appendChild(backgroundText);
+        }
+        
+        // Create background project image if it doesn't exist
+        let backgroundProjectImage = document.getElementById('backgroundProjectImage');
+        if (!backgroundProjectImage) {
+            backgroundProjectImage = document.createElement('img');
+            backgroundProjectImage.id = 'backgroundProjectImage';
+            backgroundProjectImage.className = 'background-project-image';
+            backgroundProjectImage.style.display = 'none';
+            backgroundProjectImage.alt = 'Project Image';
+            document.body.appendChild(backgroundProjectImage);
         }
         // Create info panel if it doesn't exist
         let infoPanel = document.getElementById('infoPanel');

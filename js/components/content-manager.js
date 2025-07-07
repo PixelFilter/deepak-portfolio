@@ -10,6 +10,7 @@ class ContentManager {
         this.setupFilterListeners();
         this.setupCardInteractions();
         this.setupInfoPanelClickOutside();
+        this.setupResizeListener();
     }
     // Method to refresh card references after UI is built
     refreshCardReferences() {
@@ -84,6 +85,7 @@ class ContentManager {
     }
     showBackgroundText(card, isInstant = false) {
         const backgroundText = document.getElementById('backgroundText');
+        const backgroundProjectImage = document.getElementById('backgroundProjectImage');
         const title = backgroundText?.querySelector('.background-title');
         const description = backgroundText?.querySelector('.background-description');
         const company = backgroundText?.querySelector('.background-company');
@@ -93,6 +95,56 @@ class ContentManager {
         const infoPanel = document.getElementById('infoPanel');
         const infoPanelHeader = infoPanel?.querySelector('.info-panel-header');
         const infoPanelList = infoPanel?.querySelector('.info-panel-list');
+        
+        // Handle project image
+        if (backgroundProjectImage) {
+            const projectImage = card.dataset.projectImage || '';
+            if (projectImage) {
+                // Check if we're on mobile (screen width <= 1024px)
+                const isMobile = window.innerWidth <= 1024;
+                
+                if (isMobile) {
+                    // On mobile, append image to background text container
+                    if (backgroundProjectImage.parentNode !== backgroundText) {
+                        backgroundText.appendChild(backgroundProjectImage);
+                    }
+                } else {
+                    // On desktop, keep image in body
+                    if (backgroundProjectImage.parentNode !== document.body) {
+                        document.body.appendChild(backgroundProjectImage);
+                    }
+                }
+                
+                // Check if the image source has changed to avoid unnecessary updates
+                if (backgroundProjectImage.src !== new URL(projectImage, window.location.origin).href) {
+                    // Preload the image before showing it
+                    const img = new Image();
+                    img.onload = () => {
+                        backgroundProjectImage.src = projectImage;
+                        backgroundProjectImage.style.display = 'block';
+                        backgroundProjectImage.classList.add('visible');
+                    };
+                    img.onerror = () => {
+                        console.warn('Failed to load project image:', projectImage);
+                        backgroundProjectImage.classList.remove('visible');
+                        backgroundProjectImage.style.display = 'none';
+                    };
+                    img.src = projectImage;
+                } else {
+                    // Image is already loaded, just show it
+                    backgroundProjectImage.style.display = 'block';
+                    backgroundProjectImage.classList.add('visible');
+                }
+            } else {
+                backgroundProjectImage.classList.remove('visible');
+                setTimeout(() => {
+                    if (!backgroundProjectImage.classList.contains('visible')) {
+                        backgroundProjectImage.style.display = 'none';
+                        backgroundProjectImage.src = ''; // Clear the src to avoid unnecessary loading
+                    }
+                }, 500); // Wait for fade transition
+            }
+        }
         if (backgroundText && title && description) {
             // Apply a subtle zoom effect during content change only if not instant
             if (!isInstant) {
@@ -217,6 +269,15 @@ class ContentManager {
         const backgroundText = document.getElementById('backgroundText');
         if (backgroundText) {
             backgroundText.classList.remove('visible');
+        }
+        const backgroundProjectImage = document.getElementById('backgroundProjectImage');
+        if (backgroundProjectImage) {
+            backgroundProjectImage.classList.remove('visible');
+            setTimeout(() => {
+                if (!backgroundProjectImage.classList.contains('visible')) {
+                    backgroundProjectImage.style.display = 'none';
+                }
+            }, 500); // Wait for fade transition
         }
         const infoPanel = document.getElementById('infoPanel');
         if (infoPanel) {
@@ -372,7 +433,7 @@ class ContentManager {
         // Title is always visible - no need to show/hide
         // const title = document.querySelector('.title');
         // if (title) {
-        //     title.classList.remove('hidden-for-info-panel');
+        //     title.classList.remove('hidden-for_info-panel');
         // }
     }
     pauseAutoTransition() {
@@ -416,6 +477,29 @@ class ContentManager {
             window.app.uiBuilder.buildTimeline();
             window.app.uiBuilder.buildContentPanels();
         }
+    }
+    setupResizeListener() {
+        // Handle window resize to reposition project image
+        window.addEventListener('resize', () => {
+            const backgroundProjectImage = document.getElementById('backgroundProjectImage');
+            const backgroundText = document.getElementById('backgroundText');
+            
+            if (backgroundProjectImage && backgroundText) {
+                const isMobile = window.innerWidth <= 1024;
+                
+                if (isMobile) {
+                    // Move to background text container
+                    if (backgroundProjectImage.parentNode !== backgroundText) {
+                        backgroundText.appendChild(backgroundProjectImage);
+                    }
+                } else {
+                    // Move to body
+                    if (backgroundProjectImage.parentNode !== document.body) {
+                        document.body.appendChild(backgroundProjectImage);
+                    }
+                }
+            }
+        });
     }
 }
 // Export for use in other modules
