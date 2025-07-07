@@ -65,7 +65,7 @@ const portfolioData = {
                             company: "Turn 10 Studios, Microsoft",
                             role: "Content Workflow Lead",
                             trailerUrl: "https://www.youtube.com/embed/FYH9n37B7Yw",
-                            videoStart: 5,
+                            videoStart: 52,
                             videoEnd: 100,
                             zoomVideo: true,
                             buttonLabel: "View Contributions",
