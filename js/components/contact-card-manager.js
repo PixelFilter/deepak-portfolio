@@ -74,10 +74,50 @@ class ContactCardManager {
             }
         });
 
-        // Close button clicks
+        // Close button clicks with mobile support
         const closeButton = this.overlayElement.querySelector('.contact-card-close');
-        closeButton.addEventListener('click', () => {
+        
+        // Primary click handler
+        closeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             this.closeCard();
+        });
+        
+        // Mobile touch event handlers
+        closeButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        }, { passive: false });
+        
+        closeButton.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.closeCard();
+        }, { passive: false });
+
+        // Ensure social links are tappable on mobile
+        const socialLinks = this.overlayElement.querySelectorAll('.social-link');
+        socialLinks.forEach(link => {
+            // Add touch event handlers for mobile reliability
+            link.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+                // Add visual feedback
+                link.style.transform = 'scale(0.95)';
+            }, { passive: false });
+            
+            link.addEventListener('touchend', (e) => {
+                e.stopPropagation();
+                // Reset visual feedback
+                link.style.transform = '';
+                // Don't preventDefault here to allow the link to navigate
+            }, { passive: false });
+            
+            link.addEventListener('touchcancel', (e) => {
+                e.stopPropagation();
+                // Reset visual feedback
+                link.style.transform = '';
+            }, { passive: false });
         });
 
         // Keyboard navigation

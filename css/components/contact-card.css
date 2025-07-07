@@ -112,6 +112,14 @@
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    /* Ensure social links are tappable on mobile */
+    touch-action: manipulation;
+    pointer-events: auto;
+    -webkit-touch-callout: default;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
 }
 
 .social-link::before {
@@ -199,6 +207,14 @@
     transition: all 0.3s ease-out;
     z-index: 10;
     backdrop-filter: blur(10px);
+    /* Enable touch actions for mobile */
+    touch-action: manipulation;
+    pointer-events: auto;
+    -webkit-touch-callout: default;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
 }
 
 .contact-card-close:hover {
@@ -245,6 +261,18 @@
         width: 48px;
         height: 48px;
         border-radius: 14px;
+        /* Ensure social links are tappable on mobile */
+        touch-action: manipulation !important;
+        pointer-events: auto !important;
+        -webkit-touch-callout: default !important;
+        -webkit-user-select: auto !important;
+        -moz-user-select: auto !important;
+        -ms-user-select: auto !important;
+        user-select: auto !important;
+        /* Ensure good touch target size */
+        min-width: 48px !important;
+        min-height: 48px !important;
+        z-index: 10;
     }
     
     .social-icon {
@@ -295,6 +323,18 @@
         width: 44px;
         height: 44px;
         border-radius: 12px;
+        /* Ensure social links are tappable on mobile */
+        touch-action: manipulation !important;
+        pointer-events: auto !important;
+        -webkit-touch-callout: default !important;
+        -webkit-user-select: auto !important;
+        -moz-user-select: auto !important;
+        -ms-user-select: auto !important;
+        user-select: auto !important;
+        /* Ensure good touch target size */
+        min-width: 44px !important;
+        min-height: 44px !important;
+        z-index: 10;
     }
     
     .social-icon {
@@ -313,6 +353,9 @@
         top: 0.8rem;
         right: 0.8rem;
         font-size: 1.2rem;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 11 !important;
     }
 }
 
@@ -354,6 +397,18 @@
         width: 40px;
         height: 40px;
         border-radius: 10px;
+        /* Ensure social links are tappable on mobile */
+        touch-action: manipulation !important;
+        pointer-events: auto !important;
+        -webkit-touch-callout: default !important;
+        -webkit-user-select: auto !important;
+        -moz-user-select: auto !important;
+        -ms-user-select: auto !important;
+        user-select: auto !important;
+        /* Ensure good touch target size */
+        min-width: 40px !important;
+        min-height: 40px !important;
+        z-index: 10;
     }
     
     .social-icon {

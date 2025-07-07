@@ -58,21 +58,23 @@
 
 .info-panel-close {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
     border: none;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 24px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s ease;
-    z-index: 1;
+    transition: all 0.3s ease-out;
+    z-index: 1001;
+    backdrop-filter: blur(10px);
     /* Re-enable touch actions for the close button */
     touch-action: manipulation;
     -webkit-touch-callout: default;
@@ -84,7 +86,9 @@
 }
 
 .info-panel-close:hover {
-    color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
 /* Portrait/Vertical orientation - use more vertical space */
@@ -324,18 +328,16 @@
         height: 5px;
     }
     
-    /* Larger touch target for close button on mobile */
+    /* Mobile close button styling to match contact card */
     .info-panel-close {
-        width: 44px !important;
-        height: 44px !important;
-        top: 10px !important;
-        right: 10px !important;
-        font-size: 20px !important;
+        width: 36px !important;
+        height: 36px !important;
+        top: 0.8rem !important;
+        right: 0.8rem !important;
+        font-size: 1.2rem !important;
         pointer-events: auto !important;
         touch-action: manipulation !important;
         z-index: 1001 !important;
-        background: rgba(0, 0, 0, 0.1) !important;
-        border-radius: 50% !important;
     }
 }
 
