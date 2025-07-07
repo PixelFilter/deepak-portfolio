@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepak Chennakkadan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1 class="title">DEEPAK CHENNAKKADAN</h1>
+    
+    <!-- Content Filters in Header (will be built dynamically) -->
+    <div class="header-filters"></div>
+    
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <div class="nav-menu"></div>
+    </nav>
+    
+    <div class="loading">
+        <!-- Animated Background -->
+        <div class="bg-animation">
+            <div class="particles"></div>
+            <div class="grid-overlay"></div>
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="loading-content">
+            <div class="name-container">
+                <h1 class="fancy-name">
+                    <span class="name-part">DEEPAK</span>
+                    <span class="name-part">CHENNAKKADAN</span>
+                </h1>
+                <div class="title-container">
+                    <div class="title-line"></div>
+                    <h2 class="fancy-title">Creative Technologist</h2>
+                    <div class="title-line"></div>
+                </div>
+            </div>
+            
+            <div class="loading-progress">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="loading-text">initializing</div>
+            <div class="tap-to-continue" style="display: none;">
+                <div class="tap-text">Tap to continue</div>
+                <div class="tap-indicator"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sound Toggle Button -->
+    <button class="sound-toggle" id="sound-toggle" title="Toggle sound">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.08" class="sound-waves"></path>
+            <line x1="23" y1="9" x2="17" y2="15" class="sound-disabled" style="display: none;"></line>
+            <line x1="17" y1="9" x2="23" y2="15" class="sound-disabled" style="display: none;"></line>
+        </svg>
+    </button>
+    
+    <!-- Loop Toggle Button -->
+    <button class="loop-toggle" id="loop-toggle" title="Toggle auto transitions">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25 20.062c0 0.667-0.333 0.938-1 0.938h-16v-3.188l-4.688 4.688 4.625 4.625 0.063-3.125h18c1.104 0 2-0.896 2-2v-8.604l-3 3v3.666zM7 11.938c0-0.667 0.333-0.938 1-0.938h16v3.188l4.688-4.688-4.625-4.625-0.063 3.125h-18c-1.104 0-2 0.896-2 2v8.604l3-3v-3.666z"></path>
+        </svg>
+    </button>
+    
+    <!-- Timeline and Content Panel will be built dynamically -->
+    
+    <!-- Data -->
+    <script src="data/portfolio-data.js"></script>
+    
+    <!-- Utils -->
+    <script src="js/utils/helpers.js"></script>
+    
+    <!-- Components -->
+    <script src="js/components/video-background.js"></script>
+    <script src="js/components/ui-builder.js"></script>
+    <script src="js/components/timeline-manager.js"></script>
+    <script src="js/components/content-manager.js"></script>
+    <script src="js/components/custom-scrollbar.js"></script>
+    <script src="js/components/sound-toggle-manager.js"></script>
+    <script src="js/components/loop-toggle-manager.js"></script>
+    <script src="js/components/fancy-intro-effects.js"></script>
+    <script src="js/components/contact-card-manager.js"></script>
+    
+    <!-- Main Application -->
+    <script src="js/app.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

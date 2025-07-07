@@ -1,0 +1,65 @@
+/* Loop Toggle Button */
+.loop-toggle {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    /* Remove vertical alignment transform */
+}
+
+.loop-toggle:hover {
+    opacity: 1;
+    color: #999;
+    /* Remove vertical movement and keep only scale */
+    transform: scale(1.05);
+}
+
+.loop-toggle.enabled {
+    color: #fff;
+    opacity: 1;
+}
+
+.loop-toggle.enabled:hover {
+    color: #fff;
+}
+
+.loop-toggle.disabled {
+    color: #666;
+    opacity: 0.7;
+}
+
+.loop-toggle.disabled:hover {
+    color: #999;
+    opacity: 1;
+}
+
+.loop-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive styles - only for very small screens */
+@media (max-width: 768px) {
+    .loop-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .loop-toggle {
+        display: none;
+    }
+}

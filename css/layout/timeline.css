@@ -1,0 +1,347 @@
+/* Timeline Layout */
+.year-timeline {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 12px;
+    min-height: 50px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-round);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: var(--z-timeline);
+    transition: var(--transition-fast);
+    max-width: 90vw;
+    min-width: 200px;
+}
+
+/* Timeline Navigation Buttons */
+.timeline-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    user-select: none;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+    position: relative;
+}
+
+.timeline-nav-btn:hover {
+    background: transparent;
+    transform: scale(1.15);
+}
+
+.timeline-nav-btn:active {
+    transform: scale(0.95);
+}
+
+.timeline-nav-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Custom Arrow Design - matching ‹ › shape */
+.custom-arrow {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-arrow-left::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid var(--nav-btn-text);
+    border-top: 2px solid var(--nav-btn-text);
+    transform: rotate(-45deg);
+    top: 3px;
+    left: 5px;
+    transition: all var(--transition-fast);
+}
+
+.custom-arrow-right::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--nav-btn-text);
+    border-top: 2px solid var(--nav-btn-text);
+    transform: rotate(45deg);
+    top: 3px;
+    right: 5px;
+    transition: all var(--transition-fast);
+}
+
+/* Hover effects for custom arrows */
+.timeline-nav-btn:hover .custom-arrow-left::before {
+    border-color: var(--nav-btn-text-hover);
+}
+
+.timeline-nav-btn:hover .custom-arrow-right::before {
+    border-color: var(--nav-btn-text-hover);
+}
+
+.timeline-nav-btn.disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.timeline-nav-btn:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 4px;
+}
+
+.timeline-nav-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.timeline-nav-btn.prev {
+    margin-right: 4px;
+}
+
+.timeline-nav-btn.next {
+    margin-left: 4px;
+}
+
+/* Timeline Content Container */
+.timeline-content {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1;
+}
+
+.timeline-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Year labels (clickable) */
+.timeline-year-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--inactive-text) !important;
+    font-weight: 400;
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+    margin-left: 0;
+    transition: all 0.3s ease;
+    padding: 2px 6px;
+    border-radius: 12px;
+}
+
+.timeline-year-label:hover {
+    background: transparent;
+    color: #ffffff !important;
+    transform: scale(1.05);
+}
+
+.timeline-year-label:first-child {
+    margin-left: 0;
+    cursor: default;
+    pointer-events: none;
+}
+
+.timeline-year-label:first-child:hover {
+    background: transparent;
+    color: var(--inactive-text) !important;
+    transform: none;
+}
+
+/* Timeline dots (clickable games) */
+.timeline-dot {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--inactive-text-dark) !important;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 50%;
+    position: relative;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 12px;
+    height: 20px;
+    background: transparent;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+    transform: translateY(-1px);
+}
+
+.timeline-dot.active {
+    color: #ffffff !important;
+    font-weight: 500;
+    transform: translateY(-1px) scale(1.3);
+    cursor: default;
+}
+
+.timeline-dot:hover {
+    color: #ffffff !important;
+    transform: translateY(-1px) scale(1.1);
+}
+
+.timeline-dot.active:hover {
+    color: #ffffff !important;
+    transform: translateY(-1px) scale(1.3);
+}
+
+.timeline-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #666, transparent);
+    flex: 1;
+    min-width: 20px;
+    max-width: 40px;
+}
+
+/* Timeline dots group container */
+.timeline-dots-group {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    width: 100px !important;
+    margin-left: 0;
+}
+
+/* Year label becomes active when any dot in its year is active */
+.timeline-year-label.active {
+    color: #ffffff !important;
+    font-weight: 500;
+    cursor: default;
+}
+
+.timeline-year-label.active:hover {
+    color: #ffffff !important;
+    background: transparent !important;
+    transform: none !important;
+}
+
+/* High specificity overrides for black/white theme */
+.year-timeline .timeline-dot:hover,
+.year-timeline .timeline-year-label:hover {
+    color: #ffffff !important;
+}
+
+/* Override hover effects for the first year label */
+.year-timeline .timeline-year-label:first-child:hover {
+    color: var(--inactive-text) !important;
+    background: transparent !important;
+    transform: none !important;
+}
+
+/* Override hover effects for active elements */
+.year-timeline .timeline-dot.active:hover {
+    color: #ffffff !important;
+    transform: translateY(-1px) scale(1.3) !important;
+}
+
+.year-timeline .timeline-year-label.active:hover {
+    color: #ffffff !important;
+    background: transparent !important;
+    transform: none !important;
+}
+
+.year-timeline .timeline-dot.active,
+.year-timeline .timeline-year-label.active {
+    color: #ffffff !important;
+}
+
+.year-timeline .timeline-year-label:hover {
+    background: transparent !important;
+    transform: scale(1.05) !important;
+}
+
+.header-filters .filter-btn:hover {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.header-filters .filter-btn.active {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.header-filters:hover {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+.year-timeline:hover {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Responsive Timeline Adjustments */
+@media (max-width: 600px) {
+    .year-timeline {
+        gap: 12px;
+        padding: 0px 16px;
+        max-width: 95vw;
+        min-width: 180px;
+    }
+    
+    .timeline-nav-btn {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .timeline-nav-btn.prev {
+        margin-right: 6px;
+    }
+
+    .timeline-nav-btn.next {
+        margin-left: 6px;
+    }
+    
+    .custom-arrow {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .custom-arrow-left::before,
+    .custom-arrow-right::before {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+@media (max-width: 400px) {
+    .year-timeline {
+        gap: 14px;
+        padding: 0px 18px;
+        max-width: 98vw;
+        min-width: 160px;
+    }
+    
+    .timeline-nav-btn.prev {
+        margin-right: 8px;
+    }
+
+    .timeline-nav-btn.next {
+        margin-left: 8px;
+    }
+}

@@ -1,0 +1,65 @@
+/* Responsive Override - Force centering on smaller screens */
+
+/* High specificity rules to override any existing styles */
+html body .background-text {
+    transition: all 0.2s ease-out !important;
+}
+
+@media screen and (max-width: 1024px) {
+    html body .background-text {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        max-width: none !important;
+        height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 0 5vw !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    html body .background-text .background-title,
+    html body .background-text .background-description,
+    html body .background-text .background-role,
+    html body .background-text .background-company {
+        text-align: center !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block !important;
+    }
+    
+    /* Specifically constrain description width */
+    html body .background-text .background-description {
+        max-width: 80% !important;
+    }
+}
+
+/* Additional breakpoints for safety */
+@media screen and (max-width: 768px) {
+    html body .background-text {
+        padding: 0 3vw !important;
+    }
+    
+    /* Further reduce description width on smaller screens */
+    html body .background-text .background-description {
+        max-width: 85% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    html body .background-text {
+        padding: 0 2vw !important;
+    }
+    
+    /* Most constrained description width on mobile */
+    html body .background-text .background-description {
+        max-width: 90% !important;
+    }
+}

@@ -1,0 +1,345 @@
+/* Info Panel Component */
+.info-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 800px;
+    min-height: 300px;
+    max-height: 60vh;
+    background: rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    pointer-events: none;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.info-panel-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+
+.info-panel-close:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Portrait/Vertical orientation - use more vertical space */
+@media (orientation: portrait) {
+    .info-panel {
+        max-height: 85vh;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Landscape orientation with limited height */
+@media (orientation: landscape) and (max-height: 600px) {
+    .info-panel {
+        max-height: 70vh;
+        padding: 30px;
+    }
+    
+    .info-panel-header {
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
+    
+    .info-panel-item {
+        padding: 10px 0 10px 30px;
+        font-size: 14px;
+    }
+}
+
+.info-panel.visible {
+    opacity: 1;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+    z-index: 1000 !important;
+}
+
+.info-panel.closing {
+    opacity: 0 !important;
+    transform: translate(-50%, -50%) scale(0.95) !important;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
+}
+
+.info-panel.closing .info-panel-item {
+    animation: none !important;
+    opacity: 0 !important;
+    transform: translateX(0) !important;
+    transition: none !important;
+}
+
+.info-panel-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 18px;
+    flex-shrink: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.info-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 15px;
+    min-height: 0;
+}
+
+/* Custom scrollbar styling to match main page exactly */
+.info-panel-content::-webkit-scrollbar {
+    display: block !important;
+    width: 6px !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px;
+}
+
+.info-panel-content::-webkit-scrollbar:hover {
+    width: 8px !important;
+    background: rgba(0, 0, 0, 0.15) !important;
+}
+
+.info-panel-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px;
+}
+
+.info-panel-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.6) !important;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    min-height: 20px;
+}
+
+.info-panel-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.info-panel-content::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Remove scrollbar arrow buttons */
+.info-panel-content::-webkit-scrollbar-button {
+    display: none;
+}
+
+.info-panel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-panel-item {
+    position: relative;
+    padding: 15px 0 15px 30px;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slideInInfoItem 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.info-panel-item:nth-child(1) { animation-delay: 0.1s; }
+.info-panel-item:nth-child(2) { animation-delay: 0.2s; }
+.info-panel-item:nth-child(3) { animation-delay: 0.3s; }
+.info-panel-item:nth-child(4) { animation-delay: 0.4s; }
+.info-panel-item:nth-child(5) { animation-delay: 0.5s; }
+.info-panel-item:nth-child(6) { animation-delay: 0.6s; }
+.info-panel-item:nth-child(7) { animation-delay: 0.7s; }
+.info-panel-item:nth-child(8) { animation-delay: 0.8s; }
+
+.info-panel-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+@keyframes slideInInfoItem {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .info-panel {
+        width: 700px;
+        max-height: 55vh;
+        padding: 35px;
+    }
+    
+    .info-panel-header {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+    
+    .info-panel-item {
+        font-size: 14px;
+        padding: 12px 0 12px 25px;
+    }
+}
+
+@media (max-width: 1400px) and (orientation: portrait) {
+    .info-panel {
+        max-height: 80vh;
+    }
+}
+
+@media (max-width: 1200px) {
+    .info-panel {
+        width: 600px;
+        max-height: 50vh;
+        padding: 30px;
+    }
+    
+    .info-panel-header {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .info-panel-item {
+        font-size: 13px;
+        padding: 10px 0 10px 20px;
+    }
+}
+
+@media (max-width: 1200px) and (orientation: portrait) {
+    .info-panel {
+        max-height: 75vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-panel {
+        width: 90vw;
+        max-width: 500px;
+        max-height: 50vh;
+        min-height: 250px;
+        padding: 25px;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .info-panel-header {
+        font-size: 14px;
+        margin-bottom: 18px;
+    }
+    
+    .info-panel-item {
+        font-size: 12px;
+        padding: 8px 0 8px 18px;
+    }
+    
+    .info-panel-item::before {
+        width: 5px;
+        height: 5px;
+    }
+    
+
+}
+
+/* Mobile Portrait - use maximum vertical space */
+@media (max-width: 768px) and (orientation: portrait) {
+    .info-panel {
+        max-height: 80vh;
+        min-height: 300px;
+    }
+}
+
+/* Mobile Landscape - more conservative height */
+@media (max-width: 768px) and (orientation: landscape) {
+    .info-panel {
+        max-height: 65vh;
+        padding: 20px;
+    }
+    
+    .info-panel-header {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+    
+    .info-panel-item {
+        font-size: 11px;
+        padding: 6px 0 6px 15px;
+    }
+}
+
+/* Info Panel UI Hiding Utilities */
+.hidden-for-info-panel,
+.background-text.hidden-for-info-panel,
+.year-timeline.hidden-for-info-panel,
+.header-filters.hidden-for-info-panel,
+#customScrollbar.hidden-for-info-panel {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease !important;
+}
+
+/* Additional specificity for background text elements */
+.background-text.hidden-for-info-panel .background-title,
+.background-text.hidden-for-info-panel .background-description,
+.background-text.hidden-for-info-panel .background-role,
+.background-text.hidden-for-info-panel .background-company,
+.background-text.hidden-for-info-panel .contributions-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.3s ease !important;
+}

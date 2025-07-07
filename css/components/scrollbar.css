@@ -1,0 +1,45 @@
+/* Custom Scrollbar Component */
+.custom-scrollbar {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    z-index: var(--z-header);
+    transition: var(--transition-fast);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-scrollbar.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.custom-scrollbar:hover {
+    width: 8px;
+    background: rgba(0, 0, 0, 0.15);
+    transform: translateY(-50%) translateX(-2px);
+}
+
+.custom-scrollbar-thumb {
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    transition: var(--transition-fast);
+    min-height: 20px;
+    cursor: pointer;
+}
+
+.custom-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.custom-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.9);
+}

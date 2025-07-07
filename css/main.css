@@ -1,0 +1,29 @@
+/* Main CSS File - Import all modules */
+
+/* Base styles */
+@import url('base/variables.css');
+@import url('base/reset.css');
+@import url('base/typography.css');
+
+/* Layout styles */
+@import url('layout/header.css');
+@import url('layout/timeline.css');
+@import url('layout/content-panel.css');
+
+/* Component styles */
+@import url('components/loading.css');
+@import url('components/video-background.css');
+@import url('components/cards.css');
+@import url('components/buttons.css');
+@import url('components/scrollbar.css');
+@import url('components/background-text.css');
+@import url('components/contributions-button.css');
+@import url('components/info-panel.css');
+@import url('components/sound-toggle.css');
+@import url('components/loop-toggle.css');
+@import url('components/contact-card.css');
+@import url('components/responsive-override.css');
+
+/* Utility styles */
+@import url('utils/animations.css');
+@import url('utils/responsive-styles.css');

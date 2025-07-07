@@ -1,0 +1,67 @@
+/* Sound Toggle Button */
+.sound-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    /* Remove vertical alignment transform */
+}
+
+.sound-toggle:hover {
+    opacity: 1;
+    color: #999;
+    /* Remove vertical movement and keep only scale */
+    transform: scale(1.05);
+}
+
+.sound-toggle.enabled {
+    color: #fff;
+    opacity: 1;
+}
+
+.sound-toggle.enabled:hover {
+    color: #fff;
+}
+
+.sound-toggle.disabled .sound-waves {
+    display: none;
+}
+
+.sound-toggle.disabled .sound-disabled {
+    display: block !important;
+}
+
+.sound-toggle.enabled .sound-disabled {
+    display: none !important;
+}
+
+.sound-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive styles - only for very small screens */
+@media (max-width: 768px) {
+    .sound-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .sound-toggle {
+        display: none;
+    }
+}

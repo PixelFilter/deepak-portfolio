@@ -1,0 +1,110 @@
+/* Button Components */
+.year-item {
+    transition: var(--transition-fast);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    position: relative;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.year-item.active {
+    color: var(--primary-text);
+    font-weight: 500;
+    transform: scale(1.1);
+}
+
+.year-item:hover {
+    color: #333;
+    transform: scale(1.05);
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    color: var(--inactive-text);
+    text-transform: uppercase;
+    outline: none;
+}
+
+.filter-btn:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.filter-btn:focus-visible {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.filter-btn:hover {
+    background: transparent;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.filter-btn.active {
+    background: transparent;
+    color: #ffffff;
+    font-weight: 500;
+    transform: scale(1.1);
+}
+
+.filter-separator {
+    width: 1px;
+    height: 20px;
+    background-color: #555;
+    margin: 0 1px;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-shrink: 0;
+}
+
+/* High specificity overrides for filter buttons */
+.header-filters .filter-btn,
+.filter-btn {
+    color: var(--inactive-text) !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.header-filters .filter-btn:hover,
+.filter-btn:hover {
+    color: #ffffff !important;
+    background: transparent !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.header-filters .filter-btn.active,
+.filter-btn.active {
+    color: #ffffff !important;
+    background: transparent !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.header-filters .filter-btn:focus,
+.filter-btn:focus,
+.header-filters .filter-btn:focus-visible,
+.filter-btn:focus-visible {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}

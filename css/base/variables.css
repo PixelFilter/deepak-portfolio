@@ -1,0 +1,59 @@
+/* CSS Custom Properties (Variables) */
+:root {
+    /* Colors */
+    --primary-text: #222;
+    --secondary-text: #555;
+    --tertiary-text: #666;
+    --light-text: #777;
+    --inactive-text: #484848;
+    --inactive-text-dark: rgb(94, 94, 94);
+    
+    /* Navigation */
+    --nav-btn-bg: rgba(255, 255, 255, 0.1);
+    --nav-btn-bg-hover: rgba(255, 255, 255, 0.2);
+    --nav-btn-border: rgba(255, 255, 255, 0.2);
+    --nav-btn-border-hover: rgba(255, 255, 255, 0.4);
+    --nav-btn-text: rgba(255, 255, 255, 0.8);
+    --nav-btn-text-hover: rgba(255, 255, 255, 1.0);
+    
+    /* Backgrounds */
+    --main-gradient: linear-gradient(135deg, #ffffff 0%, #f5f5f5 15%, #e8e8e8 30%, #d8d8d8 45%, #c8c8c8 60%, #b8b8b8 75%, #a8a8a8 90%, #989898 100%);
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-hover: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    --card-bg: rgba(255, 255, 255, 0.35);
+    --card-hover: rgba(255, 255, 255, 0.45);
+    
+    /* Shadows */
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 15px;
+    --radius-lg: 20px;
+    --radius-xl: 25px;
+    --radius-round: 50px;
+    
+    /* Z-index layers */
+    --z-video-background: 0;
+    --z-background-text: 2;
+    --z-timeline: 10;
+    --z-header: 100;
+    --z-filters: 200;
+    --z-ui: 300;
+    --z-modal: 9999;
+    --z-loading: 1000;
+}

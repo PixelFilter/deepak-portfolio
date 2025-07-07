@@ -1,0 +1,84 @@
+/* Typography Styles */
+.title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #ffffff;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+/* Loading text */
+.loading-text {
+    font-size: 14px;
+    color: #666;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+}
+
+/* Year items */
+.year-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #555;
+    font-weight: 300;
+}
+
+/* Filter buttons */
+.filter-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #666;
+}
+
+/* Card typography */
+.card-header h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #222;
+    margin: 0;
+}
+
+.content-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+.card-type {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-company {
+    font-weight: 500;
+    color: #555;
+}
+
+.card-duration {
+    font-size: 12px;
+    color: #777;
+}
+
+.card-link {
+    font-size: 12px;
+    color: #666;
+    text-decoration: none;
+}
+
+.tech {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: #666;
+    font-weight: 400;
+}
