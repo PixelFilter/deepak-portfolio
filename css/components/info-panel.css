@@ -43,6 +43,14 @@
     -webkit-transition: none !important;
 }
 
+/* Explicitly ensure close button keeps its functionality */
+.info-panel-close {
+    animation: unset !important;
+    transition: color 0.3s ease !important;
+    -webkit-animation: unset !important;
+    -webkit-transition: color 0.3s ease !important;
+}
+
 /* Re-enable transition for the info panel itself */
 .info-panel {
     transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
@@ -117,6 +125,13 @@
     transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
     z-index: 1000 !important;
+}
+
+/* Ensure close button is always clickable when panel is visible */
+.info-panel.visible .info-panel-close {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    z-index: 1001 !important;
 }
 
 .info-panel.closing {
@@ -311,11 +326,16 @@
     
     /* Larger touch target for close button on mobile */
     .info-panel-close {
-        width: 44px;
-        height: 44px;
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
+        width: 44px !important;
+        height: 44px !important;
+        top: 10px !important;
+        right: 10px !important;
+        font-size: 20px !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 1001 !important;
+        background: rgba(0, 0, 0, 0.1) !important;
+        border-radius: 50% !important;
     }
 }
 

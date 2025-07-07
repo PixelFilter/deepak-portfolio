@@ -384,21 +384,30 @@ class UIBuilder {
             const closeBtn = document.createElement('button');
             closeBtn.className = 'info-panel-close';
             closeBtn.innerHTML = '×';
+            
+            // Primary click handler
             closeBtn.onclick = () => {
-                // Add closing state to immediately stop animations
-                infoPanel.classList.add('closing');
-                infoPanel.classList.remove('visible');
-                // After animation completes, clean up the closing state
-                setTimeout(() => {
-                    if (infoPanel.classList.contains('closing')) {
-                        infoPanel.classList.remove('closing');
-                    }
-                }, 300); // Match the CSS transition duration
-                if (window.contentManager) {
-                    window.contentManager.showUIElements();
-                    window.contentManager.resumeAutoTransition();
-                }
+                this.closeInfoPanel(infoPanel);
             };
+            
+            // Backup touch event handlers for mobile
+            closeBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, { passive: false });
+            
+            closeBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.closeInfoPanel(infoPanel);
+            }, { passive: false });
+            
+            // Backup click handler
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.closeInfoPanel(infoPanel);
+            });
             const header = document.createElement('div');
             header.className = 'info-panel-header';
             header.textContent = '';
@@ -413,6 +422,23 @@ class UIBuilder {
             document.body.appendChild(infoPanel);
         }
 
+    }
+    
+    closeInfoPanel(infoPanel) {
+        // Add closing state to immediately stop animations
+        infoPanel.classList.add('closing');
+        infoPanel.classList.remove('visible');
+        // After animation completes, clean up the closing state
+        setTimeout(() => {
+            if (infoPanel.classList.contains('closing')) {
+                infoPanel.classList.remove('closing');
+            }
+        }, 300); // Match the CSS transition duration
+        if (window.contentManager) {
+            window.contentManager.showUIElements();
+            window.contentManager.resumeAutoTransition();
+            window.contentManager.updateNavigationButtons();
+        }
     }
 }
 // Export for use in other modules
