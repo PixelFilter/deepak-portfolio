@@ -67,18 +67,35 @@ class AboutCardManager {
     }
 
     bindEvents() {
-        // Close button
-        const closeButton = this.overlayElement?.querySelector('.about-card-close');
-        if (closeButton) {
-            closeButton.addEventListener('click', () => this.closeCard());
-        }
-
         // Overlay click to close
         this.overlayElement?.addEventListener('click', (e) => {
             if (e.target === this.overlayElement) {
                 this.closeCard();
             }
         });
+
+        // Close button clicks with mobile support
+        const closeButton = this.overlayElement?.querySelector('.about-card-close');
+        if (closeButton) {
+            // Primary click handler
+            closeButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.closeCard();
+            });
+            
+            // Mobile touch event handlers
+            closeButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, { passive: false });
+            
+            closeButton.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.closeCard();
+            }, { passive: false });
+        }
 
         // Escape key to close
         document.addEventListener('keydown', (e) => {
