@@ -1,0 +1,21 @@
+# Robots.txt for Deepak Chennakkadan Portfolio
+# https://www.deepakc.dev/robots.txt
+
+User-agent: *
+Allow: /
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+Allow: /data/
+
+# Block access to sensitive files
+Disallow: /*.log
+Disallow: /.*
+Disallow: /temp/
+Disallow: /cache/
+
+# Sitemap location
+Sitemap: https://www.deepakc.dev/sitemap.xml
+
+# Crawl delay (optional - helps prevent overloading)
+Crawl-delay: 1
