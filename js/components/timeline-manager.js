@@ -681,6 +681,7 @@ class TimelineManager {
                     videoEnd: activeItem.dataset.videoEnd,
                     zoomVideo: activeItem.dataset.zoomVideo === 'true',
                     buttonLabel: activeItem.dataset.buttonLabel,
+                    buttonURL: activeItem.dataset.buttonURL,
                     infoPanelHeader: activeItem.dataset.infoPanelHeader,
                     infoPanelData: activeItem.dataset.infoPanelData
                 };
@@ -696,6 +697,7 @@ class TimelineManager {
                     tempCard.dataset.videoEnd = gameData.videoEnd;
                     tempCard.dataset.zoomVideo = gameData.zoomVideo;
                     tempCard.dataset.buttonLabel = gameData.buttonLabel;
+                    tempCard.dataset.buttonURL = gameData.buttonURL;
                     tempCard.dataset.infoPanelHeader = gameData.infoPanelHeader;
                     tempCard.dataset.infoPanelData = gameData.infoPanelData;
                     window.contentManager.showBackgroundText(tempCard, isInstant);

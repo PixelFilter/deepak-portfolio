@@ -332,70 +332,8 @@ const portfolioData = {
                             videoStart: 60,
                             videoEnd: 180,
                             zoomVideo: false,
-                            buttonLabel: "View Project",
-                            infoPanelHeader: "Album Credits",
-                            infoPanelData: [
-                                "Composed and produced all 10 tracks on the album",
-                                "Designed custom synthesizer patches using Serum and Massive",
-                                "Mixed and mastered the entire album using Pro Tools",
-                                "Created vintage analog warmth using hardware outboard gear",
-                                "Collaborated with visual artists for album artwork",
-                                "Distributed across Spotify, Apple Music, and Bandcamp",
-                                "Featured on several synthwave playlists and radio shows"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    year: 2022,
-                    content: [
-                        {
-                            title: "Ambient\nScapes",
-                            description: "A meditative ambient music collection designed for relaxation, meditation, and creative focus, featuring organic textures and evolving soundscapes.",
-                            company: "Meditation Music Collective",
-                            role: "Ambient Composer | Sound Designer",
-                            trailerUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                            videoStart: 15,
-                            videoEnd: 75,
-                            zoomVideo: false,
-                            buttonLabel: "View Credits",
-                            infoPanelHeader: "Project Credits",
-                            infoPanelData: [
-                                "Created 8 ambient compositions totaling 90 minutes",
-                                "Recorded field recordings from nature for organic textures",
-                                "Used modular synthesizers for evolving pad sounds",
-                                "Applied advanced reverb and delay processing techniques",
-                                "Mastered specifically for streaming platforms and vinyl",
-                                "Collaborated with meditation app developers for licensing",
-                                "Music used in wellness centers and yoga studios worldwide"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    year: 2021,
-                    content: [
-                        {
-                            title: "Electronic\nSymphony",
-                            description: "A fusion of classical orchestration with modern electronic elements, blending live orchestra recordings with synthesized components.",
-                            company: "Digital Arts Ensemble",
-                            role: "Composer | Orchestrator | Electronic Producer",
-                            trailerUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                            videoStart: 30,
-                            videoEnd: 90,
-                            zoomVideo: true,
-                            buttonLabel: "View Credits",
-                            infoPanelHeader: "Symphony Credits",
-                            infoPanelData: [
-                                "Composed a 45-minute electronic symphony in four movements",
-                                "Orchestrated for full symphony orchestra with electronics",
-                                "Recorded live orchestra sessions at Abbey Road Studios",
-                                "Integrated real-time electronic processing during performance",
-                                "Programmed complex MIDI sequences for electronic elements",
-                                "Mixed using both analog console and digital workstation",
-                                "Premiered at international electronic music festival",
-                                "Nominated for Best Electronic Classical Crossover Album"
-                            ]
+                            buttonLabel: "View Platform",
+                            buttonURL: "https://hyperbolic-chamber.space",
                         }
                     ]
                 }

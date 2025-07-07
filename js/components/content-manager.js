@@ -110,6 +110,7 @@ class ContentManager {
             // Handle contributions button
             if (contributionsBtn) {
                 const buttonLabel = card.dataset.buttonLabel || 'View Contributions';
+                const buttonURL = card.dataset.buttonURL || '';
                 const infoPanelHeaderText = card.dataset.infoPanelHeader;
                 const infoPanelData = card.dataset.infoPanelData;
                 // Check if there's info panel data to show
@@ -123,12 +124,21 @@ class ContentManager {
                     }
                 }
                 if (hasInfoPanelData) {
+                    // Show button that opens info panel
                     contributionsBtn.textContent = buttonLabel;
                     contributionsBtn.style.display = 'inline-block';
                     contributionsBtn.onclick = () => {
                         this.toggleInfoPanel(card);
                     };
+                } else if (buttonURL) {
+                    // Show button that redirects to URL
+                    contributionsBtn.textContent = buttonLabel;
+                    contributionsBtn.style.display = 'inline-block';
+                    contributionsBtn.onclick = () => {
+                        window.open(buttonURL, '_blank');
+                    };
                 } else {
+                    // Hide button if no info panel data and no URL
                     contributionsBtn.style.display = 'none';
                 }
             }

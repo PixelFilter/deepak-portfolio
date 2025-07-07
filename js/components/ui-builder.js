@@ -268,6 +268,7 @@ class UIBuilder {
                 dotItem.dataset.zoomVideo = gameData.zoomVideo !== undefined ? gameData.zoomVideo : 'true';
                 dotItem.dataset.contributions = JSON.stringify(gameData.contributions || []);
                 dotItem.dataset.buttonLabel = gameData.buttonLabel || 'View Contributions';
+                dotItem.dataset.buttonURL = gameData.buttonURL || '';
                 dotItem.dataset.infoPanelHeader = gameData.infoPanelHeader || '';
                 dotItem.dataset.infoPanelData = JSON.stringify(gameData.infoPanelData || []);
                 dotsContainer.appendChild(dotItem);
