@@ -113,12 +113,37 @@ class UIBuilder {
                     navBtn.target = '_blank';
                 }
                 
-                // Add click handler for non-functional items
-                if (navItem.url === '#') {
+                // Add click handler for modal/card items
+                if (navItem.url === '#' || navItem.url === '#about') {
                     navBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         // Close mobile menu if open
                         this.closeMobileMenu();
+                        
+                        // Handle about button click
+                        if (navItem.id === 'about') {
+                            // Function to try showing the about card
+                            const tryShowAboutCard = () => {
+                                if (window.aboutCardManager) {
+                                    window.aboutCardManager.show();
+                                    return true;
+                                }
+                                return false;
+                            };
+                            
+                            // Try immediately
+                            if (!tryShowAboutCard()) {
+                                // Try again after a short delay
+                                setTimeout(() => {
+                                    if (!tryShowAboutCard()) {
+                                        // Try one more time after a longer delay
+                                        setTimeout(() => {
+                                            tryShowAboutCard();
+                                        }, 500);
+                                    }
+                                }, 100);
+                            }
+                        }
                         
                         // Handle connect button click
                         if (navItem.id === 'connect') {

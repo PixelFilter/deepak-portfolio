@@ -14,6 +14,16 @@ const portfolioData = {
             email: "deepak.chennakkadan@gmail.com"
         }
     },
+    about: {
+        name: "Deepak Chennakkadan",
+        role: "Creative Technologist",
+        photo: "assets/images/face_highres.png",
+        bio: [
+            "Deepak Chennakkadan is a creative technologist and engineering leader with a passion for building tools that empower developers, artists, and content creators. With over 7 years at Microsoft as the ForzaTech Engineering Lead at Turn 10 Studios, he shaped AI workflows, scaled infrastructure, and led the development of several end-to-end pipelines for one of Xbox's flagship franchises.",
+            "He has managed high-performing teams of engineers, interns, and vendors across disciplines, and has driven partnerships across Xbox Game Studios to foster alignment and technology sharing. In addition to his engineering leadership, Deepak has served as a public-facing voice for Xbox—appearing in media, interviews, and live streams, and speaking at industry conferences and summits.",
+            "Outside of work, Deepak enjoys scuba diving, snowboarding, biking, and producing music."
+        ]
+    },
     navigation: [
         {id:"about", label: "ABOUT", url: "#about"},
         { id: "resume", label: "RESUME", url: "https://drive.google.com/file/d/1mEzfjeDsK1AXmpjJhJ7EOcCXMU4irOVZ/view?usp=drive_link" },

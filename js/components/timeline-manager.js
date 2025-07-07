@@ -585,7 +585,10 @@ class TimelineManager {
         // Check if contact card is open
         const isContactCardOpen = window.contactCardManager && window.contactCardManager.isOpen();
         
-        return isInfoPanelOpen || isContactCardOpen;
+        // Check if about card is open
+        const isAboutCardOpen = window.aboutCardManager && window.aboutCardManager.isOpen();
+        
+        return isInfoPanelOpen || isContactCardOpen || isAboutCardOpen;
     }
 
     // Method to check if auto-transition is active
