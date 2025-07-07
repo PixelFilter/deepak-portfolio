@@ -294,15 +294,49 @@ const portfolioData = {
                     content: [
                         {
                             title: "Hyperbolic\nChamber",
-                            description: "Hyperbolic Chamber is a platform I co-founded to showcase immersive, experimental electronic music from underground artists including us.",
-                            company: "Hyperbolic Chamber",
+                            description: "Hyperbolic Chamber is a platform to showcase immersive, experimental electronic music from underground artists including us.",
+                            company: "Passion Project",
                             role: "Co-Founder",
                             trailerUrl: "https://www.youtube.com/embed/sB-UvVvmUfk",
-                            videoStart: 60,
-                            videoEnd: 180,
+                            videoStart: 2738,
+                            videoEnd: 2838,
                             zoomVideo: false,
                             buttonLabel: "View Platform",
                             buttonURL: "https://hyperbolic-chamber.space",
+                        }
+                    ]
+                },
+                {
+                    year: 2023,
+                    content: [                       
+                        {
+                            title: "PIXELFILTER",
+                            description: "My electronic music alter ego / stage name where I perform and record live sets showcasing the underground sound.",
+                            company: "Creative Pursuit",
+                            role: "Techno / Indo DJ",
+                            trailerUrl: "https://www.youtube.com/embed/bO_1bl7s9TQ",
+                            videoStart: 972,
+                            videoEnd: 1070,
+                            zoomVideo: false,
+                            buttonLabel: "View Videos",
+                            buttonURL: "https://pixelfilter.space",
+                        }
+                    ]
+                },
+                {
+                    year: 2012,
+                    content: [                       
+                        {
+                            title: "Youtube\nGuitar Videos",
+                            description: "A series of guitar videos I have recorded over the years showcasing one of my many musical passions.",
+                            company: "Creative Pursuit",
+                            role: "Guitarist",
+                            trailerUrl: "https://www.youtube.com/embed/DpXcdQLeqbI",
+                            videoStart: 180,
+                            videoEnd: 230,
+                            zoomVideo: false,
+                            buttonLabel: "View Videos",
+                            buttonURL: "https://www.youtube.com/@DeepakChennakkadan/videos",
                         }
                     ]
                 }
