@@ -52,6 +52,8 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    align-items: center;
+    transform: translateY(-1px);
 }
 
 .hamburger-line {
