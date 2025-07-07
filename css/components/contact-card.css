@@ -23,7 +23,8 @@
 
 .contact-card {
     width: 400px;
-    height: 320px;
+    min-height: 320px;
+    max-height: 90vh;
     position: relative;
     transition: transform 0.3s ease-out;
 }
@@ -36,6 +37,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    min-height: inherit;
     text-align: center;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -47,6 +49,7 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    box-sizing: border-box;
 }
 
 .contact-photo {
@@ -209,35 +212,38 @@
     .contact-card {
         width: 90vw;
         max-width: 350px;
-        height: 250px;
+        min-height: 280px;
+        max-height: 80vh;
+    }
+    
+    .contact-card-inner {
+        padding: 1.5rem;
     }
     
     .contact-photo {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 1rem;
+        width: 70px;
+        height: 70px;
+        margin-bottom: 0.8rem;
     }
     
     .contact-name {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.2rem;
     }
     
     .contact-role {
         font-size: 0.9rem;
-    }
-    
-    .contact-title {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
     }
     
     .social-links {
-        gap: 1.5rem;
+        gap: 1.2rem;
+        margin-bottom: 0.5rem;
     }
     
     .social-link {
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
         border-radius: 14px;
     }
     
@@ -245,44 +251,49 @@
         width: 20px;
         height: 20px;
     }
+    
+    .social-link.email .social-icon {
+        width: 22px;
+        height: 22px;
+    }
 }
 
 @media (max-width: 480px) {
     .contact-card {
         width: 95vw;
         max-width: 320px;
-        height: 220px;
+        min-height: 260px;
+        max-height: 75vh;
     }
     
-    .contact-card-front,
-    .contact-card-back {
-        padding: 1.5rem;
+    .contact-card-inner {
+        padding: 1.2rem;
     }
     
     .contact-photo {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0.6rem;
     }
     
     .contact-name {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        margin-bottom: 0.1rem;
     }
     
     .contact-role {
         font-size: 0.8rem;
-    }
-    
-    .contact-title {
-        font-size: 1.1rem;
+        margin-bottom: 1rem;
     }
     
     .social-links {
-        gap: 1.2rem;
+        gap: 1rem;
+        margin-bottom: 0.3rem;
     }
     
     .social-link {
-        width: 46px;
-        height: 46px;
+        width: 44px;
+        height: 44px;
         border-radius: 12px;
     }
     
@@ -290,11 +301,116 @@
         width: 18px;
         height: 18px;
     }
+    
+    .social-link.email .social-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .contact-card-close {
+        width: 36px;
+        height: 36px;
+        top: 0.8rem;
+        right: 0.8rem;
+        font-size: 1.2rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .contact-card {
+        width: 98vw;
+        max-width: 300px;
+        min-height: 240px;
+        max-height: 70vh;
+    }
+    
+    .contact-card-inner {
+        padding: 1rem;
+    }
+    
+    .contact-photo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-name {
+        font-size: 1.1rem;
+        margin-bottom: 0.1rem;
+    }
+    
+    .contact-role {
+        font-size: 0.75rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .social-links {
+        gap: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    
+    .social-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .social-link.email .social-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .contact-card-close {
+        width: 32px;
+        height: 32px;
+        top: 0.6rem;
+        right: 0.6rem;
+        font-size: 1rem;
+    }
 }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     .contact-card:hover {
         transform: none;
+    }
+}
+
+/* Mobile landscape orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    .contact-card {
+        max-height: 85vh;
+        min-height: 280px;
+    }
+    
+    .contact-card-inner {
+        padding: 1.5rem 2rem;
+    }
+    
+    .contact-photo {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0.6rem;
+    }
+    
+    .contact-name {
+        font-size: 1.3rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .contact-role {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+    
+    .social-links {
+        gap: 1rem;
+        margin-bottom: 0.4rem;
     }
 }
