@@ -238,6 +238,8 @@ class ContentManager {
                 }, 300);
                 this.showUIElements();
                 this.resumeAutoTransition();
+                // Update navigation buttons when info panel is closed
+                this.updateNavigationButtons();
             } else {
                 // Clear any previous states when showing
                 infoPanel.classList.remove('closing');
@@ -245,6 +247,8 @@ class ContentManager {
                 infoPanel.classList.add('visible');
                 this.hideUIElements();
                 this.pauseAutoTransition();
+                // Update navigation buttons when info panel is opened
+                this.updateNavigationButtons();
             }
         }
     }
@@ -268,6 +272,8 @@ class ContentManager {
                     }, 300);
                     this.showUIElements();
                     this.resumeAutoTransition();
+                    // Update navigation buttons when info panel is closed
+                    this.updateNavigationButtons();
                 }
             }
         });
@@ -287,6 +293,8 @@ class ContentManager {
                     }, 300);
                     this.showUIElements();
                     this.resumeAutoTransition();
+                    // Update navigation buttons when info panel is closed
+                    this.updateNavigationButtons();
                 }
             }
         });
@@ -367,6 +375,13 @@ class ContentManager {
     resumeAutoTransition() {
         if (window.timelineManager && window.timelineManager.resumeAutoTransition) {
             window.timelineManager.resumeAutoTransition();
+        }
+    }
+    
+    updateNavigationButtons() {
+        // Update navigation buttons when info panel state changes
+        if (window.timelineManager && window.timelineManager.updateNavigationButtons) {
+            window.timelineManager.updateNavigationButtons();
         }
     }
     switchToCategory(filterId) {

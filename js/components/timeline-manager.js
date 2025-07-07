@@ -103,6 +103,11 @@ class TimelineManager {
         // Click event listeners for timeline items (dots)
         this.timelineItems.forEach((item, index) => {
             item.addEventListener('click', () => {
+                // Check if info panel is open - if so, disable navigation
+                if (this.isInfoPanelOpen()) {
+                    return;
+                }
+                
                 // Don't allow clicking on already active dots
                 if (!item.classList.contains('active')) {
                     this.handleItemClick(index);
@@ -125,6 +130,11 @@ class TimelineManager {
         });
     }
     handleYearLabelClick(year) {
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
+        
         // Reset auto-transition timer since user is actively clicking
         this.resetAutoTransitionTimer();
         // Find the first dot for this year
@@ -246,6 +256,10 @@ class TimelineManager {
         }
         // Don't handle scroll during navigation to prevent interference
         if (this.isClickScrolling) {
+            return;
+        }
+        // Don't handle scroll if info panel is open
+        if (this.isInfoPanelOpen()) {
             return;
         }
         // Reset auto-transition timer since user is scrolling
@@ -556,6 +570,17 @@ class TimelineManager {
             this.startAutoTransitionTimer();
         }
     }
+    // Helper method to check if info panel or contact card is open
+    isInfoPanelOpen() {
+        const infoPanel = document.getElementById('infoPanel');
+        const isInfoPanelOpen = infoPanel && infoPanel.classList.contains('visible');
+        
+        // Check if contact card is open
+        const isContactCardOpen = window.contactCardManager && window.contactCardManager.isOpen();
+        
+        return isInfoPanelOpen || isContactCardOpen;
+    }
+
     // Method to check if auto-transition is active
     isAutoTransitionActive() {
         return this.autoTransitionTimer !== null;
@@ -626,6 +651,11 @@ class TimelineManager {
     }
     // Timeline Navigation Methods
     navigateNext() {
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
+        
         if (this.currentItemIndex < this.timelineItems.length - 1) {
             // Reset auto-transition timer since user is actively navigating
             this.resetAutoTransitionTimer();
@@ -635,6 +665,11 @@ class TimelineManager {
         // User navigation stops at category boundaries - no category switching
     }
     navigatePrevious() {
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
+        
         if (this.currentItemIndex > 0) {
             // Reset auto-transition timer since user is actively navigating
             this.resetAutoTransitionTimer();
@@ -705,15 +740,19 @@ class TimelineManager {
     updateNavigationButtons() {
         const prevBtn = document.querySelector('.timeline-nav-btn.prev');
         const nextBtn = document.querySelector('.timeline-nav-btn.next');
+        
+        // Check if info panel is open - if so, disable both buttons
+        const isInfoPanelOpen = this.isInfoPanelOpen();
+        
         if (prevBtn) {
-            if (this.currentItemIndex <= 0) {
+            if (isInfoPanelOpen || this.currentItemIndex <= 0) {
                 prevBtn.classList.add('disabled');
             } else {
                 prevBtn.classList.remove('disabled');
             }
         }
         if (nextBtn) {
-            if (this.currentItemIndex >= this.timelineItems.length - 1) {
+            if (isInfoPanelOpen || this.currentItemIndex >= this.timelineItems.length - 1) {
                 nextBtn.classList.add('disabled');
             } else {
                 nextBtn.classList.remove('disabled');
@@ -750,6 +789,12 @@ class TimelineManager {
                     document.activeElement.tagName === 'TEXTAREA') {
                     return;
                 }
+                
+                // Check if info panel is open - if so, disable navigation
+                if (this.isInfoPanelOpen()) {
+                    return;
+                }
+                
                 switch(e.key) {
                     case 'ArrowLeft':
                         e.preventDefault();
@@ -811,6 +856,11 @@ class TimelineManager {
             return;
         }
         
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
+        
         // Prevent default scroll behavior
         e.preventDefault();
         
@@ -840,6 +890,11 @@ class TimelineManager {
             return;
         }
         
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
+        
         // Store the initial touch position
         const touch = e.touches[0];
         this.touchStartX = touch.clientX;
@@ -848,6 +903,14 @@ class TimelineManager {
     
     handleTouchEnd(e) {
         // Only handle if we're not already in a transition
+        if (this.isClickScrolling || this.isAutoTransitioning) {
+            return;
+        }
+        
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
         if (this.isClickScrolling || this.isAutoTransitioning) {
             return;
         }

@@ -100,6 +100,9 @@ class ContactCardManager {
         this.cardElement.setAttribute('tabindex', '0');
         this.cardElement.focus();
         
+        // Update navigation buttons when contact card is opened
+        this.updateNavigationButtons();
+        
         // Trigger custom event
         document.dispatchEvent(new CustomEvent('contactCardOpen'));
     }
@@ -109,6 +112,9 @@ class ContactCardManager {
         
         this.isCardOpen = false;
         this.overlayElement.classList.remove('active');
+        
+        // Update navigation buttons when contact card is closed
+        this.updateNavigationButtons();
         
         // Trigger custom event
         document.dispatchEvent(new CustomEvent('contactCardClose'));
@@ -133,6 +139,13 @@ class ContactCardManager {
 
     isOpen() {
         return this.isCardOpen;
+    }
+
+    updateNavigationButtons() {
+        // Update navigation buttons when contact card state changes
+        if (window.timelineManager && window.timelineManager.updateNavigationButtons) {
+            window.timelineManager.updateNavigationButtons();
+        }
     }
 
     updateContactInfo(info) {
