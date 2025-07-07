@@ -21,6 +21,7 @@ const portfolioData = {
     ],
     filters: [
         { id: "games", label: "Games", active: true },
+        { id: "apps", label: "Apps", active: false },
         { id: "music", label: "Music", active: false }
     ],
     categories: {
@@ -281,6 +282,102 @@ const portfolioData = {
                                 "Wrote high-energy electronic soundtrack",
                                 "Conducted playtest sessions",
                                 "Implemented all audio for the game"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        apps: {
+            timeline: [
+                {
+                    year: 2017,
+                    content: [                       
+                        {
+                            title: "Spectral-EQ",
+                            description: "A spectrum analyzer plugin with a 6 band parametric EQ and FFT-based visualizer developed for Logic Pro.",
+                            company: "Passion Project",
+                            role: "Sole Developer",
+                            trailerUrl: "https://www.youtube.com/embed/yZD-i5p5UC0",
+                            videoStart: 0,
+                            videoEnd: 60,
+                            zoomVideo: false,
+                            buttonLabel: "Project Details",
+                            infoPanelHeader: "Project Details",
+                            infoPanelData: [
+                                "Written in Objective-C and C++",
+                                "Utilized Mac's Core Audio SDK to build this",
+                                "All the UI code was built using Cocoa",
+                                "Used fast fourier transforms to visualize the dry/wet audio spectrum",
+                                "Implemented different FFT windowing functions",
+                                "Implemented a 6 band parametric EQ with gain, frequency and Q factor",
+                            ]
+                        }
+                    ]
+                },                
+                {
+                    year: 2016,
+                    content: [                       
+                        {
+                            title: "Pedal Stack",
+                            description: "A guitar processor app with 5 usable guitar pedals: Delay, Distortion, Reverb, Whammy and Equalizer.",
+                            company: "Passion Project",
+                            role: "Sole Developer",
+                            trailerUrl: "https://www.youtube.com/embed/1TjHu73UuJc",
+                            videoStart: 0,
+                            videoEnd: 60,
+                            zoomVideo: false,
+                            buttonLabel: "Project Details",
+                            infoPanelHeader: "Project Details",
+                            infoPanelData: [                                
+                                "Written in Objective-C and C++",
+                                "Utilized Mac's Core Audio SDK to build this",
+                                "All the UI code was built using Cocoa",
+                                "Implemented a full signal chain routing system like a guitar pedal board",
+                                "Wrote all the DSP algorithms for the pedals"
+                            ]
+                        }
+                    ]
+                },                
+                {
+                    year: 2015,
+                    content: [                      
+                        {
+                            title: "Eclipse Synth",
+                            description: "Eclipse Synth is a virtual synthesizer featuring dual oscillators, flexible envelope controls, three filter types",
+                            company: "Passion Project",
+                            role: "Sole Developer",
+                            trailerUrl: "https://www.youtube.com/embed/iMDL5so-MHw",
+                            videoStart: 1,
+                            videoEnd: 12,
+                            zoomVideo: true,
+                            buttonLabel: "Project Details",
+                            infoPanelHeader: "Project Details",
+                            infoPanelData: [                                
+                                "Written in C++ using WDL and IPlug SDK",
+                                "Implemented complex routing system for the oscillators",
+                                "Each oscillator has its own waveform and frequency controls",
+                                "Added a variety of envelope controls",
+                                "Designed three filter types: Low Pass, High Pass and Band Pass",
+                                "Added support for MIDI input",
+                            ]
+                        },                       
+                        {
+                            title: "R2D2IZER",
+                            description: "A fun little app named after the iconic robot from Star Wars which used audio processing techniques to create R2D2 like sound effects.",
+                            company: "Passion Project",
+                            role: "Sole Developer",
+                            trailerUrl: "https://www.youtube.com/embed/geD8HxtQ_lY",
+                            videoStart: 19,
+                            videoEnd: 50,
+                            zoomVideo: false,
+                            buttonLabel: "Project Details",
+                            infoPanelHeader: "Project Details",
+                            infoPanelData: [                
+                                "Written in C++ using WDL and IPlug SDK",
+                                "Initially built as a waveform generator",
+                                "A bug caused it to sound like R2D2",
+                                "Now, it's a feature :)"
                             ]
                         }
                     ]
