@@ -1,12 +1,32 @@
 /* Header Layout */
-.title {
+.main-header {
     position: fixed;
     top: 30px;
     left: 30px;
+    right: 30px;
     z-index: var(--z-header);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: var(--transition-fast);
+}
+
+.title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #ffffff;
+    text-align: left;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.header-nav {
     display: flex;
     align-items: center;
+    transition: var(--transition-fast);
+    opacity: 1;
+    visibility: visible;
 }
 
 .header-filters {
@@ -27,18 +47,6 @@
     visibility: visible;
 }
 
-.header-nav {
-    position: fixed;
-    top: 30px;
-    right: 30px;
-    z-index: var(--z-filters);
-    transition: var(--transition-fast);
-    opacity: 1;
-    visibility: visible;
-    display: flex;
-    align-items: center;
-}
-
 /* Desktop navigation - horizontal layout */
 .nav-menu {
     display: flex;
@@ -57,7 +65,7 @@
     cursor: pointer;
     padding: 0;
     align-items: center;
-    transform: translateY(-2px); /* Slight upward adjustment for alignment */
+    /* Remove transform - no longer needed with unified container */
 }
 
 .hamburger-line {

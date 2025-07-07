@@ -75,20 +75,16 @@
         font-size: 11px;
     }
     
-    .header-nav {
-        top: 20px;
-        right: 20px;
-    }
-    
-    .title {
+    .main-header {
         top: 20px;
         left: 20px;
+        right: 20px;
     }
     
     /* Show mobile menu on medium screens and below */
     .mobile-menu-toggle {
         display: flex;
-        transform: translateY(-8px); /* Much stronger upward adjustment for mobile alignment */
+        /* No transform needed - perfectly aligned with unified container */
     }
     
     .nav-menu {
