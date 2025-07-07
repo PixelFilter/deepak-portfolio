@@ -33,6 +33,21 @@
     user-select: none;
 }
 
+/* Disable animations for all child elements */
+.info-panel *,
+.info-panel *::before,
+.info-panel *::after {
+    animation: none !important;
+    transition: none !important;
+    -webkit-animation: none !important;
+    -webkit-transition: none !important;
+}
+
+/* Re-enable transition for the info panel itself */
+.info-panel {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out !important;
+}
+
 .info-panel-close {
     position: absolute;
     top: 15px;
@@ -153,7 +168,7 @@
 .info-panel-content::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.6) !important;
     border-radius: 10px;
-    transition: all 0.3s ease;
+    transition: none !important;
     min-height: 20px;
 }
 
@@ -189,6 +204,11 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    /* Explicitly disable all animations and transitions */
+    animation: none !important;
+    transition: none !important;
+    -webkit-animation: none !important;
+    -webkit-transition: none !important;
 }
 
 .info-panel-item::before {
@@ -290,6 +310,16 @@
         max-height: 80vh;
         min-height: 300px;
     }
+    
+    /* Ensure no animations on mobile */
+    .info-panel *,
+    .info-panel *::before,
+    .info-panel *::after {
+        animation: none !important;
+        transition: none !important;
+        -webkit-animation: none !important;
+        -webkit-transition: none !important;
+    }
 }
 
 /* Mobile Landscape - more conservative height */
@@ -307,6 +337,16 @@
     .info-panel-item {
         font-size: 11px;
         padding: 6px 0 6px 15px;
+    }
+    
+    /* Ensure no animations on mobile landscape */
+    .info-panel *,
+    .info-panel *::before,
+    .info-panel *::after {
+        animation: none !important;
+        transition: none !important;
+        -webkit-animation: none !important;
+        -webkit-transition: none !important;
     }
 }
 
