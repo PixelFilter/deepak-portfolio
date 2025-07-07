@@ -84,10 +84,15 @@ class TimelineManager {
         // Touch event listeners for swipe navigation on mobile
         window.addEventListener('touchstart', (e) => {
             this.handleTouchStart(e);
-        }, { passive: true });
+        }, { passive: false });
+        
+        window.addEventListener('touchmove', (e) => {
+            this.handleTouchMove(e);
+        }, { passive: false });
+        
         window.addEventListener('touchend', (e) => {
             this.handleTouchEnd(e);
-        }, { passive: true });
+        }, { passive: false });
         // Resize event listener to check collision when window resizes
         window.addEventListener('resize', () => {
             // Remove the duplicate collision detection - handled by SoundToggleManager
@@ -892,6 +897,16 @@ class TimelineManager {
         
         // Check if info panel is open - if so, disable navigation
         if (this.isInfoPanelOpen()) {
+            // Prevent default touch behavior when info panel is open
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // Check if the touch is on the info panel itself
+        const infoPanel = document.getElementById('infoPanel');
+        if (infoPanel && infoPanel.contains(e.target)) {
+            // Don't handle swipe navigation if touching inside the info panel
             return;
         }
         
@@ -899,6 +914,22 @@ class TimelineManager {
         const touch = e.touches[0];
         this.touchStartX = touch.clientX;
         this.touchStartY = touch.clientY;
+    }
+    
+    handleTouchMove(e) {
+        // Check if info panel is open - if so, prevent default touch behavior
+        if (this.isInfoPanelOpen()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // Check if the touch is on the info panel itself
+        const infoPanel = document.getElementById('infoPanel');
+        if (infoPanel && infoPanel.contains(e.target)) {
+            // Don't handle swipe navigation if touching inside the info panel
+            return;
+        }
     }
     
     handleTouchEnd(e) {
@@ -909,9 +940,16 @@ class TimelineManager {
         
         // Check if info panel is open - if so, disable navigation
         if (this.isInfoPanelOpen()) {
+            // Prevent default touch behavior when info panel is open
+            e.preventDefault();
+            e.stopPropagation();
             return;
         }
-        if (this.isClickScrolling || this.isAutoTransitioning) {
+        
+        // Check if the touch is on the info panel itself
+        const infoPanel = document.getElementById('infoPanel');
+        if (infoPanel && infoPanel.contains(e.target)) {
+            // Don't handle swipe navigation if touching inside the info panel
             return;
         }
         
@@ -925,6 +963,11 @@ class TimelineManager {
     }
     
     handleSwipeGesture() {
+        // Check if info panel is open - if so, disable navigation
+        if (this.isInfoPanelOpen()) {
+            return;
+        }
+        
         const deltaX = this.touchEndX - this.touchStartX;
         const deltaY = this.touchEndY - this.touchStartY;
         

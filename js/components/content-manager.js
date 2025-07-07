@@ -302,6 +302,10 @@ class ContentManager {
     hideUIElements() {
         // Disable main page scrolling
         document.body.style.overflow = 'hidden';
+        
+        // Disable touch actions to prevent swipe navigation on mobile
+        document.body.style.touchAction = 'none';
+        
         // Hide background text elements
         const backgroundText = document.getElementById('backgroundText');
         if (backgroundText) {
@@ -336,6 +340,10 @@ class ContentManager {
     showUIElements() {
         // Re-enable main page scrolling
         document.body.style.overflow = '';
+        
+        // Re-enable touch actions
+        document.body.style.touchAction = '';
+        
         // Show background text elements
         const backgroundText = document.getElementById('backgroundText');
         if (backgroundText) {

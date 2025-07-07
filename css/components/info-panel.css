@@ -24,6 +24,13 @@
     flex-direction: column;
     overflow: hidden;
     word-wrap: break-word;
+    /* Disable touch actions to prevent swipe navigation */
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .info-panel-close {
