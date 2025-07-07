@@ -11,6 +11,7 @@ class TimelineManager {
         this.isClickScrolling = false; // Track if scroll is from click
         this.transitionResetDelay = 2000; // 2 seconds timeout for transition reset
         this.keyboardListenerAdded = false; // Track if keyboard listener is added
+        this.wheelDebounceTimer = null; // Timer for debouncing wheel events
         // Auto-transition properties
         this.autoTransitionTimer = null;
         this.autoTransitionDelay = 10000; // 10 seconds of inactivity before auto-transition
@@ -73,6 +74,10 @@ class TimelineManager {
             this.handleScroll();
             this.handleScrollEffects();
         });
+        // Wheel event listener for smooth navigation-like scrolling
+        window.addEventListener('wheel', (e) => {
+            this.handleWheelNavigation(e);
+        }, { passive: false });
         // Resize event listener to check collision when window resizes
         window.addEventListener('resize', () => {
             // Remove the duplicate collision detection - handled by SoundToggleManager
@@ -580,9 +585,8 @@ class TimelineManager {
             // We're at the last item - switch to next category
             this.switchToNextCategory();
         } else {
-            // Normal transition within current category
+            // Normal transition within current category - use transitionToItem directly
             const nextIndex = this.currentItemIndex + 1;
-            // Perform the transition
             this.transitionToItem(nextIndex, true);
             // Reset auto-transition flag and restart timer after transition
             // Extended delay to ensure smooth scroll completes
@@ -739,6 +743,10 @@ class TimelineManager {
             clearTimeout(this.transitionResetTimer);
             this.transitionResetTimer = null;
         }
+        if (this.wheelDebounceTimer) {
+            clearTimeout(this.wheelDebounceTimer);
+            this.wheelDebounceTimer = null;
+        }
         // Refresh timeline items with new data
         this.refreshTimelineItems();
         // Re-setup navigation listeners for new category with small delay to ensure DOM is ready
@@ -798,10 +806,8 @@ class TimelineManager {
             this.resetAutoTransitionTimer();
             const nextIndex = this.currentItemIndex + 1;
             this.handleNavigationClick(nextIndex);
-        } else {
-            // At the end of current category, switch to next category
-            this.switchToNextCategory();
         }
+        // User navigation stops at category boundaries - no category switching
     }
     navigatePrevious() {
         if (this.currentItemIndex > 0) {
@@ -809,10 +815,8 @@ class TimelineManager {
             this.resetAutoTransitionTimer();
             const prevIndex = this.currentItemIndex - 1;
             this.handleNavigationClick(prevIndex);
-        } else {
-            // At the beginning of current category, switch to previous category
-            this.switchToPreviousCategory();
         }
+        // User navigation stops at category boundaries - no category switching
     }
     
     switchToNextCategory() {
@@ -978,7 +982,34 @@ class TimelineManager {
         }
     }
     
-
+    // Wheel Navigation Handler - mimics keyboard/button navigation
+    handleWheelNavigation(e) {
+        // Only handle if we're not already in a transition
+        if (this.isClickScrolling || this.isAutoTransitioning) {
+            return;
+        }
+        
+        // Prevent default scroll behavior
+        e.preventDefault();
+        
+        // Debounce wheel events to prevent rapid firing
+        if (this.wheelDebounceTimer) {
+            clearTimeout(this.wheelDebounceTimer);
+        }
+        
+        this.wheelDebounceTimer = setTimeout(() => {
+            // Determine scroll direction
+            const isScrollingDown = e.deltaY > 0;
+            
+            if (isScrollingDown) {
+                // Scroll down - go to next item
+                this.navigateNext();
+            } else {
+                // Scroll up - go to previous item
+                this.navigatePrevious();
+            }
+        }, 50); // 50ms debounce to prevent rapid transitions
+    }
 
 }
 // Export for use in other modules
