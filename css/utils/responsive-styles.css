@@ -80,6 +80,11 @@
         right: 20px;
     }
     
+    .title {
+        top: 20px;
+        left: 20px;
+    }
+    
     /* Show mobile menu on medium screens and below */
     .mobile-menu-toggle {
         display: flex;

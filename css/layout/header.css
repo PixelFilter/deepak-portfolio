@@ -5,6 +5,8 @@
     left: 30px;
     z-index: var(--z-header);
     transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
 }
 
 .header-filters {
@@ -33,6 +35,8 @@
     transition: var(--transition-fast);
     opacity: 1;
     visibility: visible;
+    display: flex;
+    align-items: center;
 }
 
 /* Desktop navigation - horizontal layout */
@@ -53,7 +57,7 @@
     cursor: pointer;
     padding: 0;
     align-items: center;
-    transform: translateY(-1px);
+    transform: translateY(-2px); /* Slight upward adjustment for alignment */
 }
 
 .hamburger-line {
@@ -61,6 +65,7 @@
     height: 2px;
     background: #cacaca;
     transition: all 0.3s ease;
+    border-radius: 1px;
 }
 
 .mobile-menu-toggle:hover .hamburger-line {
