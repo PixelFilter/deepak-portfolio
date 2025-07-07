@@ -111,11 +111,9 @@ class App {
         // Re-enable scrolling after loading is complete
         document.body.style.overflow = 'auto';
         document.body.style.height = '500vh';
-        // Update timeline manager to enable scrolling and auto-transition
+        // Update timeline manager to enable scrolling
         if (this.timelineManager) {
             this.timelineManager.enableScrolling();
-            // Enable auto-transition now that user has interacted
-            this.timelineManager.enableAutoTransition();
         }
         // Notify custom scrollbar that loading is complete
         if (this.customScrollbar) {
