@@ -44,6 +44,7 @@ class VideoBackground {
             this.hideVideo();
             return;
         }
+        
         // Create a unique identifier for this video configuration
         const videoId = `${trailerUrl}_${videoStart || 'none'}_${videoEnd || 'none'}`;
         // Skip if the same video is already loaded

@@ -68,6 +68,16 @@ const Utils = {
     // Generate unique ID
     generateId() {
         return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    },
+    
+    // Mobile detection utility
+    isMobile() {
+        return window.innerWidth <= 480 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    },
+    
+    // Check if device is in portrait mode
+    isPortrait() {
+        return window.innerHeight > window.innerWidth;
     }
 };
 // Export for use in other modules
