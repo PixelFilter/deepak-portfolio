@@ -203,22 +203,6 @@ class ContentManager {
             });
         }
     }
-    showContributionsModal(contributions) {
-        const modal = document.getElementById('contributionsModal');
-        const list = modal?.querySelector('.contributions-list');
-        if (modal && list) {
-            // Clear existing content
-            list.innerHTML = '';
-            // Add each contribution as a list item
-            contributions.forEach(contribution => {
-                const li = document.createElement('li');
-                li.textContent = contribution;
-                list.appendChild(li);
-            });
-            // Show modal
-            modal.style.display = 'flex';
-        }
-    }
     hideBackgroundText() {
         const backgroundText = document.getElementById('backgroundText');
         if (backgroundText) {

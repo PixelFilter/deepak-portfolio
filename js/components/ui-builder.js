@@ -411,47 +411,7 @@ class UIBuilder {
             infoPanel.appendChild(content);
             document.body.appendChild(infoPanel);
         }
-        // Create contributions modal if it doesn't exist
-        this.createContributionsModal();
-    }
-    createContributionsModal() {
-        // Create modal container if it doesn't exist
-        let modal = document.getElementById('contributionsModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'contributionsModal';
-            modal.className = 'contributions-modal';
-            const modalContent = document.createElement('div');
-            modalContent.className = 'contributions-modal-content';
-            const header = document.createElement('div');
-            header.className = 'contributions-modal-header';
-            const title = document.createElement('h2');
-            title.className = 'contributions-modal-title';
-            title.textContent = 'Project Contributions';
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'contributions-modal-close';
-            closeBtn.innerHTML = '×';
-            header.appendChild(title);
-            header.appendChild(closeBtn);
-            const body = document.createElement('div');
-            body.className = 'contributions-modal-body';
-            const list = document.createElement('ul');
-            list.className = 'contributions-list';
-            body.appendChild(list);
-            modalContent.appendChild(header);
-            modalContent.appendChild(body);
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-            // Add event listeners
-            closeBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
+
     }
 }
 // Export for use in other modules
