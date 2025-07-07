@@ -21,7 +21,6 @@ const portfolioData = {
     ],
     filters: [
         { id: "games", label: "Games", active: true },
-        { id: "apps", label: "Apps", active: false },
         { id: "music", label: "Music", active: false }
     ],
     categories: {
@@ -288,36 +287,6 @@ const portfolioData = {
                 }
             ]
         },
-        apps: {
-            timeline: [
-                {
-                    year: 2023,
-                    content: [
-                        {
-                            title: "R2D2IZER",
-                            description: "An epic synthwave album inspired by 80s retro-futurism and cyberpunk aesthetics, featuring lush synthesizers and driving rhythms.",
-                            company: "Independent Release",
-                            role: "Composer | Producer | Sound Designer",
-                            trailerUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                            videoStart: 0,
-                            videoEnd: 60,
-                            zoomVideo: false,
-                            buttonLabel: "View Credits",
-                            infoPanelHeader: "Album Credits",
-                            infoPanelData: [
-                                "Composed and produced all 10 tracks on the album",
-                                "Designed custom synthesizer patches using Serum and Massive",
-                                "Mixed and mastered the entire album using Pro Tools",
-                                "Created vintage analog warmth using hardware outboard gear",
-                                "Collaborated with visual artists for album artwork",
-                                "Distributed across Spotify, Apple Music, and Bandcamp",
-                                "Featured on several synthwave playlists and radio shows"
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
         music: {
             timeline: [
                 {
@@ -326,8 +295,8 @@ const portfolioData = {
                         {
                             title: "Hyperbolic\nChamber",
                             description: "Hyperbolic Chamber is a platform I co-founded to showcase immersive, experimental electronic music from underground artists including us.",
-                            company: "Independent Release",
-                            role: "Composer | Producer | Sound Designer",
+                            company: "Hyperbolic Chamber",
+                            role: "Co-Founder",
                             trailerUrl: "https://www.youtube.com/embed/sB-UvVvmUfk",
                             videoStart: 60,
                             videoEnd: 180,
