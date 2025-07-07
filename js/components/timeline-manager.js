@@ -9,6 +9,13 @@ class TimelineManager {
         this.isClickScrolling = false; // Track if scroll is from click
         this.keyboardListenerAdded = false; // Track if keyboard listener is added
         this.wheelDebounceTimer = null; // Timer for debouncing wheel events
+        // Touch/swipe properties
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.touchEndX = 0;
+        this.touchEndY = 0;
+        this.minSwipeDistance = 50; // Minimum distance for a swipe
+        this.maxVerticalSwipe = 100; // Maximum vertical movement to still count as horizontal swipe
         // Auto-transition properties
         this.autoTransitionTimer = null;
         this.autoTransitionDelay = 10000; // 10 seconds of inactivity before auto-transition
@@ -74,6 +81,13 @@ class TimelineManager {
         window.addEventListener('wheel', (e) => {
             this.handleWheelNavigation(e);
         }, { passive: false });
+        // Touch event listeners for swipe navigation on mobile
+        window.addEventListener('touchstart', (e) => {
+            this.handleTouchStart(e);
+        }, { passive: true });
+        window.addEventListener('touchend', (e) => {
+            this.handleTouchEnd(e);
+        }, { passive: true });
         // Resize event listener to check collision when window resizes
         window.addEventListener('resize', () => {
             // Remove the duplicate collision detection - handled by SoundToggleManager
@@ -817,6 +831,58 @@ class TimelineManager {
                 this.navigatePrevious();
             }
         }, 50); // 50ms debounce to prevent rapid transitions
+    }
+
+    // Touch Navigation Handlers - for mobile swipe navigation
+    handleTouchStart(e) {
+        // Only handle if we're not already in a transition
+        if (this.isClickScrolling || this.isAutoTransitioning) {
+            return;
+        }
+        
+        // Store the initial touch position
+        const touch = e.touches[0];
+        this.touchStartX = touch.clientX;
+        this.touchStartY = touch.clientY;
+    }
+    
+    handleTouchEnd(e) {
+        // Only handle if we're not already in a transition
+        if (this.isClickScrolling || this.isAutoTransitioning) {
+            return;
+        }
+        
+        // Get the final touch position
+        const touch = e.changedTouches[0];
+        this.touchEndX = touch.clientX;
+        this.touchEndY = touch.clientY;
+        
+        // Process the swipe
+        this.handleSwipeGesture();
+    }
+    
+    handleSwipeGesture() {
+        const deltaX = this.touchEndX - this.touchStartX;
+        const deltaY = this.touchEndY - this.touchStartY;
+        
+        // Calculate distances
+        const horizontalDistance = Math.abs(deltaX);
+        const verticalDistance = Math.abs(deltaY);
+        
+        // Check if this is a valid horizontal swipe
+        if (horizontalDistance >= this.minSwipeDistance && 
+            verticalDistance <= this.maxVerticalSwipe &&
+            horizontalDistance > verticalDistance) {
+            
+            // Determine swipe direction and navigate
+            if (deltaX > 0) {
+                // Swipe right - go to previous item
+                this.navigatePrevious();
+            } else {
+                // Swipe left - go to next item
+                this.navigateNext();
+            }
+        }
     }
 
 }
