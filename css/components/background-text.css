@@ -187,7 +187,7 @@
     }
     
     .background-description {
-        font-size: clamp(0.8rem, 2.5vw, 1.3rem);
+        font-size: clamp(0.92rem, 2.88vw, 1.50rem);
         margin-top: 1rem;
         text-align: center !important;
         max-width: 80%; /* Reduce width of description in responsive */
@@ -196,13 +196,13 @@
     }
     
     .background-role {
-        font-size: clamp(0.73rem, 2.42vw, 1.21rem);
+        font-size: clamp(0.84rem, 2.78vw, 1.39rem);
         margin-top: 1.2rem;
         text-align: center !important;
     }
     
     .background-company {
-        font-size: clamp(0.61rem, 2.18vw, 1.09rem);
+        font-size: clamp(0.70rem, 2.51vw, 1.25rem);
         margin-top: 0.2rem;
         text-align: center !important;
     }
@@ -302,19 +302,19 @@
     }
     
     .background-description {
-        font-size: clamp(0.7rem, 3vw, 1rem);
+        font-size: clamp(0.81rem, 3.45vw, 1.15rem);
         max-width: 85%; /* Reduce width of description on small screens */
         margin-left: auto;
         margin-right: auto;
     }
     
     .background-role {
-        font-size: clamp(0.61rem, 3.03vw, 0.97rem);
+        font-size: clamp(0.70rem, 3.48vw, 1.12rem);
         margin-top: 1rem;
     }
     
     .background-company {
-        font-size: clamp(0.48rem, 2.42vw, 0.85rem);
+        font-size: clamp(0.55rem, 2.78vw, 0.98rem);
         margin-top: 0.2rem;
     }
     
