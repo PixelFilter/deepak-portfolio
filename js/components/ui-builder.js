@@ -105,16 +105,23 @@ class UIBuilder {
             this.data.navigation.forEach(navItem => {
                 const navBtn = document.createElement('a');
                 navBtn.className = 'nav-btn';
-                navBtn.href = navItem.url;
+                
+                // Set href - use '#' for modal items to prevent navigation
+                if (navItem.id === 'resume' || navItem.url === '#' || navItem.url === '#about') {
+                    navBtn.href = '#';
+                } else {
+                    navBtn.href = navItem.url;
+                }
+                
                 navBtn.textContent = navItem.label;
                 
-                // Add target="_blank" for external links
-                if (navItem.url.startsWith('http') || navItem.url.endsWith('.pdf')) {
+                // Add target="_blank" for external links only (not modal items)
+                if (navItem.url.startsWith('http') && navItem.id !== 'resume' && navItem.url !== '#' && navItem.url !== '#about') {
                     navBtn.target = '_blank';
                 }
                 
-                // Add click handler for modal/card items
-                if (navItem.url === '#' || navItem.url === '#about') {
+                // Add click handler for modal/card items and resume
+                if (navItem.url === '#' || navItem.url === '#about' || navItem.id === 'resume') {
                     navBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         // Close mobile menu if open
@@ -139,6 +146,31 @@ class UIBuilder {
                                         // Try one more time after a longer delay
                                         setTimeout(() => {
                                             tryShowAboutCard();
+                                        }, 500);
+                                    }
+                                }, 100);
+                            }
+                        }
+                        
+                        // Handle resume button click
+                        if (navItem.id === 'resume') {
+                            // Function to try showing the resume viewer
+                            const tryShowResumeViewer = () => {
+                                if (window.resumeViewer) {
+                                    window.resumeViewer.show();
+                                    return true;
+                                }
+                                return false;
+                            };
+                            
+                            // Try immediately
+                            if (!tryShowResumeViewer()) {
+                                // Try again after a short delay
+                                setTimeout(() => {
+                                    if (!tryShowResumeViewer()) {
+                                        // Try one more time after a longer delay
+                                        setTimeout(() => {
+                                            tryShowResumeViewer();
                                         }, 500);
                                     }
                                 }, 100);
@@ -170,8 +202,8 @@ class UIBuilder {
                             }
                         }
                     });
-                } else {
-                    // Close mobile menu when clicking functional links
+                } else if (navItem.id !== 'resume' && navItem.url !== '#' && navItem.url !== '#about') {
+                    // Close mobile menu when clicking external links
                     navBtn.addEventListener('click', () => {
                         this.closeMobileMenu();
                     });
