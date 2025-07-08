@@ -335,8 +335,8 @@ const portfolioData = {
                             videoEnd: 60,
                             zoomVideo: false,
                             projectImage: "assets/images/apps/wish_drop.png",
-                            buttonLabel: "Project Details",
-                            infoPanelHeader: "Project Details",
+                            buttonLabel: "View Contributions",
+                            infoPanelHeader: "Project Contributions",
                             infoPanelData: [
                                 "Managed a team of developers for building the iOS, Android, Web apps",
                                 "Managed the development of the admin and analytics panel",
