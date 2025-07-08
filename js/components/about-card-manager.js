@@ -297,6 +297,17 @@ class AboutCardManager {
                 }, 100); // Small delay for orientation change to complete
             }
         });
+
+        // Listen to visual viewport changes for better mobile support
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', () => {
+                if (this.isCardOpen) {
+                    requestAnimationFrame(() => {
+                        this.updateCardDimensions();
+                    });
+                }
+            });
+        }
     }
 
     updateCardDimensions() {
@@ -319,10 +330,23 @@ class AboutCardManager {
         const viewport = {
             width: window.innerWidth,
             height: window.innerHeight,
-            isPortrait: window.innerHeight > window.innerWidth
+            isPortrait: window.innerHeight > window.innerWidth,
+            isMobile: window.innerWidth <= 768
         };
 
-        // Apply dynamic styling based on current viewport
+        // Only apply dynamic styling to mobile devices
+        if (!viewport.isMobile) {
+            // Reset any mobile styles for desktop
+            const cardStyle = this.cardElement.style;
+            cardStyle.removeProperty('width');
+            cardStyle.removeProperty('max-width');
+            cardStyle.removeProperty('height');
+            cardStyle.removeProperty('max-height');
+            cardStyle.removeProperty('min-height');
+            return;
+        }
+
+        // Apply dynamic styling based on current viewport for mobile only
         const cardStyle = this.cardElement.style;
         
         // Reset any inline styles first
@@ -335,28 +359,16 @@ class AboutCardManager {
         // Force a style recalculation
         this.cardElement.offsetHeight;
 
-        // Apply responsive rules programmatically for immediate effect
-        if (viewport.width <= 480) {
-            cardStyle.setProperty('width', '95vw', 'important');
-            cardStyle.setProperty('max-width', '400px', 'important');
-            cardStyle.setProperty('max-height', '75vh', 'important');
-            cardStyle.setProperty('min-height', '320px', 'important');
+        // Apply responsive rules only for mobile devices
+        if (viewport.width <= 360) {
+            cardStyle.setProperty('max-height', '95vh', 'important');
+            cardStyle.setProperty('max-width', '98vw', 'important');
+        } else if (viewport.width <= 480) {
+            cardStyle.setProperty('max-height', '90vh', 'important');
+            cardStyle.setProperty('max-width', '95vw', 'important');
         } else if (viewport.width <= 768) {
-            cardStyle.setProperty('width', '90vw', 'important');
-            cardStyle.setProperty('max-width', '500px', 'important');
-            cardStyle.setProperty('max-height', viewport.isPortrait ? '80vh' : '85vh', 'important');
-            cardStyle.setProperty('min-height', viewport.isPortrait ? '400px' : '350px', 'important');
-        } else if (viewport.width <= 1200) {
-            cardStyle.setProperty('width', '650px', 'important');
-            cardStyle.setProperty('max-width', '85vw', 'important');
-            cardStyle.setProperty('max-height', viewport.isPortrait ? '75vh' : '70vh', 'important');
-        } else if (viewport.width >= 1400) {
-            cardStyle.setProperty('width', '900px', 'important');
-            cardStyle.setProperty('max-height', '70vh', 'important');
-        } else {
-            cardStyle.setProperty('width', '800px', 'important');
+            cardStyle.setProperty('max-height', '85vh', 'important');
             cardStyle.setProperty('max-width', '90vw', 'important');
-            cardStyle.setProperty('max-height', viewport.isPortrait ? '85vh' : '75vh', 'important');
         }
 
         // Force another layout recalculation to apply changes immediately

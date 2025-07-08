@@ -94,8 +94,6 @@
     overflow-y: auto;
     overflow-x: hidden;
     min-height: 0;
-    /* Ensure scrolling works on mobile */
-    -webkit-overflow-scrolling: touch;
 }
 
 .about-header {
@@ -165,8 +163,6 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
-    /* Ensure scrolling works on mobile */
-    -webkit-overflow-scrolling: touch;
 }
 
 .about-text p {
@@ -342,11 +338,15 @@
     
     .about-content {
         padding: 30px;
+        /* Add mobile scrolling support */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
     
     .about-header {
         max-width: 350px;
         padding: 0 0.8rem;
+        flex-shrink: 0;
     }
     
     .about-photo {
@@ -365,6 +365,12 @@
         font-size: 0.9rem;
         margin-bottom: 0;
     }
+    
+    .about-text {
+        /* Enable mobile scrolling */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+    }
 }
 
 /* Small screens */
@@ -376,11 +382,17 @@
     
     .about-content {
         padding: 25px;
+        /* Enhanced mobile scrolling */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+        scroll-behavior: smooth;
     }
     
     .about-header {
         max-width: 300px;
         padding: 0 0.5rem;
+        flex-shrink: 0;
+        margin-bottom: 1rem;
     }
     
     .about-photo {
@@ -402,11 +414,15 @@
     
     .about-text {
         margin-bottom: 20px;
+        /* Enhanced mobile text scrolling */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
     
     .about-text p {
         font-size: 15px;
         line-height: 1.5;
+        margin-bottom: 16px;
     }
 }
 
@@ -419,11 +435,17 @@
     
     .about-content {
         padding: 20px;
+        /* Enhanced mobile scrolling */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+        scroll-behavior: smooth;
     }
     
     .about-header {
         max-width: 280px;
         padding: 0 0.3rem;
+        flex-shrink: 0;
+        margin-bottom: 0.8rem;
     }
     
     .about-photo {
@@ -445,11 +467,15 @@
     
     .about-text {
         margin-bottom: 15px;
+        /* Enhanced mobile text scrolling */
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
     
     .about-text p {
         font-size: 14px;
         line-height: 1.4;
+        margin-bottom: 14px;
     }
 }
 
@@ -478,10 +504,10 @@
     }
 }
 
-/* Mobile devices with short viewport height */
-@media (max-height: 600px) {
+/* Mobile devices with short viewport height - only for mobile screens */
+@media (max-width: 768px) and (max-height: 600px) {
     .about-card {
-        max-height: 95vh !important;
+        max-height: 90vh !important;
     }
     
     .about-content {
@@ -489,24 +515,20 @@
     }
     
     .about-header {
-        margin-bottom: 1rem !important;
-    }
-    
-    .about-text {
-        margin-bottom: 15px !important;
+        margin-bottom: 0.8rem !important;
     }
     
     .about-text p {
         font-size: 14px !important;
         line-height: 1.4 !important;
-        margin-bottom: 15px !important;
+        margin-bottom: 12px !important;
     }
 }
 
-/* Mobile landscape and very short screens */
-@media (max-height: 500px) {
+/* Mobile landscape and very short screens - only for mobile screens */
+@media (max-width: 768px) and (max-height: 500px) {
     .about-card {
-        max-height: 98vh !important;
+        max-height: 95vh !important;
     }
     
     .about-content {
@@ -516,7 +538,7 @@
     .about-photo {
         width: 50px !important;
         height: 50px !important;
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.4rem !important;
     }
     
     .about-name {
@@ -529,8 +551,8 @@
         margin-bottom: 0 !important;
     }
     
-    .about-text {
-        margin-bottom: 10px !important;
+    .about-header {
+        margin-bottom: 0.6rem !important;
     }
     
     .about-text p {
@@ -558,5 +580,15 @@
         width: 32px;
         height: 32px;
         font-size: 1rem;
+    }
+}
+
+/* Enhanced mobile scrolling - only for mobile devices */
+@media (max-width: 768px) {
+    .about-content,
+    .about-text {
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+        scroll-behavior: smooth;
     }
 }
