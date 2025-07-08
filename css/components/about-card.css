@@ -94,6 +94,8 @@
     overflow-y: auto;
     overflow-x: hidden;
     min-height: 0;
+    /* Ensure scrolling works on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 .about-header {
@@ -163,6 +165,8 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    /* Ensure scrolling works on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 .about-text p {
@@ -332,6 +336,14 @@
 
 /* Medium screens */
 @media (max-width: 768px) {
+    .about-card {
+        max-height: 85vh;
+    }
+    
+    .about-content {
+        padding: 30px;
+    }
+    
     .about-header {
         max-width: 350px;
         padding: 0 0.8rem;
@@ -357,6 +369,15 @@
 
 /* Small screens */
 @media (max-width: 480px) {
+    .about-card {
+        max-height: 90vh;
+        max-width: 95vw;
+    }
+    
+    .about-content {
+        padding: 25px;
+    }
+    
     .about-header {
         max-width: 300px;
         padding: 0 0.5rem;
@@ -378,10 +399,28 @@
         font-size: 0.8rem;
         margin-bottom: 0;
     }
+    
+    .about-text {
+        margin-bottom: 20px;
+    }
+    
+    .about-text p {
+        font-size: 15px;
+        line-height: 1.5;
+    }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
+    .about-card {
+        max-height: 95vh;
+        max-width: 98vw;
+    }
+    
+    .about-content {
+        padding: 20px;
+    }
+    
     .about-header {
         max-width: 280px;
         padding: 0 0.3rem;
@@ -402,6 +441,15 @@
     .about-role {
         font-size: 0.75rem;
         margin-bottom: 0;
+    }
+    
+    .about-text {
+        margin-bottom: 15px;
+    }
+    
+    .about-text p {
+        font-size: 14px;
+        line-height: 1.4;
     }
 }
 
@@ -427,5 +475,88 @@
     .about-role {
         font-size: 1.1rem;
         margin-bottom: 0;
+    }
+}
+
+/* Mobile devices with short viewport height */
+@media (max-height: 600px) {
+    .about-card {
+        max-height: 95vh !important;
+    }
+    
+    .about-content {
+        padding: 15px !important;
+    }
+    
+    .about-header {
+        margin-bottom: 1rem !important;
+    }
+    
+    .about-text {
+        margin-bottom: 15px !important;
+    }
+    
+    .about-text p {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 15px !important;
+    }
+}
+
+/* Mobile landscape and very short screens */
+@media (max-height: 500px) {
+    .about-card {
+        max-height: 98vh !important;
+    }
+    
+    .about-content {
+        padding: 10px !important;
+    }
+    
+    .about-photo {
+        width: 50px !important;
+        height: 50px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .about-name {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.1rem !important;
+    }
+    
+    .about-role {
+        font-size: 0.7rem !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .about-text {
+        margin-bottom: 10px !important;
+    }
+    
+    .about-text p {
+        font-size: 13px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Mobile close button adjustments */
+@media (max-width: 480px) {
+    .about-card-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .about-card-close {
+        top: 0.3rem;
+        right: 0.3rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
     }
 }
