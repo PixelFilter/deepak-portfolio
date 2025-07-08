@@ -167,6 +167,28 @@ const portfolioData = {
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
+                                "Built/Scripted the Audio Manager to manage all audio in the game in Unity",
+                                "Composed, Recorded, Mixed and Mastered all music and audio content",
+                                "Composed music in a style to change tempo as the game sped up",
+                                "Designed the website",
+                                "Designed all promotional materials",
+                                "Conducted playtesting on a large scale",
+                                "Utilized data tracking / analytics tools to keep track of a variety of game data",
+                                "Handled marketing aspects such as social media etc"
+                            ]
+                        },
+                        {
+                            title: "Just Flick",
+                            description: "An endless shape mathching and music synced iOS/Android mobile game.",
+                            company: "Voxel Game Studios",
+                            role: "Audio Programmer | Audio Content",
+                            trailerUrl: "https://www.youtube.com/embed/jKOilVDdx9o",
+                            videoStart: 4,
+                            videoEnd: 20,
+                            zoomVideo: false,
+                            buttonLabel: "View Contributions",
+                            infoPanelHeader: "Project Contributions",
+                            infoPanelData: [
                                 "Handled logistics of beta release for Google Play Store launch",
                                 "Integrated Audiokinetic's Wwise into Unity 5",
                                 "Composed, recorded, mixed and mastered all the music for the game",
