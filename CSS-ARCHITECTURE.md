@@ -52,9 +52,12 @@ css/
 
 ### Z-Index Layers
 - **Timeline**: `10` (--z-timeline)
-- **Header**: `100` (--z-header)
 - **Filters**: `200` (--z-filters)
+- **UI Elements**: `300` (--z-ui)
+- **Header**: `500` (--z-header)
+- **Dropdowns**: `500` (--z-dropdown)
 - **Loading**: `1000` (--z-loading)
+- **Modals**: `9999` (--z-modal)
 
 ## 🔧 Component Guidelines
 

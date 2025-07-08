@@ -51,9 +51,10 @@
     --z-video-background: 0;
     --z-background-text: 2;
     --z-timeline: 10;
-    --z-header: 100;
     --z-filters: 200;
     --z-ui: 300;
+    --z-header: 500;
+    --z-dropdown: 500;
     --z-modal: 9999;
     --z-loading: 1000;
 }
