@@ -303,10 +303,16 @@
     .info-panel {
         width: 90vw;
         max-width: 500px;
-        max-height: 50vh;
+        max-height: 70vh;
         min-height: 250px;
         padding: 25px;
+        /* Ensure perfect centering on mobile */
+        position: fixed;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%) scale(0.95);
+        /* Add safe area padding for mobile devices */
+        margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     
     .info-panel.visible {
@@ -344,8 +350,17 @@
 /* Mobile Portrait - use maximum vertical space */
 @media (max-width: 768px) and (orientation: portrait) {
     .info-panel {
-        max-height: 80vh;
+        max-height: 75vh;
         min-height: 300px;
+        /* Ensure perfect centering for portrait mode */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
     }
     
     /* Ensure no animations on mobile except close button */
@@ -364,6 +379,15 @@
     .info-panel {
         max-height: 65vh;
         padding: 20px;
+        /* Ensure perfect centering for landscape mode */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
     }
     
     .info-panel-header {
@@ -387,6 +411,112 @@
     }
 }
 
+/* Very small mobile screens */
+@media (max-width: 480px) {
+    .info-panel {
+        width: 95vw;
+        max-width: none;
+        max-height: 80vh;
+        min-height: 200px;
+        padding: 20px;
+        /* Ensure perfect centering on very small screens */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        border-radius: 16px;
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .info-panel-header {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+    
+    .info-panel-item {
+        font-size: 11px;
+        padding: 6px 0 6px 15px;
+    }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 360px) {
+    .info-panel {
+        width: 98vw;
+        max-height: 85vh;
+        min-height: 180px;
+        padding: 15px;
+        /* Ensure perfect centering on extra small screens */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        border-radius: 12px;
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .info-panel-header {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .info-panel-item {
+        font-size: 10px;
+        padding: 5px 0 5px 12px;
+    }
+}
+
+/* Mobile devices with very short viewport height */
+@media (max-height: 600px) and (max-width: 768px) {
+    .info-panel {
+        max-height: 90vh;
+        min-height: 150px;
+        /* Ensure centering even on short mobile screens */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Mobile landscape with very short height */
+@media (max-height: 500px) and (max-width: 768px) and (orientation: landscape) {
+    .info-panel {
+        max-height: 95vh;
+        min-height: 120px;
+        padding: 15px;
+        /* Ensure centering on very short landscape screens */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    
+    .info-panel.visible {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .info-panel-header {
+        font-size: 11px;
+        margin-bottom: 8px;
+    }
+    
+    .info-panel-item {
+        font-size: 9px;
+        padding: 3px 0 3px 10px;
+    }
+}
+
 /* Info Panel UI Hiding Utilities */
 .hidden-for-info-panel,
 .background-text.hidden-for-info-panel,
@@ -402,9 +532,9 @@
 /* Additional specificity for background text elements */
 .background-text.hidden-for-info-panel .background-title,
 .background-text.hidden-for-info-panel .background-description,
-.background-text.hidden-for-info-panel .background-role,
+.background-text.hidden-for_info-panel .background-role,
 .background-text.hidden-for_info-panel .background-company,
-.background-text.hidden-for-info-panel .contributions-btn {
+.background-text.hidden-for_info-panel .contributions-btn {
     opacity: 0 !important;
     pointer-events: none !important;
     transition: opacity 0.3s ease !important;
