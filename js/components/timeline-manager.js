@@ -106,35 +106,19 @@ class TimelineManager {
         // Navigation button listeners
         this.setupNavigationListeners();
     }
+    // Helper function to detect mobile devices
+    isMobileDevice() {
+        return window.innerWidth <= 768;
+    }
     setupTimelineItemListeners() {
-        // Click event listeners for timeline items (dots)
-        this.timelineItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                // Check if info panel is open - if so, disable navigation
-                if (this.isInfoPanelOpen()) {
-                    return;
-                }
-                
-                // Don't allow clicking on already active dots
-                if (!item.classList.contains('active')) {
-                    this.handleItemClick(index);
-                }
-            });
-        });
+        // Timeline dots are now non-clickable for all devices - navigation only via arrows
+        // Keeping this method for potential future use but not adding click listeners
+        return;
     }
     setupYearLabelListeners() {
-        const yearLabels = document.querySelectorAll('.timeline-year-label');
-        yearLabels.forEach((label, index) => {
-            // Skip the first year label (index 0) - make it non-clickable
-            if (index !== 0) {
-                label.addEventListener('click', () => {
-                    // Don't allow clicking on already active years
-                    if (!label.classList.contains('active')) {
-                        this.handleYearLabelClick(label.textContent);
-                    }
-                });
-            }
-        });
+        // Year labels are now non-clickable for all devices - navigation only via arrows
+        // Keeping this method for potential future use but not adding click listeners
+        return;
     }
     handleYearLabelClick(year) {
         // Check if info panel is open - if so, disable navigation
