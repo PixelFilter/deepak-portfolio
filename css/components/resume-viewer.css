@@ -255,26 +255,6 @@
         padding: 0.625rem 1.25rem;
         font-size: 0.9rem;
     }
-
-    /* Hide Google Drive's built-in toolbar on mobile */
-    .resume-viewer-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 50px;
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        z-index: 10;
-        pointer-events: none;
-        border-radius: 0;
-    }
-    
-    /* Adjust iframe positioning to hide toolbar underneath overlay */
-    .resume-iframe {
-        border-radius: 0 0 16px 16px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -286,21 +266,6 @@
 
     .resume-viewer-inner {
         border-radius: 16px;
-    }
-
-    /* Apply the same toolbar hiding overlay for smaller mobile screens */
-    .resume-viewer-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 45px;
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        z-index: 10;
-        pointer-events: none;
-        border-radius: 0;
     }
 
     .resume-iframe {

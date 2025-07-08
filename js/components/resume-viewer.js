@@ -40,8 +40,8 @@ class ResumeViewer {
                     // Check if we're on mobile to hide Google Drive's toolbar
                     const isMobile = window.innerWidth <= 768;
                     if (isMobile) {
-                        // Use multiple parameters to try to hide the toolbar on mobile
-                        this.resumeUrl = `https://drive.google.com/file/d/${fileId}/preview?usp=embed_facebook&embedded=true&chrome=false&toolbar=false&navpanes=0&scrollbar=0&rm=minimal`;
+                        // Use embedded URL that hides the toolbar on mobile
+                        this.resumeUrl = `https://drive.google.com/file/d/${fileId}/preview?usp=embed_facebook&chrome=false&toolbar=false`;
                     } else {
                         this.resumeUrl = `https://drive.google.com/file/d/${fileId}/preview`;
                     }
