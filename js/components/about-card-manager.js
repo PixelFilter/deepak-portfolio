@@ -8,6 +8,7 @@ class AboutCardManager {
         this.isCardOpen = false;
         this.cardElement = null;
         this.overlayElement = null;
+        this.resizeObserver = null;
         
         this.init();
     }
@@ -18,10 +19,12 @@ class AboutCardManager {
             document.addEventListener('DOMContentLoaded', () => {
                 this.createAboutCard();
                 this.bindEvents();
+                this.setupResizeHandling();
             });
         } else {
             this.createAboutCard();
             this.bindEvents();
+            this.setupResizeHandling();
         }
     }
 
@@ -112,6 +115,41 @@ class AboutCardManager {
                 this.openCard();
             }
         });
+
+        // Handle focus trapping for accessibility
+        document.addEventListener('keydown', (e) => {
+            if (!this.isCardOpen) return;
+            
+            if (e.key === 'Tab') {
+                this.handleTabNavigation(e);
+            }
+        });
+    }
+
+    handleTabNavigation(e) {
+        if (!this.overlayElement) return;
+
+        const focusableElements = this.overlayElement.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        const focusableArray = Array.from(focusableElements);
+        const firstElement = focusableArray[0];
+        const lastElement = focusableArray[focusableArray.length - 1];
+
+        if (e.shiftKey) {
+            // Shift + Tab (backward navigation)
+            if (document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            }
+        } else {
+            // Tab (forward navigation)
+            if (document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
     }
 
     openCard() {
@@ -122,6 +160,15 @@ class AboutCardManager {
         
         // Add active class for fade in
         this.overlayElement.classList.add('active');
+        
+        // Apply initial responsive styles immediately
+        this.applyResponsiveStyles();
+        
+        // Start observing for resize changes
+        if (this.resizeObserver && this.cardElement) {
+            this.resizeObserver.observe(this.cardElement);
+            this.resizeObserver.observe(document.documentElement);
+        }
         
         // Focus management for accessibility
         const firstFocusable = this.overlayElement.querySelector('.about-card-close');
@@ -149,6 +196,21 @@ class AboutCardManager {
 
         this.isCardOpen = false;
         document.body.style.overflow = '';
+        
+        // Stop observing for resize changes
+        if (this.resizeObserver && this.cardElement) {
+            this.resizeObserver.unobserve(this.cardElement);
+            this.resizeObserver.unobserve(document.documentElement);
+        }
+        
+        // Clean up any inline styles
+        if (this.cardElement) {
+            this.cardElement.style.removeProperty('width');
+            this.cardElement.style.removeProperty('max-width');
+            this.cardElement.style.removeProperty('height');
+            this.cardElement.style.removeProperty('max-height');
+            this.cardElement.style.removeProperty('min-height');
+        }
         
         // Remove active class for fade out
         this.overlayElement.classList.remove('active');
@@ -188,6 +250,123 @@ class AboutCardManager {
         if (window.timelineManager && window.timelineManager.updateNavigationButtons) {
             window.timelineManager.updateNavigationButtons();
         }
+    }
+
+    setupResizeHandling() {
+        // Immediate resize handler for real-time updates
+        const handleResizeImmediate = () => {
+            if (this.isCardOpen && this.cardElement) {
+                this.updateCardDimensions();
+            }
+        };
+
+        // Debounced resize handler for final cleanup
+        let resizeTimeout;
+        const handleResizeDebounced = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (this.isCardOpen && this.cardElement) {
+                    this.finalizeResize();
+                }
+            }, 150);
+        };
+
+        // Add both immediate and debounced handlers
+        window.addEventListener('resize', handleResizeImmediate);
+        window.addEventListener('resize', handleResizeDebounced);
+
+        // Set up ResizeObserver for viewport changes
+        if (window.ResizeObserver) {
+            this.resizeObserver = new ResizeObserver((entries) => {
+                if (this.isCardOpen) {
+                    // Trigger immediate update on any size change
+                    requestAnimationFrame(() => {
+                        this.updateCardDimensions();
+                    });
+                }
+            });
+        }
+
+        // Also listen to orientationchange for mobile devices
+        window.addEventListener('orientationchange', () => {
+            if (this.isCardOpen) {
+                setTimeout(() => {
+                    this.updateCardDimensions();
+                }, 100); // Small delay for orientation change to complete
+            }
+        });
+    }
+
+    updateCardDimensions() {
+        if (!this.cardElement || !this.overlayElement) return;
+
+        // Add resizing class for smooth transitions
+        this.cardElement.classList.add('resizing');
+        this.overlayElement.classList.add('resizing');
+        
+        // Force layout recalculation
+        this.cardElement.offsetHeight;
+        
+        // Update viewport-based sizing immediately
+        this.applyResponsiveStyles();
+    }
+
+    applyResponsiveStyles() {
+        if (!this.cardElement) return;
+
+        const viewport = {
+            width: window.innerWidth,
+            height: window.innerHeight,
+            isPortrait: window.innerHeight > window.innerWidth
+        };
+
+        // Apply dynamic styling based on current viewport
+        const cardStyle = this.cardElement.style;
+        
+        // Reset any inline styles first
+        cardStyle.removeProperty('width');
+        cardStyle.removeProperty('max-width');
+        cardStyle.removeProperty('height');
+        cardStyle.removeProperty('max-height');
+        cardStyle.removeProperty('min-height');
+
+        // Force a style recalculation
+        this.cardElement.offsetHeight;
+
+        // Apply responsive rules programmatically for immediate effect
+        if (viewport.width <= 480) {
+            cardStyle.setProperty('width', '95vw', 'important');
+            cardStyle.setProperty('max-width', '400px', 'important');
+            cardStyle.setProperty('max-height', '75vh', 'important');
+            cardStyle.setProperty('min-height', '320px', 'important');
+        } else if (viewport.width <= 768) {
+            cardStyle.setProperty('width', '90vw', 'important');
+            cardStyle.setProperty('max-width', '500px', 'important');
+            cardStyle.setProperty('max-height', viewport.isPortrait ? '80vh' : '85vh', 'important');
+            cardStyle.setProperty('min-height', viewport.isPortrait ? '400px' : '350px', 'important');
+        } else if (viewport.width <= 1200) {
+            cardStyle.setProperty('width', '650px', 'important');
+            cardStyle.setProperty('max-width', '85vw', 'important');
+            cardStyle.setProperty('max-height', viewport.isPortrait ? '75vh' : '70vh', 'important');
+        } else if (viewport.width >= 1400) {
+            cardStyle.setProperty('width', '900px', 'important');
+            cardStyle.setProperty('max-height', '70vh', 'important');
+        } else {
+            cardStyle.setProperty('width', '800px', 'important');
+            cardStyle.setProperty('max-width', '90vw', 'important');
+            cardStyle.setProperty('max-height', viewport.isPortrait ? '85vh' : '75vh', 'important');
+        }
+
+        // Force another layout recalculation to apply changes immediately
+        this.cardElement.offsetHeight;
+    }
+
+    finalizeResize() {
+        if (!this.cardElement || !this.overlayElement) return;
+        
+        // Remove resizing classes after transition
+        this.cardElement.classList.remove('resizing');
+        this.overlayElement.classList.remove('resizing');
     }
 }
 

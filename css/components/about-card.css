@@ -22,9 +22,10 @@
 }
 
 .about-card {
-    width: 90%;
-    max-width: 600px;
-    max-height: 90vh;
+    width: 800px;
+    max-width: 90vw;
+    min-height: 400px;
+    max-height: 75vh;
     position: relative;
     transition: transform 0.3s ease-out;
 }
@@ -42,8 +43,10 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    overflow-y: auto;
+    word-wrap: break-word;
 }
 
 .about-card-close {
@@ -82,11 +85,15 @@
 }
 
 .about-content {
+    flex: 1;
     padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
 }
 
 .about-photo {
@@ -127,6 +134,11 @@
     text-align: left;
     margin-bottom: 30px;
     max-width: 500px;
+    flex: 1;
+    overflow-y: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .about-text p {
@@ -141,52 +153,40 @@
     margin-bottom: 0;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .about-card {
-        width: 95%;
-        max-height: 95vh;
-    }
-    
-    .about-content {
-        padding: 30px 20px;
-    }
-    
-    .about-name {
-        font-size: 24px;
-    }
-    
-    .about-role {
-        font-size: 14px;
-    }
-    
-    .about-text p {
-        font-size: 15px;
-    }
-    
-    .about-photo {
-        width: 100px;
-        height: 100px;
-    }
+/* Smooth resize transitions */
+.about-card.resizing {
+    transition: all 0.2s ease-out !important;
 }
 
-@media (max-width: 480px) {
+.about-card.resizing .about-content,
+.about-card.resizing .about-name,
+.about-card.resizing .about-role,
+.about-card.resizing .about-text,
+.about-card.resizing .about-photo {
+    transition: all 0.2s ease-out !important;
+}
+
+/* Smooth resize transitions for overlay */
+.about-card-overlay.resizing {
+    transition: all 0.1s ease-out !important;
+}
+
+.about-card-overlay.resizing .about-card {
+    transition: all 0.1s ease-out !important;
+}
+
+/* Ensure smooth transitions on window resize */
+@media (prefers-reduced-motion: no-preference) {
+    .about-card {
+        transition: all 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out, max-height 0.3s ease-out;
+    }
+    
     .about-content {
-        padding: 20px 16px;
+        transition: all 0.3s ease-out, padding 0.3s ease-out;
     }
     
-    .about-name {
-        font-size: 20px;
-    }
-    
-    .about-text p {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-    
-    .about-photo {
-        width: 80px;
-        height: 80px;
+    .about-content * {
+        transition: all 0.3s ease-out, font-size 0.3s ease-out;
     }
 }
 
@@ -199,21 +199,109 @@
     transform: scale(1) translateY(0);
 }
 
+/* High priority rules for dynamic resizing */
+.about-card-overlay.active .about-card {
+    transition: all 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out, max-height 0.2s ease-out !important;
+}
+
+/* Override any static sizing when resizing */
+.about-card[style*="width"],
+.about-card[style*="height"],
+.about-card[style*="max-height"] {
+    transition: all 0.2s ease-out !important;
+}
+
+/* Ensure the card responds to programmatic style changes */
+.about-card-overlay.active .about-card.resizing {
+    transition: all 0.1s ease-out !important;
+}
+
 /* Scrollbar styling for about card content */
-.about-card-inner::-webkit-scrollbar {
-    width: 6px;
+.about-content::-webkit-scrollbar {
+    display: block !important;
+    width: 6px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px;
 }
 
-.about-card-inner::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
+.about-content::-webkit-scrollbar:hover {
+    width: 8px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
-.about-card-inner::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
+.about-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px;
 }
 
-.about-card-inner::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+.about-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 10px;
+    transition: background 0.3s ease !important;
+    min-height: 20px;
 }
+
+.about-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.about-content::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Remove scrollbar arrow buttons */
+.about-content::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Firefox scrollbar styling */
+.about-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+/* Custom scrollbar for about text if content overflows */
+.about-text::-webkit-scrollbar {
+    display: block !important;
+    width: 4px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 8px;
+}
+
+.about-text::-webkit-scrollbar:hover {
+    width: 6px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.about-text::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 8px;
+}
+
+.about-text::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px;
+    transition: background 0.3s ease !important;
+    min-height: 15px;
+}
+
+.about-text::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.about-text::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Remove scrollbar arrow buttons */
+.about-text::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Firefox scrollbar styling for about text */
+.about-text {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.03);
+}
+
+/* Responsive Design */
