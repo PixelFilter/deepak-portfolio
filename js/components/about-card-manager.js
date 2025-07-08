@@ -53,9 +53,11 @@ class AboutCardManager {
                         <span>&times;</span>
                     </button>
                     <div class="about-content">
-                        <img src="${aboutData.photo}" alt="${aboutData.name}" class="about-photo">
-                        <h2 class="about-name">${aboutData.name}</h2>
-                        <p class="about-role">${aboutData.role}</p>
+                        <div class="about-header">
+                            <img src="${aboutData.photo}" alt="${aboutData.name}" class="about-photo">
+                            <h2 class="about-name">${aboutData.name}</h2>
+                            <p class="about-role">${aboutData.role}</p>
+                        </div>
                         <div class="about-text">
                             ${aboutContent}
                         </div>
