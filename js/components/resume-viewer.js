@@ -264,8 +264,14 @@ class ResumeViewer {
         this.isViewerOpen = true;
         document.body.style.overflow = 'hidden';
         
+        // Disable touch actions to prevent swipe navigation on mobile
+        document.body.style.touchAction = 'none';
+        
         // Add active class for fade in
         this.overlayElement.classList.add('active');
+        
+        // Update navigation buttons when resume viewer is opened
+        this.updateNavigationButtons();
         
         // Focus management for accessibility
         const firstFocusable = this.overlayElement.querySelector('.resume-viewer-external');
@@ -306,8 +312,14 @@ class ResumeViewer {
         this.isViewerOpen = false;
         document.body.style.overflow = '';
         
+        // Re-enable touch actions
+        document.body.style.touchAction = '';
+        
         // Remove active class for fade out
         this.overlayElement.classList.remove('active');
+
+        // Update navigation buttons when resume viewer is closed
+        this.updateNavigationButtons();
 
         // Track analytics if available
         if (typeof gtag !== 'undefined') {
@@ -344,6 +356,18 @@ class ResumeViewer {
     // Public method to hide the viewer
     hide() {
         this.closeViewer();
+    }
+
+    // Public method to check if viewer is open (for navigation blocking)
+    isOpen() {
+        return this.isViewerOpen;
+    }
+
+    // Update navigation buttons when resume viewer state changes
+    updateNavigationButtons() {
+        if (window.timelineManager && window.timelineManager.updateNavigationButtons) {
+            window.timelineManager.updateNavigationButtons();
+        }
     }
 }
 

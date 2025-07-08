@@ -579,7 +579,10 @@ class TimelineManager {
         // Check if about card is open
         const isAboutCardOpen = window.aboutCardManager && window.aboutCardManager.isOpen();
         
-        return isInfoPanelOpen || isContactCardOpen || isAboutCardOpen;
+        // Check if resume viewer is open
+        const isResumeViewerOpen = window.resumeViewer && window.resumeViewer.isOpen();
+        
+        return isInfoPanelOpen || isContactCardOpen || isAboutCardOpen || isResumeViewerOpen;
     }
 
     // Method to check if auto-transition is active
