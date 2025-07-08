@@ -205,7 +205,7 @@
 @media (max-width: 768px) {
     .resume-viewer {
         width: 95vw;
-        height: 90vh;
+        height: 75vh;
         max-height: none;
     }
 
@@ -264,8 +264,8 @@
 @media (max-width: 480px) {
     .resume-viewer {
         width: 98vw;
-        height: 95vh;
-        max-height: calc(100vh - 2rem);
+        height: 80vh;
+        max-height: calc(100vh - 4rem);
     }
 
     .resume-viewer-inner {
