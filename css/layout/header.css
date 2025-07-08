@@ -112,6 +112,19 @@
     letter-spacing: 0.5px;
 }
 
+/* Mobile responsive nav button */
+@media (max-width: 768px) {
+    .nav-btn {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-btn {
+        font-size: 1.15rem;
+    }
+}
+
 .nav-btn:hover {
     color: #ffffff;
     transform: none;

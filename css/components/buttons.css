@@ -30,6 +30,9 @@
     color: var(--inactive-text);
     text-transform: uppercase;
     outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .filter-btn:focus {
