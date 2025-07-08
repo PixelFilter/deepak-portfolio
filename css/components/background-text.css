@@ -196,13 +196,13 @@
     }
     
     .background-role {
-        font-size: clamp(0.6rem, 2vw, 1rem);
+        font-size: clamp(0.66rem, 2.2vw, 1.1rem);
         margin-top: 1.2rem;
         text-align: center !important;
     }
     
     .background-company {
-        font-size: clamp(0.5rem, 1.8vw, 0.9rem);
+        font-size: clamp(0.55rem, 1.98vw, 0.99rem);
         margin-top: 0.2rem;
         text-align: center !important;
     }
@@ -309,12 +309,12 @@
     }
     
     .background-role {
-        font-size: clamp(0.5rem, 2.5vw, 0.8rem);
+        font-size: clamp(0.55rem, 2.75vw, 0.88rem);
         margin-top: 1rem;
     }
     
     .background-company {
-        font-size: clamp(0.4rem, 2vw, 0.7rem);
+        font-size: clamp(0.44rem, 2.2vw, 0.77rem);
         margin-top: 0.2rem;
     }
     
