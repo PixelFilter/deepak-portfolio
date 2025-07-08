@@ -323,6 +323,34 @@ const portfolioData = {
         apps: {
             timeline: [
                 {
+                    year: 2020,
+                    content: [                       
+                        {
+                            title: "Wish Drop",
+                            description: "Wish Drop was a social wish list app that simplified the process of gifting and and visiting bucket list places",
+                            company: "Wish Drop LLC.",
+                            role: "Chief Operating Officer",
+                            trailerUrl: "https://www.youtube.com/embed/41JXyYjvnSI",
+                            videoStart: 1,
+                            videoEnd: 60,
+                            zoomVideo: false,
+                            projectImage: "assets/images/apps/wish_drop.png",
+                            buttonLabel: "Project Details",
+                            infoPanelHeader: "Project Details",
+                            infoPanelData: [
+                                "Managed a team of developers for building the iOS, Android, Web apps",
+                                "Managed the development of the admin and analytics panel",
+                                "Coordinated with QA testers to ensure the app is stable",
+                                "Came up with complete designs for the mobile version",
+                                "Optimized UI development workflows",
+                                "Developed the launch landing page",
+                                "Spearheaded beta soft launch in two cities",
+                                "Handled marketing aspects for all soft launches",
+                            ]
+                        }
+                    ]
+                },
+                {
                     year: 2017,
                     content: [                       
                         {
