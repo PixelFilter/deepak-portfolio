@@ -327,7 +327,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Wish Drop",
-                            description: "Wish Drop was a social wish list app that simplified the process of gifting and and visiting bucket list places",
+                            description: "Wish Drop was a social wish-list app that simplified the process of gifting and visiting bucket-list places",
                             company: "Wish Drop LLC.",
                             role: "Chief Operating Officer",
                             trailerUrl: "https://www.youtube.com/embed/41JXyYjvnSI",
