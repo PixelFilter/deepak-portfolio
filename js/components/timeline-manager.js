@@ -230,20 +230,10 @@ class TimelineManager {
         this.updateNavigationButtons();
     }
     updateYearLabels() {
-        // Remove active class from all year labels
+        // Remove active class from all year labels (no longer highlighting active year)
         const yearLabels = document.querySelectorAll('.timeline-year-label');
         yearLabels.forEach(label => label.classList.remove('active'));
-        // Find the active dot and get its year
-        const activeDot = document.querySelector('.timeline-dot.active');
-        if (activeDot) {
-            const activeYear = activeDot.getAttribute('data-year');
-            // Find and activate the corresponding year label
-            yearLabels.forEach(label => {
-                if (label.textContent === activeYear) {
-                    label.classList.add('active');
-                }
-            });
-        }
+        // Year labels will no longer have active highlighting
     }
     handleScroll() {
         if (this.timelineItems.length === 0) return;
