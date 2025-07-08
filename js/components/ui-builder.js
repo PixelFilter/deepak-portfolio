@@ -200,6 +200,13 @@ class UIBuilder {
                     navMenu.classList.remove('mobile-open');
                 }
             });
+            
+            // Close mobile menu when switching to desktop view
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navMenu.classList.remove('mobile-open');
+                }
+            });
         }
     }
     
