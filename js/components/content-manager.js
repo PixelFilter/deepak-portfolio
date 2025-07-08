@@ -394,6 +394,13 @@ class ContentManager {
         if (backgroundText) {
             backgroundText.classList.add('hidden-for-info-panel');
         }
+        
+        // Hide background project image
+        const backgroundProjectImage = document.getElementById('backgroundProjectImage');
+        if (backgroundProjectImage) {
+            backgroundProjectImage.classList.add('hidden-for-info-panel');
+        }
+        
         // Hide timeline panel
         const timelinePanel = document.querySelector('.year-timeline');
         if (timelinePanel) {
@@ -432,6 +439,13 @@ class ContentManager {
         if (backgroundText) {
             backgroundText.classList.remove('hidden-for-info-panel');
         }
+        
+        // Show background project image
+        const backgroundProjectImage = document.getElementById('backgroundProjectImage');
+        if (backgroundProjectImage) {
+            backgroundProjectImage.classList.remove('hidden-for-info-panel');
+        }
+        
         // Show timeline panel
         const timelinePanel = document.querySelector('.year-timeline');
         if (timelinePanel) {

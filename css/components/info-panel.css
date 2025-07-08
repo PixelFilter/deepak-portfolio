@@ -392,7 +392,8 @@
 .background-text.hidden-for-info-panel,
 .year-timeline.hidden-for-info-panel,
 .header-filters.hidden-for-info-panel,
-#customScrollbar.hidden-for-info-panel {
+#customScrollbar.hidden-for-info-panel,
+.background-project-image.hidden-for-info-panel {
     opacity: 0 !important;
     pointer-events: none !important;
     transition: opacity 0.3s ease !important;
@@ -402,7 +403,7 @@
 .background-text.hidden-for-info-panel .background-title,
 .background-text.hidden-for-info-panel .background-description,
 .background-text.hidden-for-info-panel .background-role,
-.background-text.hidden-for-info-panel .background-company,
+.background-text.hidden-for_info-panel .background-company,
 .background-text.hidden-for-info-panel .contributions-btn {
     opacity: 0 !important;
     pointer-events: none !important;
