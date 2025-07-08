@@ -37,7 +37,14 @@ class ResumeViewer {
             if (resumeFile.includes('drive.google.com')) {
                 const fileId = this.extractGoogleDriveFileId(resumeFile);
                 if (fileId) {
-                    this.resumeUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+                    // Check if we're on mobile to hide Google Drive's toolbar
+                    const isMobile = window.innerWidth <= 768;
+                    if (isMobile) {
+                        // Use embedded URL that hides the toolbar on mobile
+                        this.resumeUrl = `https://drive.google.com/file/d/${fileId}/preview?usp=embed_facebook&chrome=false&toolbar=false`;
+                    } else {
+                        this.resumeUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+                    }
                 }
             } else {
                 this.resumeUrl = resumeFile;
@@ -276,8 +283,9 @@ class ResumeViewer {
             loadingElement.style.display = 'flex';
             errorElement.style.display = 'none';
             
-            // Reload iframe
-            iframe.src = iframe.src;
+            // Update URL based on current screen size before reloading
+            this.setupResumeUrl();
+            iframe.src = this.resumeUrl;
         }
 
         // Track analytics if available
