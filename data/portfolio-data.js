@@ -1,4 +1,5 @@
 // Portfolio Data Configuration
+
 const portfolioData = {
     personal: {
         name: "DEEPAK CHENNAKKADAN",
@@ -50,6 +51,7 @@ const portfolioData = {
                             videoStart: 8,
                             videoEnd: 60,
                             zoomVideo: true,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -80,6 +82,7 @@ const portfolioData = {
                             videoStart: 52,
                             videoEnd: 100,
                             zoomVideo: true,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -104,6 +107,7 @@ const portfolioData = {
                             videoStart: 17,
                             videoEnd: 85,
                             zoomVideo: true,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -131,6 +135,7 @@ const portfolioData = {
                             videoStart: 12,
                             videoEnd: 75,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -165,6 +170,7 @@ const portfolioData = {
                             videoStart: 12,
                             videoEnd: 59,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -187,6 +193,7 @@ const portfolioData = {
                             videoStart: 4,
                             videoEnd: 20,
                             zoomVideo: false,
+                            mobileVideoAlign: "right",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -217,6 +224,7 @@ const portfolioData = {
                             videoStart: 21,
                             videoEnd: 37,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -234,6 +242,7 @@ const portfolioData = {
                             videoStart: 24,
                             videoEnd: 65,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -250,6 +259,7 @@ const portfolioData = {
                             videoStart: 25,
                             videoEnd: 72,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -282,6 +292,7 @@ const portfolioData = {
                             videoStart: 25,
                             videoEnd: 90,
                             zoomVideo: true,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -308,6 +319,7 @@ const portfolioData = {
                             videoStart: 10,
                             videoEnd: 70,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -335,6 +347,7 @@ const portfolioData = {
                             videoStart: 1,
                             videoEnd: 60,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             projectImage: "assets/images/apps/wish_drop.png",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
@@ -363,6 +376,7 @@ const portfolioData = {
                             videoStart: 0,
                             videoEnd: 60,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             projectImage: "assets/images/apps/spectral_eq.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -389,6 +403,7 @@ const portfolioData = {
                             videoStart: 0,
                             videoEnd: 60,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             projectImage: "assets/images/apps/pedal_stack.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -414,6 +429,7 @@ const portfolioData = {
                             videoStart: 1,
                             videoEnd: 12,
                             zoomVideo: true,
+                            mobileVideoAlign: "center",
                             projectImage: "assets/images/apps/eclipse_synth.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -435,6 +451,7 @@ const portfolioData = {
                             videoStart: 19,
                             videoEnd: 50,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             projectImage: "assets/images/apps/R2D2IZER.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -463,6 +480,7 @@ const portfolioData = {
                             videoStart: 2738,
                             videoEnd: 2838,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Platform",
                             buttonURL: "https://hyperbolic-chamber.space"
                         }
@@ -480,6 +498,7 @@ const portfolioData = {
                             videoStart: 972,
                             videoEnd: 1070,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Videos",
                             buttonURL: "https://pixelfilter.space"
                         }
@@ -497,6 +516,7 @@ const portfolioData = {
                             videoStart: 180,
                             videoEnd: 230,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Videos",
                             buttonURL: "https://www.youtube.com/@DeepakChennakkadan/videos"
                         }
@@ -517,7 +537,8 @@ const portfolioData = {
                             trailerUrl: "https://www.youtube.com/embed/akLUAwzVicg",
                             videoStart: 0,
                             videoEnd: 18,
-                            zoomVideo: false
+                            zoomVideo: false,
+                            mobileVideoAlign: "center"
                         }
                     ]
                 },
@@ -533,6 +554,7 @@ const portfolioData = {
                             videoStart: 0,
                             videoEnd: 37,
                             zoomVideo: false,
+                            mobileVideoAlign: "left",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1839380809?t=00h08m19s"
                         },
@@ -545,6 +567,7 @@ const portfolioData = {
                             videoStart: 2,
                             videoEnd: 40,
                             zoomVideo: false,
+                            mobileVideoAlign: "right",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1943634392?t=01h45m16s"
                         },
@@ -557,6 +580,7 @@ const portfolioData = {
                             videoStart: 1,
                             videoEnd: 120,
                             zoomVideo: false,
+                            mobileVideoAlign: "left",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
                         }
@@ -574,6 +598,7 @@ const portfolioData = {
                             videoStart: 18,
                             videoEnd: 70,
                             zoomVideo: false,
+                            mobileVideoAlign: "center",
                             buttonLabel: "View Stream",
                             buttonURL: "https://youtu.be/BBkpIn4Ihkc?si=PxzuBAFJkIzu2aYn"
                         }

@@ -182,3 +182,107 @@
 .video-background iframe {
     z-index: 0;
 }
+
+/* Mobile Video Alignment Styles */
+@media (max-width: 1024px) {
+    .video-background.mobile-align-left iframe {
+        transform-origin: left center;
+        left: -5% !important;
+    }
+    
+    .video-background.mobile-align-right iframe {
+        transform-origin: right center;
+        right: -5% !important;
+        left: auto !important;
+    }
+    
+    .video-background.mobile-align-center iframe {
+        transform-origin: center center;
+        left: 50% !important;
+        transform: translateX(-50%) scale(1.15);
+    }
+    
+    /* Apply alignment-specific transforms while preserving existing scaling */
+    .video-background.mobile-align-left.visible iframe {
+        transform: scale(1.15);
+        transform-origin: left center;
+    }
+    
+    .video-background.mobile-align-right.visible iframe {
+        transform: scale(1.15);
+        transform-origin: right center;
+    }
+    
+    .video-background.mobile-align-center.visible iframe {
+        transform: translateX(-50%) scale(1.15);
+        transform-origin: center center;
+    }
+    
+    .video-background.mobile-align-left.loaded iframe {
+        transform: scale(1.15);
+        transform-origin: left center;
+    }
+    
+    .video-background.mobile-align-right.loaded iframe {
+        transform: scale(1.15);
+        transform-origin: right center;
+    }
+    
+    .video-background.mobile-align-center.loaded iframe {
+        transform: translateX(-50%) scale(1.15);
+        transform-origin: center center;
+    }
+    
+    /* Mobile alignment for scrolling states */
+    .video-background.mobile-align-left.scrolling iframe {
+        transform: scale(1.16);
+        transform-origin: left center;
+    }
+    
+    .video-background.mobile-align-right.scrolling iframe {
+        transform: scale(1.16);
+        transform-origin: right center;
+    }
+    
+    .video-background.mobile-align-center.scrolling iframe {
+        transform: translateX(-50%) scale(1.16);
+        transform-origin: center center;
+    }
+    
+    /* Mobile alignment for transitioning states */
+    .video-background.mobile-align-left.transitioning iframe {
+        transform: scale(1.155);
+        transform-origin: left center;
+    }
+    
+    .video-background.mobile-align-right.transitioning iframe {
+        transform: scale(1.155);
+        transform-origin: right center;
+    }
+    
+    .video-background.mobile-align-center.transitioning iframe {
+        transform: translateX(-50%) scale(1.155);
+        transform-origin: center center;
+    }
+}
+
+/* Additional styles for smaller mobile screens */
+@media (max-width: 768px) {
+    .video-background.mobile-align-left iframe {
+        left: -8% !important;
+    }
+    
+    .video-background.mobile-align-right iframe {
+        right: -8% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-background.mobile-align-left iframe {
+        left: -10% !important;
+    }
+    
+    .video-background.mobile-align-right iframe {
+        right: -10% !important;
+    }
+}

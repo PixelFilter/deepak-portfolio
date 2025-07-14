@@ -30,7 +30,7 @@ class VideoBackground {
         // Listen for content changes
         document.addEventListener('contentChanged', (event) => {
             if (event.detail && event.detail.trailerUrl) {
-                this.showVideo(event.detail.trailerUrl, event.detail.videoStart, event.detail.videoEnd, event.detail.zoomVideo, event.detail.isInstant, event.detail.category);
+                this.showVideo(event.detail.trailerUrl, event.detail.videoStart, event.detail.videoEnd, event.detail.zoomVideo, event.detail.isInstant, event.detail.category, event.detail.mobileVideoAlign);
             } else {
                 this.hideVideo();
             }
@@ -38,6 +38,7 @@ class VideoBackground {
         // Listen for window resize to adjust video size
         window.addEventListener('resize', () => {
             this.adjustVideoSize();
+            this.applyMobileVideoAlignment();
         });
     }
     // Utility function to detect mobile devices reliably
@@ -45,7 +46,7 @@ class VideoBackground {
         return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
     
-    showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false, category = null) {
+    showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false, category = null, mobileVideoAlign = 'center') {
         if (!trailerUrl) {
             this.hideVideo();
             return;
@@ -73,6 +74,7 @@ class VideoBackground {
         // Store the new video configuration
         this.currentVideoUrl = videoId;
         this.zoomVideo = zoomVideo;
+        this.currentMobileVideoAlign = mobileVideoAlign;
         // If instant transition is requested, use subtle fade instead of black overlay
         if (isInstant && this.videoContainer.innerHTML !== '') {
             // Use a subtle fade transition instead of black overlay
@@ -196,6 +198,8 @@ class VideoBackground {
         }
         // Ensure video covers full background
         this.adjustVideoSize();
+        // Apply mobile video alignment
+        this.applyMobileVideoAlignment();
         // Show video with fade-in effect
         setTimeout(() => {
             this.videoContainer.classList.add('visible');
@@ -262,13 +266,78 @@ class VideoBackground {
                 videoHeight = (viewportHeight + 100) * zoomFactor;
                 videoWidth = ((viewportHeight + 100) * aspectRatio) * zoomFactor;
             }
-            // Apply dimensions and center the video
+            // Apply dimensions and positioning based on mobile alignment
             this.currentVideo.style.width = `${videoWidth}px`;
             this.currentVideo.style.height = `${videoHeight}px`;
-            this.currentVideo.style.left = `${(viewportWidth - videoWidth) / 2}px`;
-            this.currentVideo.style.top = `${(viewportHeight - videoHeight) / 2}px`;
+            
+            // Apply positioning based on mobile alignment for mobile devices
+            const isMobile = window.innerWidth <= 1024;
+            if (isMobile && this.currentMobileVideoAlign) {
+                this.currentVideo.style.top = `${(viewportHeight - videoHeight) / 2}px`;
+                
+                // Calculate offset based on screen size
+                let horizontalOffset = '-5%';
+                if (window.innerWidth <= 480) {
+                    horizontalOffset = '-10%';
+                } else if (window.innerWidth <= 768) {
+                    horizontalOffset = '-8%';
+                }
+                
+                switch (this.currentMobileVideoAlign) {
+                    case 'left':
+                        this.currentVideo.style.left = horizontalOffset;
+                        this.currentVideo.style.right = 'auto';
+                        break;
+                    case 'right':
+                        this.currentVideo.style.right = horizontalOffset;
+                        this.currentVideo.style.left = 'auto';
+                        break;
+                    case 'center':
+                    default:
+                        this.currentVideo.style.left = `50%`;
+                        this.currentVideo.style.right = 'auto';
+                        // Center alignment will be handled by CSS transform
+                        break;
+                }
+            } else {
+                // Default desktop centering
+                this.currentVideo.style.left = `${(viewportWidth - videoWidth) / 2}px`;
+                this.currentVideo.style.top = `${(viewportHeight - videoHeight) / 2}px`;
+                this.currentVideo.style.right = 'auto';
+            }
         }
     }
+    
+    // Method to apply mobile video alignment
+    applyMobileVideoAlignment() {
+        if (!this.currentVideo || !this.currentMobileVideoAlign) {
+            return;
+        }
+        
+        // Only apply mobile alignment on mobile/tablet devices
+        const isMobile = window.innerWidth <= 1024;
+        if (!isMobile) {
+            return;
+        }
+        
+        // Remove any existing alignment classes
+        this.videoContainer.classList.remove('mobile-align-left', 'mobile-align-center', 'mobile-align-right');
+        
+        // Apply the new alignment class
+        switch (this.currentMobileVideoAlign) {
+            case 'left':
+                this.videoContainer.classList.add('mobile-align-left');
+                break;
+            case 'right':
+                this.videoContainer.classList.add('mobile-align-right');
+                break;
+            case 'center':
+            default:
+                this.videoContainer.classList.add('mobile-align-center');
+                break;
+        }
+    }
+    
     // Method to setup custom looping for time segments
     setupCustomLoop(startTime, endTime) {
         // Load YouTube API if not already loaded

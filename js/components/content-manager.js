@@ -263,6 +263,7 @@ class ContentManager {
             const videoStart = card.dataset.videoStart;
             const videoEnd = card.dataset.videoEnd;
             const zoomVideo = card.dataset.zoomVideo === 'true';
+            const mobileVideoAlign = card.dataset.mobileVideoAlign || 'center';
             document.dispatchEvent(new CustomEvent('contentChanged', {
                 detail: {
                     title: card.dataset.title,
@@ -273,6 +274,7 @@ class ContentManager {
                     videoStart: videoStart,
                     videoEnd: videoEnd,
                     zoomVideo: zoomVideo,
+                    mobileVideoAlign: mobileVideoAlign,
                     isInstant: isInstant,
                     category: this.activeFilter
                 }
