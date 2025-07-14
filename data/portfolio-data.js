@@ -628,6 +628,21 @@ const portfolioData = {
                             alignmentOffset: "-80",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
+                        },
+                        {
+                            title: "The DigiPen\nShow",
+                            slug: "the-digipen-show",
+                            description: "Invited as a guest to talk about my college and work experiences.",
+                            company: "DigiPen Institute of Technology",
+                            role: "Guest",
+                            trailerUrl: "https://www.youtube.com/embed/kFsEmo_KkHc",
+                            videoStart: 1,
+                            videoEnd: 55,
+                            zoomVideo: false,
+                            mobileVideoAlign: "right",
+                            alignmentOffset: "-30",
+                            buttonLabel: "View Stream",
+                            buttonURL: "https://www.twitch.tv/videos/1914627333"
                         }
                     ]
                 },
