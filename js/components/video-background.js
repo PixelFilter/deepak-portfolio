@@ -8,7 +8,7 @@ class VideoBackground {
         this.player = null;
         this.timeChecker = null;
         this.zoomVideo = true; // Default to zoom enabled
-        this.isMuted = true; // Default to muted
+        this.isMuted = true; // Default to muted for mobile autoplay compatibility
         this.init();
     }
     init() {
@@ -39,13 +39,19 @@ class VideoBackground {
             this.adjustVideoSize();
         });
     }
+    // Utility function to detect mobile devices reliably
+    isMobileDevice() {
+        return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
     showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false, category = null) {
         if (!trailerUrl) {
             this.hideVideo();
             return;
         }
         
-        // Set mute state based on category - Press videos are unmuted by default
+        // Set mute state based on category - Press videos are unmuted on all devices
+        // Other videos stay muted for autoplay compatibility
         const shouldBeMuted = category !== 'press';
         if (this.isMuted !== shouldBeMuted) {
             this.isMuted = shouldBeMuted;
@@ -144,6 +150,31 @@ class VideoBackground {
         iframe.setAttribute('webkitallowfullscreen', 'false');
         iframe.setAttribute('mozallowfullscreen', 'false');
         iframe.setAttribute('allowfullscreen', 'false');
+        
+        // Add error handling for autoplay failures on mobile
+        iframe.addEventListener('load', () => {
+            const isMobile = this.isMobileDevice();
+            if (isMobile) {
+                // Add a small delay then check if video is playing
+                setTimeout(() => {
+                    // If autoplay failed, try to force playback through the API
+                    if (this.player && typeof this.player.getPlayerState === 'function') {
+                        const state = this.player.getPlayerState();
+                        // If video is not playing (-1 = unstarted, 2 = paused)
+                        if (state === -1 || state === 2) {
+                            // Apply current mute state and try to play
+                            if (this.isMuted) {
+                                this.player.mute();
+                            } else {
+                                this.player.unMute();
+                            }
+                            this.player.playVideo();
+                        }
+                    }
+                }, 1000);
+            }
+        });
+        
         this.videoContainer.appendChild(iframe);
         this.currentVideo = iframe;
         // If we have timing parameters, set up custom looping
@@ -157,6 +188,7 @@ class VideoBackground {
             this.videoContainer.classList.add('visible');
             this.videoContainer.style.opacity = '';
             this.isVisible = true;
+            
             // Delay to ensure smooth loading
             setTimeout(() => {
                 this.videoContainer.classList.add('loaded');
@@ -253,7 +285,13 @@ class VideoBackground {
                     } else {
                         event.target.unMute();
                     }
-                    event.target.playVideo();
+                    
+                    // Try to play video
+                    try {
+                        event.target.playVideo();
+                    } catch (error) {
+                        console.log('Autoplay failed in onReady:', error);
+                    }
                 },
                 onStateChange: (event) => {
                     // Check if video has reached end time
