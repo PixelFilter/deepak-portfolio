@@ -43,7 +43,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Forza\nMotorsport",
-                            description: "A ground-up reboot of Forza focused on realism, tire physics, and immersive racing experiences",
+                            description: "A ground-up reboot of Forza focused on realism, tire physics, and immersive racing experiences.",
                             company: "Turn 10 Studios, Microsoft",
                             role: "ForzaTech Engineering Lead",
                             trailerUrl: "https://www.youtube.com/embed/aL4h5cMONIs",
@@ -73,7 +73,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Forza\nHorizon 5",
-                            description: "An open-world racer set in Mexico, blending exploration, arcade racing, and seasonal events",
+                            description: "An open-world racer set in Mexico, blending exploration, arcade racing, and seasonal events.",
                             company: "Turn 10 Studios, Microsoft",
                             role: "Content Workflow Lead",
                             trailerUrl: "https://www.youtube.com/embed/FYH9n37B7Yw",
@@ -97,7 +97,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Forza\nMotorsport 7",
-                            description: "A simulation racing game with 700+ cars, dynamic weather, and competitive motorsport gameplay",
+                            description: "A simulation racing game with 700+ cars, dynamic weather, and competitive motorsport gameplay.",
                             company: "Turn 10 Studios, Microsoft",
                             role: "Software Engineer",
                             trailerUrl: "https://www.youtube.com/embed/9aAr5blVy0g",
@@ -124,7 +124,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Magnolia",
-                            description: "A poetic experience dedicated to the memory of a 3 year old girl where you play as her experiencing things she loved in real life",
+                            description: "A poetic experience dedicated to the memory of a 3 year old girl where you play as her experiencing things she loved in real life.",
                             company: "Irradiance Games",
                             role: "Creative Director | Audio Programmer",
                             trailerUrl: "https://www.youtube.com/embed/yc1tn3Z5HvY",
@@ -158,7 +158,7 @@ const portfolioData = {
                         },
                         {
                             title: "Cubicopolis",
-                            description: "A puzzle platformer where you solve puzzles by manipulating the camera to reveal unique perspectives",
+                            description: "A puzzle platformer where you solve puzzles by manipulating the camera to reveal unique perspectives.",
                             company: "Voxel Game Studios",
                             role: "Audio Programmer | Audio Content",
                             trailerUrl: "https://www.youtube.com/embed/CUZN1jfuZuw",
@@ -180,7 +180,7 @@ const portfolioData = {
                         },
                         {
                             title: "Just Flick",
-                            description: "An endless shape mathching and music synced iOS/Android mobile game",
+                            description: "An endless shape mathching and music synced iOS/Android mobile game.",
                             company: "Voxel Game Studios",
                             role: "Audio Programmer | Audio Content",
                             trailerUrl: "https://www.youtube.com/embed/jKOilVDdx9o",
@@ -210,7 +210,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Flickers",
-                            description: "An atmospheric platformer where you journey from a dying flower to the moon, jumping between sparks to transform a twilight world through emotion and rhythm",
+                            description: "An atmospheric platformer where you journey from a dying flower to the moon, jumping between sparks to transform a twilight world through emotion and rhythm.",
                             company: "Neat Snake",
                             role: "Mixing & Mastering Engineer",
                             trailerUrl: "https://www.youtube.com/embed/sFJyjHDlOuE",
@@ -227,7 +227,7 @@ const portfolioData = {
                         },
                         {
                             title: "Never Alone",
-                            description: "Never Alone: Foxtales is the first expansion to Never Alone, featuring Nuna and Fox in a new adventure",
+                            description: "Never Alone: Foxtales is the first expansion to Never Alone, featuring Nuna and Fox in a new adventure.",
                             company: "Upper One Games",
                             role: "Game Tester",
                             trailerUrl: "https://www.youtube.com/embed/V9jT_PKGXdI",
@@ -243,7 +243,7 @@ const portfolioData = {
                         },
                         {
                             title: "Tread Lightly",
-                            description: "A poetic experience of a mysterious character treading their way through a lifeless, ominous landscape",
+                            description: "A poetic experience of a mysterious character treading their way through a lifeless, ominous landscape.",
                             company: "Team Yarbus",
                             role: "Audio Programmer | Audio Content",
                             trailerUrl: "https://www.youtube.com/embed/5qvZPTqIPDs",
@@ -275,7 +275,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Auricular Hierarchy",
-                            description: "A 2D sound-driven platformer where jumping creates music and color, transforming a minimalist world through exploration",
+                            description: "A 2D sound-driven platformer where jumping creates music and color, transforming a minimalist world through exploration.",
                             company: "Sient Sound Productions",
                             role: "Audio Programmer | Audio Content",
                             trailerUrl: "https://www.youtube.com/embed/BX70y7mq4aA",
@@ -301,7 +301,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Discord",
-                            description: "Discord is a 2D arcade game where you throw and catch a ball to break tiles, collect orbs, and score points before time runs out",
+                            description: "Discord is a 2D arcade game where you throw and catch a ball to break tiles, collect orbs, and score points before time runs out.",
                             company: "Team Discord",
                             role: "Audio Programmer | Audio Content",
                             trailerUrl: "https://www.youtube.com/embed/xIsTQIe18iQ",
@@ -328,7 +328,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Wish Drop",
-                            description: "Wish Drop was a social wish-list app that simplified the process of gifting and visiting bucket-list places",
+                            description: "Wish Drop was a social wish-list app that simplified the process of gifting and visiting bucket-list places.",
                             company: "Wish Drop LLC.",
                             role: "Chief Operating Officer",
                             trailerUrl: "https://www.youtube.com/embed/41JXyYjvnSI",
@@ -356,7 +356,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Spectral-EQ",
-                            description: "A spectrum analyzer plugin with a 6 band parametric EQ and FFT-based visualizer developed for Logic Pro",
+                            description: "A spectrum analyzer plugin with a 6 band parametric EQ and FFT-based visualizer developed for Logic Pro.",
                             company: "Passion Project",
                             role: "Sole Developer",
                             trailerUrl: "https://www.youtube.com/embed/yZD-i5p5UC0",
@@ -382,7 +382,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Pedal Stack",
-                            description: "A guitar processor app with 5 usable guitar pedals: Delay, Distortion, Reverb, Whammy and Equalizer",
+                            description: "A guitar processor app with 5 usable guitar pedals: Delay, Distortion, Reverb, Whammy and Equalizer.",
                             company: "Passion Project",
                             role: "Sole Developer",
                             trailerUrl: "https://www.youtube.com/embed/1TjHu73UuJc",
@@ -407,7 +407,7 @@ const portfolioData = {
                     content: [                      
                         {
                             title: "Eclipse Synth",
-                            description: "Eclipse Synth is a virtual synthesizer featuring dual oscillators, flexible envelope controls, three filter types",
+                            description: "Eclipse Synth is a virtual synthesizer featuring dual oscillators, flexible envelope controls, three filter types.",
                             company: "Passion Project",
                             role: "Sole Developer",
                             trailerUrl: "https://www.youtube.com/embed/iMDL5so-MHw",
@@ -428,7 +428,7 @@ const portfolioData = {
                         },                       
                         {
                             title: "R2D2IZER",
-                            description: "A fun little app named after the iconic robot from Star Wars which used audio processing techniques to create R2D2 like sound effects",
+                            description: "A fun little app named after the iconic robot from Star Wars which used audio processing techniques to create R2D2 like sound effects.",
                             company: "Passion Project",
                             role: "Sole Developer",
                             trailerUrl: "https://www.youtube.com/embed/geD8HxtQ_lY",
@@ -456,7 +456,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Hyperbolic\nChamber",
-                            description: "Hyperbolic Chamber is a platform to showcase immersive, experimental electronic music from underground artists including us",
+                            description: "Hyperbolic Chamber is a platform to showcase immersive, experimental electronic music from underground artists including us.",
                             company: "Passion Project",
                             role: "Co-Founder",
                             trailerUrl: "https://www.youtube.com/embed/sB-UvVvmUfk",
@@ -473,7 +473,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "PIXELFILTER",
-                            description: "My electronic music alter ego / stage name where I perform and record live sets showcasing the underground sound",
+                            description: "My electronic music alter ego / stage name where I perform and record live sets showcasing the underground sound.",
                             company: "Creative Pursuit",
                             role: "Techno / Indo DJ",
                             trailerUrl: "https://www.youtube.com/embed/bO_1bl7s9TQ",
@@ -490,7 +490,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Youtube\nGuitar Videos",
-                            description: "A series of guitar videos I have recorded over the years showcasing one of my many musical passions",
+                            description: "A series of guitar videos I have recorded over the years showcasing one of my many musical passions.",
                             company: "Creative Pursuit",
                             role: "Guitarist",
                             trailerUrl: "https://www.youtube.com/embed/DpXcdQLeqbI",
@@ -511,7 +511,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Xbox Super\nGaming Update",
-                            description: "Hosted the Super Gaming Update with Phil Spencer (CEO, Microsoft Gaming), Cynthia Per-Lee (CVP, Gaming HR), Kevin Gammil (CVP, Ecosystem Engineering) at Xbox",
+                            description: "Hosted the Super Gaming Update with Phil Spencer (CEO, Microsoft Gaming), Cynthia Per-Lee (CVP, Gaming HR), Kevin Gammil (CVP, Ecosystem Engineering) at Xbox.",
                             company: "Xbox Studio",
                             role: "Host",
                             trailerUrl: "https://www.youtube.com/embed/akLUAwzVicg",
@@ -531,10 +531,22 @@ const portfolioData = {
                             role: "Co-Host",
                             trailerUrl: "https://www.youtube.com/embed/K9SqwT2_1o4",
                             videoStart: 0,
-                            videoEnd: 40,
+                            videoEnd: 37,
                             zoomVideo: false,
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1839380809?t=00h08m19s"
+                        },
+                        {
+                            title: "Xbox ASL\nStream",
+                            description: "Hosted the Xbox ASL Anniversary Stream with an Xbox Sign Language Expert where we played Forza Horizon 5 and talked about accessibility in gaming.",
+                            company: "Xbox Plays",
+                            role: "Host",
+                            trailerUrl: "https://www.youtube.com/embed/asSK3ijcz9I",
+                            videoStart: 0,
+                            videoEnd: 120,
+                            zoomVideo: false,
+                            buttonLabel: "View Stream",
+                            buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
                         }
                     ]
                 }
