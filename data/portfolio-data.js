@@ -526,7 +526,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Diablo IV\nLaunch Event",
-                            description: "Hosted the Diablo IV launch event with Rod Fergusson (Head of Diablo), Xbox's Major Nelson and Mav from TheMavShow.",
+                            description: "Co-Hosted the Diablo IV launch event with Rod Fergusson (Head of Diablo), Xbox's Major Nelson and Mav from TheMavShow.",
                             company: "Xbox Plays",
                             role: "Co-Host",
                             trailerUrl: "https://www.youtube.com/embed/K9SqwT2_1o4",
@@ -537,16 +537,45 @@ const portfolioData = {
                             buttonURL: "https://www.twitch.tv/videos/1839380809?t=00h08m19s"
                         },
                         {
+                            title: "Forza Motorsport\nLaunch Stream",
+                            description: "Co-Hosted the Forza Motorsport launch stream which was broadcasted on the front page of Twitch and the Steam Store.",
+                            company: "Turn 10 Studios",
+                            role: "Co-Host",
+                            trailerUrl: "https://www.youtube.com/embed/lVMDtHM7wWE",
+                            videoStart: 2,
+                            videoEnd: 40,
+                            zoomVideo: false,
+                            buttonLabel: "View Stream",
+                            buttonURL: "https://www.twitch.tv/videos/1943634392?t=01h45m16s"
+                        },
+                        {
                             title: "Xbox ASL\nStream",
                             description: "Hosted the Xbox ASL Anniversary Stream with an Xbox Sign Language Expert where we played Forza Horizon 5 and talked about accessibility in gaming.",
                             company: "Xbox Plays",
                             role: "Host",
                             trailerUrl: "https://www.youtube.com/embed/asSK3ijcz9I",
-                            videoStart: 0,
+                            videoStart: 1,
                             videoEnd: 120,
                             zoomVideo: false,
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
+                        }
+                    ]
+                },
+                {
+                    year: 2017,
+                    content: [
+                        {
+                            title: "Intel University\nGames Showcase",
+                            description: "Presented our Student Game, Magnolia at the Intel University Showcase in San Francisco.",
+                            company: "Irradiance Games",
+                            role: "Presenter",
+                            trailerUrl: "https://www.youtube.com/embed/BBkpIn4Ihkc",
+                            videoStart: 18,
+                            videoEnd: 70,
+                            zoomVideo: false,
+                            buttonLabel: "View Stream",
+                            buttonURL: "https://youtu.be/BBkpIn4Ihkc?si=PxzuBAFJkIzu2aYn"
                         }
                     ]
                 }
