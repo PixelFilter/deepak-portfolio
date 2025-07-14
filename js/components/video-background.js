@@ -29,7 +29,7 @@ class VideoBackground {
         // Listen for content changes
         document.addEventListener('contentChanged', (event) => {
             if (event.detail && event.detail.trailerUrl) {
-                this.showVideo(event.detail.trailerUrl, event.detail.videoStart, event.detail.videoEnd, event.detail.zoomVideo, event.detail.isInstant);
+                this.showVideo(event.detail.trailerUrl, event.detail.videoStart, event.detail.videoEnd, event.detail.zoomVideo, event.detail.isInstant, event.detail.category);
             } else {
                 this.hideVideo();
             }
@@ -39,10 +39,17 @@ class VideoBackground {
             this.adjustVideoSize();
         });
     }
-    showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false) {
+    showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false, category = null) {
         if (!trailerUrl) {
             this.hideVideo();
             return;
+        }
+        
+        // Set mute state based on category - Press videos are unmuted by default
+        const shouldBeMuted = category !== 'press';
+        if (this.isMuted !== shouldBeMuted) {
+            this.isMuted = shouldBeMuted;
+            this.updateSoundToggleUI();
         }
         
         // Create a unique identifier for this video configuration
@@ -319,6 +326,20 @@ class VideoBackground {
     toggleSound() {
         const soundToggle = document.getElementById('sound-toggle');
         this.isMuted = !this.isMuted;
+        this.updateSoundToggleUI();
+        
+        // Update current video if playing
+        if (this.currentVideo && this.player) {
+            if (this.isMuted) {
+                this.player.mute();
+            } else {
+                this.player.unMute();
+            }
+        }
+    }
+    
+    updateSoundToggleUI() {
+        const soundToggle = document.getElementById('sound-toggle');
         if (soundToggle) {
             if (this.isMuted) {
                 soundToggle.classList.add('disabled');
@@ -326,14 +347,6 @@ class VideoBackground {
             } else {
                 soundToggle.classList.remove('disabled');
                 soundToggle.classList.add('enabled');
-            }
-        }
-        // Update current video if playing
-        if (this.currentVideo && this.player) {
-            if (this.isMuted) {
-                this.player.mute();
-            } else {
-                this.player.unMute();
             }
         }
     }

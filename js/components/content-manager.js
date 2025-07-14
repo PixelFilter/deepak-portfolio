@@ -273,7 +273,8 @@ class ContentManager {
                     videoStart: videoStart,
                     videoEnd: videoEnd,
                     zoomVideo: zoomVideo,
-                    isInstant: isInstant
+                    isInstant: isInstant,
+                    category: this.activeFilter
                 }
             }));
         } else {

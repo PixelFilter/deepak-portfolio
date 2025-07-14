@@ -510,7 +510,7 @@ const portfolioData = {
                     year: 2024,
                     content: [
                         {
-                            title: "Super Gaming\nUpdate",
+                            title: "Xbox Super\nGaming Update",
                             description: "Hosted the Super Gaming Update with Phil Spencer (CEO, Microsoft Gaming), Cynthia Per-Lee (CVP, Gaming HR), Kevin Gammil (CVP, Ecosystem Engineering) at Xbox",
                             company: "Xbox Studio",
                             role: "Host",
