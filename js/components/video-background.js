@@ -15,6 +15,7 @@ class VideoBackground {
         this.createVideoContainer();
         this.setupEventListeners();
         this.initSoundToggle();
+        this.autoplayAttempted = false; // Track if we've tried autoplay after user interaction
     }
     createVideoContainer() {
         // Create video container if it doesn't exist
@@ -50,13 +51,18 @@ class VideoBackground {
             return;
         }
         
-        // Set mute state based on category - Press videos are unmuted on all devices
-        // Other videos stay muted for autoplay compatibility
-        const shouldBeMuted = category !== 'press';
+        // Set mute state based on category and device
+        // For mobile devices, start muted even for press videos to enable autoplay, then unmute
+        const isMobile = this.isMobileDevice();
+        const shouldBeMuted = isMobile ? true : (category !== 'press');
+        
         if (this.isMuted !== shouldBeMuted) {
             this.isMuted = shouldBeMuted;
             this.updateSoundToggleUI();
         }
+        
+        // Store the desired final mute state for press videos on mobile
+        this.targetMuteState = category !== 'press' ? true : false;
         
         // Create a unique identifier for this video configuration
         const videoId = `${trailerUrl}_${videoStart || 'none'}_${videoEnd || 'none'}`;
@@ -112,9 +118,13 @@ class VideoBackground {
         urlParams.append('hl', 'en');
         urlParams.append('color', 'white');
         urlParams.append('theme', 'dark');
+        // Additional mobile-friendly parameters
+        urlParams.append('widget_referrer', window.location.origin);
         // Add timing parameters if provided
+        // Fix for YouTube stutter: if videoStart is 0, set it to 1 to avoid initial frame issues
         if (videoStart !== undefined) {
-            urlParams.append('start', videoStart);
+            const adjustedStart = videoStart === 0 ? 1 : videoStart;
+            urlParams.append('start', adjustedStart);
         }
         if (videoEnd !== undefined) {
             urlParams.append('end', videoEnd);
@@ -155,6 +165,9 @@ class VideoBackground {
         iframe.addEventListener('load', () => {
             const isMobile = this.isMobileDevice();
             if (isMobile) {
+                // Add interaction listeners to enable autoplay after user interaction
+                this.setupMobileAutoplayFallback();
+                
                 // Add a small delay then check if video is playing
                 setTimeout(() => {
                     // If autoplay failed, try to force playback through the API
@@ -275,10 +288,14 @@ class VideoBackground {
         if (this.player) {
             this.player.destroy();
         }
+        
+        // Fix for YouTube stutter: if startTime is 0, set it to 1 to avoid initial frame issues
+        const adjustedStartTime = startTime === 0 ? 1 : startTime;
+        
         this.player = new YT.Player('youtube-player', {
             events: {
                 onReady: (event) => {
-                    event.target.seekTo(startTime);
+                    event.target.seekTo(adjustedStartTime);
                     // Apply current mute state
                     if (this.isMuted) {
                         event.target.mute();
@@ -296,7 +313,7 @@ class VideoBackground {
                 onStateChange: (event) => {
                     // Check if video has reached end time
                     if (event.data === YT.PlayerState.PLAYING) {
-                        this.checkVideoTime(event.target, startTime, endTime);
+                        this.checkVideoTime(event.target, adjustedStartTime, endTime);
                     }
                 }
             }
@@ -391,6 +408,54 @@ class VideoBackground {
     // Method to get current mute state for new videos
     getMuteState() {
         return this.isMuted ? '1' : '0';
+    }
+    
+    // Setup mobile autoplay fallback for when autoplay is blocked
+    setupMobileAutoplayFallback() {
+        // Only set up once per session
+        if (this.autoplayAttempted) {
+            return;
+        }
+        
+        const interactionEvents = ['touchstart', 'touchend', 'click', 'keydown'];
+        
+        const enableAutoplayOnInteraction = () => {
+            this.autoplayAttempted = true;
+            
+            // Try to play any current video
+            if (this.currentVideo && this.player) {
+                try {
+                    // Start muted to ensure autoplay works
+                    this.player.mute();
+                    this.player.playVideo();
+                    
+                    // If this is a press video and we want it unmuted, unmute after successful play
+                    if (!this.targetMuteState) {
+                        setTimeout(() => {
+                            try {
+                                this.player.unMute();
+                                this.isMuted = false;
+                                this.updateSoundToggleUI();
+                            } catch (error) {
+                                console.log('Failed to unmute after autoplay:', error);
+                            }
+                        }, 500);
+                    }
+                } catch (error) {
+                    console.log('Autoplay with interaction failed:', error);
+                }
+            }
+            
+            // Remove listeners after first successful interaction
+            interactionEvents.forEach(event => {
+                document.removeEventListener(event, enableAutoplayOnInteraction, true);
+            });
+        };
+        
+        // Add listeners for user interactions
+        interactionEvents.forEach(event => {
+            document.addEventListener(event, enableAutoplayOnInteraction, true);
+        });
     }
 }
 // Export for use in other modules
