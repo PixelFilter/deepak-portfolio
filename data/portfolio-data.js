@@ -32,7 +32,8 @@ const portfolioData = {
     filters: [
         { id: "games", label: "Games", active: true },
         { id: "apps", label: "Apps", active: false },
-        { id: "music", label: "Music", active: false }
+        { id: "music", label: "Music", active: false },
+        { id: "press", label: "Press", active: false }
     ],
     categories: {
         games: {
@@ -498,6 +499,25 @@ const portfolioData = {
                             zoomVideo: false,
                             buttonLabel: "View Videos",
                             buttonURL: "https://www.youtube.com/@DeepakChennakkadan/videos",
+                        }
+                    ]
+                }
+            ]
+        },
+        press: {
+            timeline: [
+                {
+                    year: 2024,
+                    content: [
+                        {
+                            title: "Super Gaming\nUpdate",
+                            description: "Hosted the Super Gaming Update with Phil Spencer (CEO, Microsoft Gaming), Cynthia Per-Lee (CVP, Gaming HR), Kevin Gammil (CVP, Ecosystem Engineering) at Xbox",
+                            company: "Xbox Studio",
+                            role: "Host",
+                            trailerUrl: "https://www.youtube.com/embed/akLUAwzVicg",
+                            videoStart: 0,
+                            videoEnd: 18,
+                            zoomVideo: false
                         }
                     ]
                 }
