@@ -30,7 +30,7 @@ class VideoBackground {
         // Listen for content changes
         document.addEventListener('contentChanged', (event) => {
             if (event.detail && event.detail.trailerUrl) {
-                this.showVideo(event.detail.trailerUrl, event.detail.videoStart, event.detail.videoEnd, event.detail.zoomVideo, event.detail.isInstant, event.detail.category, event.detail.mobileVideoAlign);
+                this.showVideo(event.detail.trailerUrl, event.detail.videoStart, event.detail.videoEnd, event.detail.zoomVideo, event.detail.isInstant, event.detail.category, event.detail.mobileVideoAlign, event.detail.alignmentOffset);
             } else {
                 this.hideVideo();
             }
@@ -46,7 +46,7 @@ class VideoBackground {
         return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
     
-    showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false, category = null, mobileVideoAlign = 'center') {
+    showVideo(trailerUrl, videoStart, videoEnd, zoomVideo = true, isInstant = false, category = null, mobileVideoAlign = 'center', alignmentOffset = '0') {
         if (!trailerUrl) {
             this.hideVideo();
             return;
@@ -75,6 +75,7 @@ class VideoBackground {
         this.currentVideoUrl = videoId;
         this.zoomVideo = zoomVideo;
         this.currentMobileVideoAlign = mobileVideoAlign;
+        this.currentAlignmentOffset = alignmentOffset;
         // If instant transition is requested, use subtle fade instead of black overlay
         if (isInstant && this.videoContainer.innerHTML !== '') {
             // Use a subtle fade transition instead of black overlay
@@ -275,28 +276,28 @@ class VideoBackground {
             if (isMobile && this.currentMobileVideoAlign) {
                 this.currentVideo.style.top = `${(viewportHeight - videoHeight) / 2}px`;
                 
-                // Calculate offset based on screen size
-                let horizontalOffset = '-5%';
-                if (window.innerWidth <= 480) {
-                    horizontalOffset = '-10%';
-                } else if (window.innerWidth <= 768) {
-                    horizontalOffset = '-8%';
-                }
+                // Get the alignment offset as a percentage (default 0)
+                const offsetPercent = parseFloat(this.currentAlignmentOffset || '0');
                 
                 switch (this.currentMobileVideoAlign) {
                     case 'left':
-                        this.currentVideo.style.left = horizontalOffset;
+                        // Position from left edge with offset percentage
+                        const leftOffset = (viewportWidth * offsetPercent) / 100;
+                        this.currentVideo.style.left = `${leftOffset}px`;
                         this.currentVideo.style.right = 'auto';
                         break;
                     case 'right':
-                        this.currentVideo.style.right = horizontalOffset;
+                        // Position from right edge with offset percentage
+                        const rightOffset = (viewportWidth * offsetPercent) / 100;
+                        this.currentVideo.style.right = `${rightOffset}px`;
                         this.currentVideo.style.left = 'auto';
                         break;
                     case 'center':
                     default:
-                        this.currentVideo.style.left = `50%`;
+                        // Center with optional offset (offset moves from center point)
+                        const centerOffset = (viewportWidth * offsetPercent) / 100;
+                        this.currentVideo.style.left = `${(viewportWidth - videoWidth) / 2 + centerOffset}px`;
                         this.currentVideo.style.right = 'auto';
-                        // Center alignment will be handled by CSS transform
                         break;
                 }
             } else {
@@ -323,7 +324,7 @@ class VideoBackground {
         // Remove any existing alignment classes
         this.videoContainer.classList.remove('mobile-align-left', 'mobile-align-center', 'mobile-align-right');
         
-        // Apply the new alignment class
+        // Apply the new alignment class (now mainly for transform-origin)
         switch (this.currentMobileVideoAlign) {
             case 'left':
                 this.videoContainer.classList.add('mobile-align-left');

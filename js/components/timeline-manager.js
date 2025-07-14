@@ -531,6 +531,7 @@ class TimelineManager {
                     tempCard.dataset.videoEnd = gameData.videoEnd;
                     tempCard.dataset.zoomVideo = gameData.zoomVideo;
                     tempCard.dataset.mobileVideoAlign = activeItem.dataset.mobileVideoAlign || 'center';
+                    tempCard.dataset.alignmentOffset = activeItem.dataset.alignmentOffset || '0';
                     tempCard.dataset.buttonLabel = gameData.buttonLabel;
                     tempCard.dataset.buttonURL = gameData.buttonURL;
                     tempCard.dataset.infoPanelHeader = gameData.infoPanelHeader;

@@ -331,6 +331,7 @@ class UIBuilder {
                 dotItem.dataset.videoEnd = gameData.videoEnd || '';
                 dotItem.dataset.zoomVideo = gameData.zoomVideo !== undefined ? gameData.zoomVideo : 'true';
                 dotItem.dataset.mobileVideoAlign = gameData.mobileVideoAlign || 'center';
+                dotItem.dataset.alignmentOffset = gameData.alignmentOffset || '0';
                 dotItem.dataset.contributions = JSON.stringify(gameData.contributions || []);
                 dotItem.dataset.buttonLabel = gameData.buttonLabel || 'View Contributions';
                 dotItem.dataset.buttonURL = gameData.buttonURL || '';
@@ -399,6 +400,7 @@ class UIBuilder {
         card.dataset.videoEnd = item.videoEnd || '';
         card.dataset.zoomVideo = item.zoomVideo !== undefined ? item.zoomVideo : 'true';
         card.dataset.mobileVideoAlign = item.mobileVideoAlign || 'center';
+        card.dataset.alignmentOffset = item.alignmentOffset || '0';
         card.dataset.buttonLabel = item.buttonLabel || 'View Contributions';
         card.dataset.buttonURL = item.buttonURL || '';
         card.dataset.infoPanelHeader = item.infoPanelHeader || '';

@@ -52,6 +52,7 @@ const portfolioData = {
                             videoEnd: 60,
                             zoomVideo: true,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",                            
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -83,6 +84,7 @@ const portfolioData = {
                             videoEnd: 100,
                             zoomVideo: true,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -108,6 +110,7 @@ const portfolioData = {
                             videoEnd: 85,
                             zoomVideo: true,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -136,6 +139,7 @@ const portfolioData = {
                             videoEnd: 75,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -171,6 +175,7 @@ const portfolioData = {
                             videoEnd: 59,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -190,10 +195,11 @@ const portfolioData = {
                             company: "Voxel Game Studios",
                             role: "Audio Programmer | Audio Content",
                             trailerUrl: "https://www.youtube.com/embed/jKOilVDdx9o",
-                            videoStart: 4,
+                            videoStart: 5,
                             videoEnd: 20,
                             zoomVideo: false,
                             mobileVideoAlign: "right",
+                            alignmentOffset: "-28",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -225,6 +231,7 @@ const portfolioData = {
                             videoEnd: 37,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -243,6 +250,7 @@ const portfolioData = {
                             videoEnd: 65,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -260,6 +268,7 @@ const portfolioData = {
                             videoEnd: 72,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -293,6 +302,7 @@ const portfolioData = {
                             videoEnd: 90,
                             zoomVideo: true,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -320,6 +330,7 @@ const portfolioData = {
                             videoEnd: 70,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
                             infoPanelData: [
@@ -348,6 +359,7 @@ const portfolioData = {
                             videoEnd: 60,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             projectImage: "assets/images/apps/wish_drop.png",
                             buttonLabel: "View Contributions",
                             infoPanelHeader: "Project Contributions",
@@ -377,6 +389,7 @@ const portfolioData = {
                             videoEnd: 60,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             projectImage: "assets/images/apps/spectral_eq.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -404,6 +417,7 @@ const portfolioData = {
                             videoEnd: 60,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             projectImage: "assets/images/apps/pedal_stack.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -430,6 +444,7 @@ const portfolioData = {
                             videoEnd: 12,
                             zoomVideo: true,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             projectImage: "assets/images/apps/eclipse_synth.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -452,6 +467,7 @@ const portfolioData = {
                             videoEnd: 50,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             projectImage: "assets/images/apps/R2D2IZER.png",
                             buttonLabel: "Project Details",
                             infoPanelHeader: "Project Details",
@@ -481,6 +497,7 @@ const portfolioData = {
                             videoEnd: 2838,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Platform",
                             buttonURL: "https://hyperbolic-chamber.space"
                         }
@@ -499,6 +516,7 @@ const portfolioData = {
                             videoEnd: 1070,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Videos",
                             buttonURL: "https://pixelfilter.space"
                         }
@@ -517,6 +535,7 @@ const portfolioData = {
                             videoEnd: 230,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Videos",
                             buttonURL: "https://www.youtube.com/@DeepakChennakkadan/videos"
                         }
@@ -535,7 +554,7 @@ const portfolioData = {
                             company: "Xbox Studio",
                             role: "Host",
                             trailerUrl: "https://www.youtube.com/embed/akLUAwzVicg",
-                            videoStart: 0,
+                            videoStart: 1,
                             videoEnd: 18,
                             zoomVideo: false,
                             mobileVideoAlign: "center"
@@ -555,6 +574,7 @@ const portfolioData = {
                             videoEnd: 37,
                             zoomVideo: false,
                             mobileVideoAlign: "left",
+                            alignmentOffset: "-60",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1839380809?t=00h08m19s"
                         },
@@ -568,6 +588,7 @@ const portfolioData = {
                             videoEnd: 40,
                             zoomVideo: false,
                             mobileVideoAlign: "right",
+                            alignmentOffset: "-30",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1943634392?t=01h45m16s"
                         },
@@ -581,6 +602,7 @@ const portfolioData = {
                             videoEnd: 120,
                             zoomVideo: false,
                             mobileVideoAlign: "left",
+                            alignmentOffset: "-80",
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
                         }
@@ -595,10 +617,11 @@ const portfolioData = {
                             company: "Irradiance Games",
                             role: "Presenter",
                             trailerUrl: "https://www.youtube.com/embed/BBkpIn4Ihkc",
-                            videoStart: 18,
+                            videoStart: 21,
                             videoEnd: 70,
                             zoomVideo: false,
                             mobileVideoAlign: "center",
+                            alignmentOffset: "0",
                             buttonLabel: "View Stream",
                             buttonURL: "https://youtu.be/BBkpIn4Ihkc?si=PxzuBAFJkIzu2aYn"
                         }
