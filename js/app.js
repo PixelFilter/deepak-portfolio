@@ -11,6 +11,18 @@ class App {
         this.init();
     }
     init() {
+        // Initialize URL router first
+        this.urlRouter = new URLRouter();
+        window.urlRouter = this.urlRouter;
+        
+        // Get initial category from URL
+        const initialCategory = this.urlRouter.getInitialCategory();
+        
+        // Set the initial category in the data before building UI
+        if (window.portfolioData && window.portfolioData.setActiveFilter) {
+            window.portfolioData.setActiveFilter(initialCategory);
+        }
+        
         // Build UI dynamically from data
         this.uiBuilder = new UIBuilder(this.data);
         // Disable scrolling during loading
@@ -40,6 +52,12 @@ class App {
         window.contentManager = this.contentManager;
         // Make app instance available globally for content manager
         window.app = this;
+        
+        // Update URL to reflect initial category (use replace to not add to history)
+        // Add delay to ensure all components are initialized
+        setTimeout(() => {
+            this.urlRouter.replaceURL(initialCategory);
+        }, 100);
         
         // Flag to track if initialization is complete
         this.initializationComplete = false;

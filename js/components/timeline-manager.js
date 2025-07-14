@@ -633,8 +633,10 @@ class TimelineManager {
         // Calculate next category index (loop back to 0 if at end)
         const nextIndex = (currentIndex + 1) % cycleOrder.length;
         const nextCategoryId = cycleOrder[nextIndex];
-        // Switch to the next category
-        if (window.contentManager) {
+        // Switch to the next category using URL router
+        if (window.urlRouter) {
+            window.urlRouter.navigateToCategory(nextCategoryId);
+        } else if (window.contentManager) {
             window.contentManager.switchToCategory(nextCategoryId);
         }
         // Reset auto-transition flag and restart timer after category switch
@@ -681,7 +683,12 @@ class TimelineManager {
         const nextIndex = (currentActiveIndex + 1) % filters.length;
         
         if (nextIndex !== currentActiveIndex) {
-            this.switchToCategory(filters[nextIndex].id);
+            // Use URL router to navigate to next category
+            if (window.urlRouter) {
+                window.urlRouter.navigateToCategory(filters[nextIndex].id);
+            } else {
+                this.switchToCategory(filters[nextIndex].id);
+            }
         }
     }
     
@@ -691,7 +698,12 @@ class TimelineManager {
         const prevIndex = (currentActiveIndex - 1 + filters.length) % filters.length;
         
         if (prevIndex !== currentActiveIndex) {
-            this.switchToCategory(filters[prevIndex].id);
+            // Use URL router to navigate to previous category
+            if (window.urlRouter) {
+                window.urlRouter.navigateToCategory(filters[prevIndex].id);
+            } else {
+                this.switchToCategory(filters[prevIndex].id);
+            }
         }
     }
     

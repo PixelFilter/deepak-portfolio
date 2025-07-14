@@ -23,8 +23,14 @@ class ContentManager {
         this.filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.dataset.filter;
-                this.setActiveFilter(filter);
-                this.switchToCategory(filter);
+                // Use URL router to navigate to category (will update URL and switch category)
+                if (window.urlRouter) {
+                    window.urlRouter.navigateToCategory(filter);
+                } else {
+                    // Fallback if router not available
+                    this.setActiveFilter(filter);
+                    this.switchToCategory(filter);
+                }
             });
         });
     }
