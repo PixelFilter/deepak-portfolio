@@ -520,6 +520,23 @@ const portfolioData = {
                             zoomVideo: false
                         }
                     ]
+                },
+                {
+                    year: 2023,
+                    content: [
+                        {
+                            title: "Diablo IV\nLaunch Event",
+                            description: "Hosted the Diablo IV launch event with Rod Fergusson (Head of Diablo), Xbox's Major Nelson and Mav from TheMavShow.",
+                            company: "Xbox Plays",
+                            role: "Co-Host",
+                            trailerUrl: "https://www.youtube.com/embed/K9SqwT2_1o4",
+                            videoStart: 0,
+                            videoEnd: 40,
+                            zoomVideo: false,
+                            buttonLabel: "View Stream",
+                            buttonURL: "https://www.twitch.tv/videos/1839380809?t=00h08m19s"
+                        }
+                    ]
                 }
             ]
         }
