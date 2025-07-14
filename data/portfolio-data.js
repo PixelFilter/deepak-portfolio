@@ -44,6 +44,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Forza\nMotorsport",
+                            slug: "forza-motorsport",
                             description: "A ground-up reboot of Forza focused on realism, tire physics, and immersive racing experiences.",
                             company: "Turn 10 Studios, Microsoft",
                             role: "ForzaTech Engineering Lead",
@@ -76,6 +77,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Forza\nHorizon 5",
+                            slug: "forza-horizon-5",
                             description: "An open-world racer set in Mexico, blending exploration, arcade racing, and seasonal events.",
                             company: "Turn 10 Studios, Microsoft",
                             role: "Content Workflow Lead",
@@ -102,6 +104,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Forza\nMotorsport 7",
+                            slug: "forza-motorsport-7",
                             description: "A simulation racing game with 700+ cars, dynamic weather, and competitive motorsport gameplay.",
                             company: "Turn 10 Studios, Microsoft",
                             role: "Software Engineer",
@@ -131,6 +134,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Magnolia",
+                            slug: "magnolia",
                             description: "A poetic experience dedicated to the memory of a 3 year old girl where you play as her experiencing things she loved in real life.",
                             company: "Irradiance Games",
                             role: "Creative Director | Audio Programmer",
@@ -167,6 +171,7 @@ const portfolioData = {
                         },
                         {
                             title: "Cubicopolis",
+                            slug: "cubicopolis",
                             description: "A puzzle platformer where you solve puzzles by manipulating the camera to reveal unique perspectives.",
                             company: "Voxel Game Studios",
                             role: "Audio Programmer | Audio Content",
@@ -191,6 +196,7 @@ const portfolioData = {
                         },
                         {
                             title: "Just Flick",
+                            slug: "just-flick",
                             description: "An endless shape mathching and music synced iOS/Android mobile game.",
                             company: "Voxel Game Studios",
                             role: "Audio Programmer | Audio Content",
@@ -223,6 +229,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Flickers",
+                            slug: "flickers",
                             description: "An atmospheric platformer where you journey from a dying flower to the moon, jumping between sparks to transform a twilight world through emotion and rhythm.",
                             company: "Neat Snake",
                             role: "Mixing & Mastering Engineer",
@@ -242,6 +249,7 @@ const portfolioData = {
                         },
                         {
                             title: "Never Alone",
+                            slug: "never-alone",
                             description: "Never Alone: Foxtales is the first expansion to Never Alone, featuring Nuna and Fox in a new adventure.",
                             company: "Upper One Games",
                             role: "Game Tester",
@@ -260,6 +268,7 @@ const portfolioData = {
                         },
                         {
                             title: "Tread Lightly",
+                            slug: "tread-lightly",
                             description: "A poetic experience of a mysterious character treading their way through a lifeless, ominous landscape.",
                             company: "Team Yarbus",
                             role: "Audio Programmer | Audio Content",
@@ -294,6 +303,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Auricular Hierarchy",
+                            slug: "auricular-hierarchy",
                             description: "A 2D sound-driven platformer where jumping creates music and color, transforming a minimalist world through exploration.",
                             company: "Sient Sound Productions",
                             role: "Audio Programmer | Audio Content",
@@ -322,6 +332,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Discord",
+                            slug: "discord-game",
                             description: "Discord is a 2D arcade game where you throw and catch a ball to break tiles, collect orbs, and score points before time runs out.",
                             company: "Team Discord",
                             role: "Audio Programmer | Audio Content",
@@ -351,6 +362,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Wish Drop",
+                            slug: "wish-drop",
                             description: "Wish Drop was a social wish-list app that simplified the process of gifting and visiting bucket-list places.",
                             company: "Wish Drop LLC.",
                             role: "Chief Operating Officer",
@@ -381,6 +393,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Spectral-EQ",
+                            slug: "spectral-eq",
                             description: "A spectrum analyzer plugin with a 6 band parametric EQ and FFT-based visualizer developed for Logic Pro.",
                             company: "Passion Project",
                             role: "Sole Developer",
@@ -409,6 +422,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Pedal Stack",
+                            slug: "pedal-stack",
                             description: "A guitar processor app with 5 usable guitar pedals: Delay, Distortion, Reverb, Whammy and Equalizer.",
                             company: "Passion Project",
                             role: "Sole Developer",
@@ -436,6 +450,7 @@ const portfolioData = {
                     content: [                      
                         {
                             title: "Eclipse Synth",
+                            slug: "eclipse-synth",
                             description: "Eclipse Synth is a virtual synthesizer featuring dual oscillators, flexible envelope controls, three filter types.",
                             company: "Passion Project",
                             role: "Sole Developer",
@@ -459,6 +474,7 @@ const portfolioData = {
                         },                       
                         {
                             title: "R2D2IZER",
+                            slug: "r2d2izer",
                             description: "A fun little app named after the iconic robot from Star Wars which used audio processing techniques to create R2D2 like sound effects.",
                             company: "Passion Project",
                             role: "Sole Developer",
@@ -489,6 +505,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Hyperbolic\nChamber",
+                            slug: "hyperbolic-chamber",
                             description: "Hyperbolic Chamber is a platform to showcase immersive, experimental electronic music from underground artists including us.",
                             company: "Passion Project",
                             role: "Co-Founder",
@@ -508,6 +525,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "PIXELFILTER",
+                            slug: "pixelfilter",
                             description: "My electronic music alter ego / stage name where I perform and record live sets showcasing the underground sound.",
                             company: "Creative Pursuit",
                             role: "Techno / Indo DJ",
@@ -527,6 +545,7 @@ const portfolioData = {
                     content: [                       
                         {
                             title: "Youtube\nGuitar Videos",
+                            slug: "youtube-guitar-videos",
                             description: "A series of guitar videos I have recorded over the years showcasing one of my many musical passions.",
                             company: "Creative Pursuit",
                             role: "Guitarist",
@@ -550,6 +569,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Xbox Super\nGaming Update",
+                            slug: "xbox-super-gaming-update",
                             description: "Hosted the Super Gaming Update with Phil Spencer (CEO, Microsoft Gaming), Cynthia Per-Lee (CVP, Gaming HR), Kevin Gammil (CVP, Ecosystem Engineering) at Xbox.",
                             company: "Xbox Studio",
                             role: "Host",
@@ -566,6 +586,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Diablo IV\nLaunch Event",
+                            slug: "diablo-iv-launch-event",
                             description: "Co-Hosted the Diablo IV launch event with Rod Fergusson (Head of Diablo), Xbox's Major Nelson and Mav from TheMavShow.",
                             company: "Xbox Plays",
                             role: "Co-Host",
@@ -580,6 +601,7 @@ const portfolioData = {
                         },
                         {
                             title: "Forza Motorsport\nLaunch Stream",
+                            slug: "forza-motorsport-launch-stream",
                             description: "Co-Hosted the Forza Motorsport launch stream which was broadcasted on the front page of Twitch and the Steam Store.",
                             company: "Turn 10 Studios",
                             role: "Co-Host",
@@ -594,6 +616,7 @@ const portfolioData = {
                         },
                         {
                             title: "Xbox ASL\nStream",
+                            slug: "xbox-asl-stream",
                             description: "Hosted the Xbox ASL Anniversary Stream with an Xbox Sign Language Expert where we played Forza Horizon 5 and talked about accessibility in gaming.",
                             company: "Xbox Plays",
                             role: "Host",
@@ -613,6 +636,7 @@ const portfolioData = {
                     content: [
                         {
                             title: "Intel University\nGames Showcase",
+                            slug: "intel-university-games-showcase",
                             description: "Presented our Student Game, Magnolia at the Intel University Showcase in San Francisco.",
                             company: "Irradiance Games",
                             role: "Presenter",
@@ -650,6 +674,57 @@ const portfolioData = {
         
         // Dynamically return the timeline for the active category
         return this.categories[activeFilter.id]?.timeline || [];
+    },
+
+    // Helper method to find a project by slug within a category
+    findProjectBySlug(categoryId, slug) {
+        const category = this.categories[categoryId];
+        if (!category || !category.timeline) {
+            return null;
+        }
+
+        for (const yearData of category.timeline) {
+            for (const project of yearData.content) {
+                if (project.slug === slug) {
+                    return {
+                        project,
+                        year: yearData.year,
+                        categoryId
+                    };
+                }
+            }
+        }
+        return null;
+    },
+
+    // Helper method to find a project by slug across all categories
+    findProjectBySlugGlobal(slug) {
+        for (const categoryId of Object.keys(this.categories)) {
+            const result = this.findProjectBySlug(categoryId, slug);
+            if (result) {
+                return result;
+            }
+        }
+        return null;
+    },
+
+    // Helper method to get project index within timeline for navigation
+    getProjectIndexInTimeline(categoryId, slug) {
+        const category = this.categories[categoryId];
+        if (!category || !category.timeline) {
+            return -1;
+        }
+
+        let index = 0;
+        for (const yearData of category.timeline) {
+            for (const project of yearData.content) {
+                if (project.slug === slug) {
+                    return index;
+                }
+                index++;
+            }
+        }
+        return -1;
     }
 };
 

@@ -15,12 +15,12 @@ class App {
         this.urlRouter = new URLRouter();
         window.urlRouter = this.urlRouter;
         
-        // Get initial category from URL
-        const initialCategory = this.urlRouter.getInitialCategory();
+        // Get initial route from URL (category and optional project)
+        const initialRoute = this.urlRouter.getInitialRoute();
         
         // Set the initial category in the data before building UI
         if (window.portfolioData && window.portfolioData.setActiveFilter) {
-            window.portfolioData.setActiveFilter(initialCategory);
+            window.portfolioData.setActiveFilter(initialRoute.category);
         }
         
         // Build UI dynamically from data
@@ -53,10 +53,17 @@ class App {
         // Make app instance available globally for content manager
         window.app = this;
         
-        // Update URL to reflect initial category (use replace to not add to history)
+        // Update URL to reflect initial route (use replace to not add to history)
         // Add delay to ensure all components are initialized
         setTimeout(() => {
-            this.urlRouter.replaceURL(initialCategory);
+            this.urlRouter.replaceURL(initialRoute.category, initialRoute.projectSlug);
+            
+            // If there's a project slug, navigate to it after initialization
+            if (initialRoute.projectSlug) {
+                setTimeout(() => {
+                    this.urlRouter.navigateToProject(initialRoute.projectSlug);
+                }, 300);
+            }
         }, 100);
         
         // Flag to track if initialization is complete

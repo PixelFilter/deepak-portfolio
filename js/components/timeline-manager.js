@@ -265,6 +265,9 @@ class TimelineManager {
             this.updateNavigationButtons();
             this.scrollTimelineToActiveItem(clampedIndex);
             this.updateItemContent(clampedIndex);
+            
+            // Update URL for new project
+            this.updateURLForCurrentProject();
         }
     }
     handleItemClick(index) {
@@ -278,6 +281,10 @@ class TimelineManager {
         this.currentItemIndex = index;
         this.updateYearLabels();
         this.updateNavigationButtons();
+        
+        // Update URL for new project
+        this.updateURLForCurrentProject();
+        
         // Set flag to prevent blur effects during click scroll
         this.isClickScrolling = true;
         // Immediately update content and scroll without transition animation
@@ -713,6 +720,26 @@ class TimelineManager {
             window.contentManager.switchToCategory(filterId);
         }
     }
+
+    // Navigate to a specific project by slug
+    navigateToProjectBySlug(slug) {
+        // Get current active category
+        const activeFilter = window.portfolioData.filters.find(f => f.active);
+        if (!activeFilter) return;
+
+        // Find the project index in the current category's timeline
+        const projectIndex = window.portfolioData.getProjectIndexInTimeline(activeFilter.id, slug);
+        
+        if (projectIndex >= 0 && projectIndex < this.timelineItems.length) {
+            // Navigate to the project
+            this.handleNavigationClick(projectIndex);
+            
+            // Update URL to reflect the project (without adding to history since we're already navigating)
+            if (window.urlRouter) {
+                window.urlRouter.replaceURL(activeFilter.id, slug);
+            }
+        }
+    }
     // Special handler for navigation button clicks (no black overlay)
     handleNavigationClick(index) {
         if (this.timelineItems.length === 0) {
@@ -730,6 +757,10 @@ class TimelineManager {
         this.currentItemIndex = index;
         this.updateYearLabels();
         this.updateNavigationButtons();
+        
+        // Update URL with current project
+        this.updateURLForCurrentProject();
+        
         // Set flag to prevent blur effects during navigation
         this.isClickScrolling = true;
         // Update content immediately without any overlays
@@ -991,6 +1022,34 @@ class TimelineManager {
                 // Swipe left - go to next item
                 this.navigateNext();
             }
+        }
+    }
+
+    // Update URL based on current project
+    updateURLForCurrentProject() {
+        if (!window.urlRouter || !window.portfolioData) return;
+        
+        const activeFilter = window.portfolioData.filters.find(f => f.active);
+        if (!activeFilter) return;
+        
+        // Get current project slug based on current item index
+        const timelineData = window.portfolioData.getTimelineData();
+        let currentIndex = 0;
+        let projectSlug = null;
+        
+        for (const yearData of timelineData) {
+            for (const project of yearData.content) {
+                if (currentIndex === this.currentItemIndex) {
+                    projectSlug = project.slug;
+                    break;
+                }
+                currentIndex++;
+            }
+            if (projectSlug) break;
+        }
+        
+        if (projectSlug) {
+            window.urlRouter.replaceURL(activeFilter.id, projectSlug);
         }
     }
 
