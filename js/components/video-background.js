@@ -100,14 +100,14 @@ class VideoBackground {
         urlParams.append('color', 'white');
         urlParams.append('theme', 'dark');
         // Add timing parameters if provided
-        if (videoStart) {
+        if (videoStart !== undefined) {
             urlParams.append('start', videoStart);
         }
-        if (videoEnd) {
+        if (videoEnd !== undefined) {
             urlParams.append('end', videoEnd);
         }
         // For looping with specific time range, we'll use JavaScript
-        if (videoStart && videoEnd) {
+        if (videoStart !== undefined && videoEnd !== undefined) {
             urlParams.append('enablejsapi', '1');
         } else {
             // Standard loop for full video
@@ -140,7 +140,7 @@ class VideoBackground {
         this.videoContainer.appendChild(iframe);
         this.currentVideo = iframe;
         // If we have timing parameters, set up custom looping
-        if (videoStart && videoEnd) {
+        if (videoStart !== undefined && videoEnd !== undefined) {
             this.setupCustomLoop(videoStart, videoEnd);
         }
         // Ensure video covers full background
@@ -240,6 +240,12 @@ class VideoBackground {
             events: {
                 onReady: (event) => {
                     event.target.seekTo(startTime);
+                    // Apply current mute state
+                    if (this.isMuted) {
+                        event.target.mute();
+                    } else {
+                        event.target.unMute();
+                    }
                     event.target.playVideo();
                 },
                 onStateChange: (event) => {
