@@ -464,7 +464,7 @@ const portfolioData = {
                             videoEnd: 2838,
                             zoomVideo: false,
                             buttonLabel: "View Platform",
-                            buttonURL: "https://hyperbolic-chamber.space",
+                            buttonURL: "https://hyperbolic-chamber.space"
                         }
                     ]
                 },
@@ -481,7 +481,7 @@ const portfolioData = {
                             videoEnd: 1070,
                             zoomVideo: false,
                             buttonLabel: "View Videos",
-                            buttonURL: "https://pixelfilter.space",
+                            buttonURL: "https://pixelfilter.space"
                         }
                     ]
                 },
@@ -498,7 +498,7 @@ const portfolioData = {
                             videoEnd: 230,
                             zoomVideo: false,
                             buttonLabel: "View Videos",
-                            buttonURL: "https://www.youtube.com/@DeepakChennakkadan/videos",
+                            buttonURL: "https://www.youtube.com/@DeepakChennakkadan/videos"
                         }
                     ]
                 }
