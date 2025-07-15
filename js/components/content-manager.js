@@ -3,7 +3,11 @@ class ContentManager {
     constructor() {
         this.filterButtons = document.querySelectorAll('.filter-btn');
         this.contentCards = document.querySelectorAll('.content-card');
-        this.activeFilter = 'all';
+        
+        // Initialize activeFilter to the current active filter from portfolio data
+        const activeFilterData = window.portfolioData?.filters?.find(f => f.active);
+        this.activeFilter = activeFilterData ? activeFilterData.id : 'games';
+        
         this.init();
     }
     init() {
@@ -475,7 +479,7 @@ class ContentManager {
         // Resume button is always visible - it's part of the header
         // const resumeBtn = document.querySelector('.resume-btn');
         // if (resumeBtn) {
-        //     resumeBtn.classList.remove('hidden-for-info-panel');
+        //     resumeBtn.classList.remove('hidden-for_info-panel');
         // }
         // Title is always visible - no need to show/hide
         // const title = document.querySelector('.title');
@@ -519,6 +523,9 @@ class ContentManager {
         // Update the filter buttons UI
         this.setActiveFilter(filterId);
         
+        // Sync activeFilter with portfolio data
+        this.syncActiveFilterFromData();
+        
         // If we're staying in the same category and want to preserve current item, don't rebuild
         if (isSameCategory && preserveCurrentItem) {
             return;
@@ -540,6 +547,13 @@ class ContentManager {
         if (window.app && window.app.uiBuilder) {
             window.app.uiBuilder.buildTimeline();
             window.app.uiBuilder.buildContentPanels();
+        }
+    }
+    // Sync activeFilter with the current active filter in portfolio data
+    syncActiveFilterFromData() {
+        const activeFilterData = window.portfolioData?.filters?.find(f => f.active);
+        if (activeFilterData) {
+            this.activeFilter = activeFilterData.id;
         }
     }
     setupResizeListener() {

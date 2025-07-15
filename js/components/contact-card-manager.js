@@ -158,7 +158,9 @@ class ContactCardManager {
         
         // Navigate back to current portfolio category when card is closed
         if (window.urlRouter && window.contentManager) {
-            const currentCategory = window.contentManager.activeFilter || 'games';
+            // Get current category from portfolio data as the primary source
+            const activeFilterData = window.portfolioData?.filters?.find(f => f.active);
+            const currentCategory = activeFilterData ? activeFilterData.id : (window.contentManager.activeFilter || 'games');
             const currentProjectSlug = window.timelineManager?.getCurrentProjectSlug();
             
             if (currentProjectSlug) {
