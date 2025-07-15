@@ -630,6 +630,26 @@ const portfolioData = {
                             buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
                         },
                         {
+                            title: "Forza Friday\nStreams",
+                            slug: "forza-friday-streams",
+                            description: "Regularly hosted the Forza Friday Streams to share updates on inner development of our titles with our player community.",
+                            company: "Turn 10 Studios",
+                            role: "Host",
+                            trailerUrl: "https://www.youtube.com/embed/26MqzWXaI0k",
+                            videoStart: 1,
+                            videoEnd: 178,
+                            zoomVideo: false,
+                            mobileVideoAlign: "right",
+                            alignmentOffset: "0",
+                            buttonLabel: "View Stream",
+                            buttonURL: "https://www.twitch.tv/videos/2142280162"
+                        },
+                    ]
+                },
+                {
+                    year: 2022,
+                    content: [
+                        {
                             title: "The DigiPen\nShow",
                             slug: "the-digipen-show",
                             description: "Invited as a guest to talk about my college and work experiences.",
