@@ -500,7 +500,11 @@ class ContentManager {
             window.timelineManager.updateNavigationButtons();
         }
     }
-    switchToCategory(filterId) {
+    switchToCategory(filterId, preserveCurrentItem = false) {
+        // Check if we're already in the same category
+        const currentActiveFilter = this.activeFilter;
+        const isSameCategory = currentActiveFilter === filterId;
+        
         // Update the active filter in the data
         if (window.portfolioData && window.portfolioData.setActiveFilter) {
             window.portfolioData.setActiveFilter(filterId);
@@ -514,6 +518,12 @@ class ContentManager {
         
         // Update the filter buttons UI
         this.setActiveFilter(filterId);
+        
+        // If we're staying in the same category and want to preserve current item, don't rebuild
+        if (isSameCategory && preserveCurrentItem) {
+            return;
+        }
+        
         // Rebuild the timeline and content for the new category
         this.rebuildTimelineForCategory();
         // Reset timeline manager to use new data - add small delay for DOM updates

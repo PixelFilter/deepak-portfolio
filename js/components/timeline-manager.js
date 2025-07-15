@@ -1053,6 +1053,28 @@ class TimelineManager {
         }
     }
 
+    // Get the current project slug
+    getCurrentProjectSlug() {
+        if (!window.portfolioData) return null;
+        
+        const timelineData = window.portfolioData.getTimelineData();
+        let currentIndex = 0;
+        let projectSlug = null;
+        
+        for (const yearData of timelineData) {
+            for (const project of yearData.content) {
+                if (currentIndex === this.currentItemIndex) {
+                    projectSlug = project.slug;
+                    break;
+                }
+                currentIndex++;
+            }
+            if (projectSlug) break;
+        }
+        
+        return projectSlug;
+    }
+
 }
 // Export for use in other modules
 window.TimelineManager = TimelineManager;

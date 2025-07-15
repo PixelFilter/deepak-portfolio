@@ -159,7 +159,15 @@ class ContactCardManager {
         // Navigate back to current portfolio category when card is closed
         if (window.urlRouter && window.contentManager) {
             const currentCategory = window.contentManager.activeFilter || 'games';
-            window.urlRouter.navigateToCategory(currentCategory, true);
+            const currentProjectSlug = window.timelineManager?.getCurrentProjectSlug();
+            
+            if (currentProjectSlug) {
+                // Navigate back to the specific project
+                window.urlRouter.navigateToProjectInCategory(currentCategory, currentProjectSlug, true);
+            } else {
+                // Fallback to category navigation
+                window.urlRouter.navigateToCategory(currentCategory, true);
+            }
         }
         
         // Trigger custom event

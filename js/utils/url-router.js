@@ -87,15 +87,22 @@ class URLRouter {
                 this.updateURL(category, projectSlug);
             }
 
+            // Check if we're staying in the same category
+            const currentCategory = this.getCategoryFromURL();
+            const isSameCategory = currentCategory === category;
+
             // Switch to the category using the content manager
             if (window.contentManager) {
-                window.contentManager.switchToCategory(category);
+                // If we have a project slug and we're staying in the same category, preserve current item
+                const preserveCurrentItem = projectSlug && isSameCategory;
+                window.contentManager.switchToCategory(category, preserveCurrentItem);
                 
                 // If project slug is provided, navigate to that project after category switch
                 if (projectSlug) {
+                    const delay = preserveCurrentItem ? 50 : 200; // Shorter delay if not rebuilding
                     setTimeout(() => {
                         this.navigateToProject(projectSlug);
-                    }, 200); // Small delay to ensure category switch completes
+                    }, delay);
                 }
             }
         }
