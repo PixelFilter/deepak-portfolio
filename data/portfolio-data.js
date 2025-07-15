@@ -630,6 +630,19 @@ const portfolioData = {
                             buttonURL: "https://www.twitch.tv/videos/1816452658?t=01h38m56s"
                         },
                         {
+                            title: "Xbox Host\nTraining",
+                            slug: "xbox-host-training",
+                            description: "Went through a media and PR training certification to become an Xbox host to represent the brand effectively.",
+                            company: "Xbox Studio",
+                            role: "Host",
+                            trailerUrl: "https://www.youtube.com/embed/cqN_ZatXllc",
+                            videoStart: 139,
+                            videoEnd: 160,
+                            zoomVideo: false,
+                            mobileVideoAlign: "right",
+                            alignmentOffset: "-100"
+                        },
+                        {
                             title: "Forza Friday\nStreams",
                             slug: "forza-friday-streams",
                             description: "Regularly hosted the Forza Friday Streams to share updates on inner development of our titles with our player community.",
@@ -644,6 +657,19 @@ const portfolioData = {
                             buttonLabel: "View Stream",
                             buttonURL: "https://www.twitch.tv/videos/2142280162"
                         },
+                        {
+                            title: "Psychonauts 2\nStream",
+                            slug: "psychonauts-2-stream",
+                            description: "Co-Hosted a stream to showcase the gameplay for Psychonauts 2.",
+                            company: "Xbox Studio",
+                            role: "Co-Host",
+                            trailerUrl: "https://www.youtube.com/embed/9cEQd05_jNY",
+                            videoStart: 5,
+                            videoEnd: 51,
+                            zoomVideo: false,
+                            mobileVideoAlign: "left",
+                            alignmentOffset: "-90"
+                        }
                     ]
                 },
                 {
