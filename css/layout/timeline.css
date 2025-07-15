@@ -124,7 +124,7 @@
 .timeline-content {
     display: flex;
     align-items: center;
-    gap: 0px;
+    gap: 15px; /* Consistent gap between all timeline elements */
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -146,7 +146,7 @@
     flex-shrink: 0;
     cursor: default;
     user-select: none;
-    margin-left: 0;
+    margin-left: 0; /* Reset margin - let parent gap handle spacing */
     transition: all 0.3s ease;
     padding: 2px 6px;
     border-radius: 12px;
@@ -160,7 +160,7 @@
 }
 
 .timeline-year-label:first-child {
-    margin-left: 0;
+    margin-left: 0; /* Reset margin - let parent gap handle spacing */
     cursor: default;
     pointer-events: none;
 }
@@ -195,6 +195,7 @@
     vertical-align: middle;
     transform: translateY(-1px);
     pointer-events: none;
+    margin: 0; /* Reset any default margins */
 }
 
 .timeline-dot.active {
@@ -226,9 +227,13 @@
 .timeline-dots-group {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-evenly !important;
-    width: 100px !important;
+    justify-content: center !important; /* Change to center for even spacing */
+    gap: 8px; /* Consistent gap between dots within a year */
+    width: auto !important;
     margin-left: 0;
+    margin-right: 0; /* Remove margin - let parent gap handle spacing */
+    flex-shrink: 0; /* Prevent shrinking */
+    overflow: visible; /* Ensure content is visible */
 }
 
 /* Year label becomes active when any dot in its year is active */
@@ -306,6 +311,10 @@
         min-width: 180px;
     }
     
+    .timeline-content {
+        gap: 12px; /* Slightly smaller gap on mobile */
+    }
+    
     .timeline-nav-btn {
         width: 18px;
         height: 18px;
@@ -333,13 +342,13 @@
     /* Increase spacing for year labels on mobile */
     .timeline-year-label {
         padding: 4px 10px;
-        margin: 0 2px;
+        margin: 0; /* Reset margin - let parent gap handle spacing */
         font-size: 14px;
     }
     
     /* Increase spacing for timeline dots on mobile */
     .timeline-dot {
-        margin: 0 4px;
+        margin: 0; /* Reset margin - let parent gap handle spacing */
         min-width: 16px;
         height: 24px;
         font-size: 17px;
@@ -347,8 +356,9 @@
     
     /* Adjust dots group container for better spacing */
     .timeline-dots-group {
-        width: 120px !important;
-        gap: 8px;
+        gap: 6px; /* Slightly smaller gap between dots on mobile */
+        margin: 0; /* Reset margins */
+        padding: 0; /* Reset padding */
     }
     
     /* Increase line spacing */
@@ -366,6 +376,10 @@
         min-width: 160px;
     }
     
+    .timeline-content {
+        gap: 10px; /* Even smaller gap on very small screens */
+    }
+    
     .timeline-nav-btn.prev {
         margin-right: 10px;
     }
@@ -377,20 +391,21 @@
     /* Extra spacing for very small screens */
     .timeline-year-label {
         padding: 5px 12px;
-        margin: 0 3px;
+        margin: 0; /* Reset margin - let parent gap handle spacing */
         font-size: 13px;
     }
     
     .timeline-dot {
-        margin: 0 5px;
+        margin: 0; /* Reset margin - let parent gap handle spacing */
         min-width: 18px;
         height: 26px;
         font-size: 18px;
     }
     
     .timeline-dots-group {
-        width: 140px !important;
-        gap: 10px;
+        gap: 5px; /* Smaller gap for very small screens */
+        margin: 0; /* Reset margins */
+        padding: 0; /* Reset padding */
     }
     
     .timeline-line {
