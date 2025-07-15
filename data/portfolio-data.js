@@ -693,6 +693,27 @@ const portfolioData = {
                     ]
                 },
                 {
+                    year: 2019,
+                    content: [
+                        {
+                            title: "DigiPen\nArticle",
+                            slug: "digipen-article",
+                            description: "An article written sharing my college and work experiences.",
+                            company: "DigiPen Institute of Technology",
+                            role: "Featured Guest",
+                            trailerUrl: "https://www.youtube.com/embed/EScjdv8EptI",
+                            videoStart: 1,
+                            videoEnd: 10,
+                            zoomVideo: false,
+                            mobileVideoAlign: "center",
+                            alignmentOffset: "0",                            
+                            projectImage: "assets/images/press/digipen-article.png",
+                            buttonLabel: "Read Article",
+                            buttonURL: "https://www.digipen.edu/showcase/news/digipen-digital-audio-graduates-take-the-wheel-in-forza-motorsport-7"
+                        }
+                    ]
+                },
+                {
                     year: 2017,
                     content: [
                         {
