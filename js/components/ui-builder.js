@@ -106,8 +106,14 @@ class UIBuilder {
                 const navBtn = document.createElement('a');
                 navBtn.className = 'nav-btn';
                 
-                // Set href - use '#' for modal items to prevent navigation
-                if (navItem.id === 'resume' || navItem.url === '#' || navItem.url === '#about') {
+                // Set href - use proper URLs for sections
+                if (navItem.id === 'about') {
+                    navBtn.href = '#about';
+                } else if (navItem.id === 'resume') {
+                    navBtn.href = '#resume';
+                } else if (navItem.id === 'connect') {
+                    navBtn.href = '#connect';
+                } else if (navItem.url === '#') {
                     navBtn.href = '#';
                 } else {
                     navBtn.href = navItem.url;
@@ -115,94 +121,28 @@ class UIBuilder {
                 
                 navBtn.textContent = navItem.label;
                 
-                // Add target="_blank" for external links only (not modal items)
-                if (navItem.url.startsWith('http') && navItem.id !== 'resume' && navItem.url !== '#' && navItem.url !== '#about') {
+                // Add target="_blank" for external links only (not modal items or sections)
+                if (navItem.url.startsWith('http') && !['about', 'resume', 'connect'].includes(navItem.id) && navItem.url !== '#') {
                     navBtn.target = '_blank';
                 }
                 
-                // Add click handler for modal/card items and resume
-                if (navItem.url === '#' || navItem.url === '#about' || navItem.id === 'resume') {
+                // Add click handler for modal/card items and sections
+                if (['about', 'resume', 'connect'].includes(navItem.id) || navItem.url === '#') {
                     navBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         // Close mobile menu if open
                         this.closeMobileMenu();
                         
-                        // Handle about button click
+                        // Handle section navigation with URL routing
                         if (navItem.id === 'about') {
-                            // Function to try showing the about card
-                            const tryShowAboutCard = () => {
-                                if (window.aboutCardManager) {
-                                    window.aboutCardManager.show();
-                                    return true;
-                                }
-                                return false;
-                            };
-                            
-                            // Try immediately
-                            if (!tryShowAboutCard()) {
-                                // Try again after a short delay
-                                setTimeout(() => {
-                                    if (!tryShowAboutCard()) {
-                                        // Try one more time after a longer delay
-                                        setTimeout(() => {
-                                            tryShowAboutCard();
-                                        }, 500);
-                                    }
-                                }, 100);
-                            }
-                        }
-                        
-                        // Handle resume button click
-                        if (navItem.id === 'resume') {
-                            // Function to try showing the resume viewer
-                            const tryShowResumeViewer = () => {
-                                if (window.resumeViewer) {
-                                    window.resumeViewer.show();
-                                    return true;
-                                }
-                                return false;
-                            };
-                            
-                            // Try immediately
-                            if (!tryShowResumeViewer()) {
-                                // Try again after a short delay
-                                setTimeout(() => {
-                                    if (!tryShowResumeViewer()) {
-                                        // Try one more time after a longer delay
-                                        setTimeout(() => {
-                                            tryShowResumeViewer();
-                                        }, 500);
-                                    }
-                                }, 100);
-                            }
-                        }
-                        
-                        // Handle connect button click
-                        if (navItem.id === 'connect') {
-                            // Function to try showing the connect card
-                            const tryShowConnectCard = () => {
-                                if (window.contactCardManager) {
-                                    window.contactCardManager.show();
-                                    return true;
-                                }
-                                return false;
-                            };
-                            
-                            // Try immediately
-                            if (!tryShowConnectCard()) {
-                                // Try again after a short delay
-                                setTimeout(() => {
-                                    if (!tryShowConnectCard()) {
-                                        // Try one more time after a longer delay
-                                        setTimeout(() => {
-                                            tryShowConnectCard();
-                                        }, 500);
-                                    }
-                                }, 100);
-                            }
+                            window.urlRouter.navigateToSectionWithURL('about');
+                        } else if (navItem.id === 'resume') {
+                            window.urlRouter.navigateToSectionWithURL('resume');
+                        } else if (navItem.id === 'connect') {
+                            window.urlRouter.navigateToSectionWithURL('connect');
                         }
                     });
-                } else if (navItem.id !== 'resume' && navItem.url !== '#' && navItem.url !== '#about') {
+                } else {
                     // Close mobile menu when clicking external links
                     navBtn.addEventListener('click', () => {
                         this.closeMobileMenu();

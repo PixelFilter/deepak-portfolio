@@ -27,8 +27,8 @@ const portfolioData = {
     },
     navigation: [
         {id:"about", label: "ABOUT", url: "#about"},
-        { id: "resume", label: "RESUME", url: "https://drive.google.com/file/d/1mEzfjeDsK1AXmpjJhJ7EOcCXMU4irOVZ/view?usp=drive_link" },
-        { id: "connect", label: "CONNECT", url: "#" }
+        { id: "resume", label: "RESUME", url: "#resume" },
+        { id: "connect", label: "CONNECT", url: "#connect" }
     ],
     filters: [
         { id: "games", label: "Games", active: true },

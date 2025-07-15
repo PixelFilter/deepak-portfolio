@@ -220,6 +220,12 @@ class AboutCardManager {
         // Update navigation buttons when about card is closed
         this.updateNavigationButtons();
 
+        // Navigate back to current portfolio category when card is closed
+        if (window.urlRouter && window.contentManager) {
+            const currentCategory = window.contentManager.activeFilter || 'games';
+            window.urlRouter.navigateToCategory(currentCategory, true);
+        }
+
         // Track analytics if available
         if (typeof gtag !== 'undefined') {
             gtag('event', 'about_card_closed', {

@@ -2,6 +2,7 @@
 class URLRouter {
     constructor() {
         this.validCategories = ['games', 'apps', 'music', 'press'];
+        this.validSections = ['about', 'resume', 'connect'];
         this.defaultCategory = 'games';
         this.init();
     }
@@ -14,23 +15,40 @@ class URLRouter {
         });
     }
 
-    // Parse current URL to extract category and project
+    // Parse current URL to extract category, section, or project
     parseCurrentURL() {
         const hash = window.location.hash.slice(1); // Remove #
         const parts = hash.split('/');
         
-        const category = parts[0] || this.defaultCategory;
-        const projectSlug = parts[1] || null;
+        const firstPart = parts[0] || this.defaultCategory;
+        const secondPart = parts[1] || null;
+        
+        // Check if first part is a valid section (about, resume, contact)
+        if (this.validSections.includes(firstPart)) {
+            return {
+                type: 'section',
+                section: firstPart,
+                category: null,
+                projectSlug: null
+            };
+        }
+        
+        // Otherwise, treat as category/project navigation
+        const category = this.validCategories.includes(firstPart) ? firstPart : this.defaultCategory;
+        const projectSlug = secondPart || null;
         
         return {
-            category: this.validCategories.includes(category) ? category : this.defaultCategory,
-            projectSlug
+            type: 'category',
+            category,
+            projectSlug,
+            section: null
         };
     }
 
     // Get category from current URL hash (backward compatibility)
     getCategoryFromURL() {
-        return this.parseCurrentURL().category;
+        const routeInfo = this.parseCurrentURL();
+        return routeInfo.type === 'category' ? routeInfo.category : this.defaultCategory;
     }
 
     // Update URL with category and optional project
@@ -40,35 +58,78 @@ class URLRouter {
             if (projectSlug) {
                 newURL += `/${projectSlug}`;
             }
-            window.history.pushState({ category, projectSlug }, '', newURL);
+            window.history.pushState({ type: 'category', category, projectSlug }, '', newURL);
         }
     }
 
-    // Navigate to a route with category and optional project
-    navigateToRoute(routeInfo, updateURL = true) {
-        const { category, projectSlug } = routeInfo;
-        
-        // Update URL if requested
-        if (updateURL) {
-            this.updateURL(category, projectSlug);
+    // Update URL for sections (about, resume, contact)
+    updateSectionURL(section) {
+        if (this.validSections.includes(section)) {
+            const newURL = `${window.location.pathname}#${section}`;
+            window.history.pushState({ type: 'section', section }, '', newURL);
         }
+    }
 
-        // Switch to the category using the content manager
-        if (window.contentManager) {
-            window.contentManager.switchToCategory(category);
+    // Navigate to a route with category/section and optional project
+    navigateToRoute(routeInfo, updateURL = true) {
+        if (routeInfo.type === 'section') {
+            // Handle section navigation (about, resume, contact)
+            if (updateURL) {
+                this.updateSectionURL(routeInfo.section);
+            }
+            this.navigateToSection(routeInfo.section);
+        } else {
+            // Handle category navigation
+            const { category, projectSlug } = routeInfo;
             
-            // If project slug is provided, navigate to that project after category switch
-            if (projectSlug) {
-                setTimeout(() => {
-                    this.navigateToProject(projectSlug);
-                }, 200); // Small delay to ensure category switch completes
+            // Update URL if requested
+            if (updateURL) {
+                this.updateURL(category, projectSlug);
+            }
+
+            // Switch to the category using the content manager
+            if (window.contentManager) {
+                window.contentManager.switchToCategory(category);
+                
+                // If project slug is provided, navigate to that project after category switch
+                if (projectSlug) {
+                    setTimeout(() => {
+                        this.navigateToProject(projectSlug);
+                    }, 200); // Small delay to ensure category switch completes
+                }
             }
         }
     }
 
+    // Navigate to a section (about, resume, contact)
+    navigateToSection(section) {
+        switch (section) {
+            case 'about':
+                if (window.aboutCardManager) {
+                    window.aboutCardManager.show();
+                }
+                break;
+            case 'resume':
+                if (window.resumeViewer) {
+                    window.resumeViewer.show();
+                }
+                break;
+            case 'connect':
+                if (window.contactCardManager) {
+                    window.contactCardManager.show();
+                }
+                break;
+        }
+    }
+
+    // Navigate to a section with URL update
+    navigateToSectionWithURL(section) {
+        this.navigateToRoute({ type: 'section', section }, true);
+    }
+
     // Navigate to a category (with or without URL update) - backward compatibility
     navigateToCategory(category, updateURL = true) {
-        this.navigateToRoute({ category, projectSlug: null }, updateURL);
+        this.navigateToRoute({ type: 'category', category, projectSlug: null }, updateURL);
     }
 
     // Navigate to a specific project within current category
@@ -80,12 +141,13 @@ class URLRouter {
 
     // Navigate to a specific project with category
     navigateToProjectInCategory(category, projectSlug, updateURL = true) {
-        this.navigateToRoute({ category, projectSlug }, updateURL);
+        this.navigateToRoute({ type: 'category', category, projectSlug }, updateURL);
     }
 
     // Get the initial category from URL on page load
     getInitialCategory() {
-        return this.parseCurrentURL().category;
+        const routeInfo = this.parseCurrentURL();
+        return routeInfo.type === 'category' ? routeInfo.category : this.defaultCategory;
     }
 
     // Get the initial route info from URL on page load
@@ -100,7 +162,15 @@ class URLRouter {
             if (projectSlug) {
                 newURL += `/${projectSlug}`;
             }
-            window.history.replaceState({ category, projectSlug }, '', newURL);
+            window.history.replaceState({ type: 'category', category, projectSlug }, '', newURL);
+        }
+    }
+
+    // Replace current URL for sections without adding to history
+    replaceSectionURL(section) {
+        if (this.validSections.includes(section)) {
+            const newURL = `${window.location.pathname}#${section}`;
+            window.history.replaceState({ type: 'section', section }, '', newURL);
         }
     }
 }

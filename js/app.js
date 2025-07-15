@@ -15,11 +15,11 @@ class App {
         this.urlRouter = new URLRouter();
         window.urlRouter = this.urlRouter;
         
-        // Get initial route from URL (category and optional project)
+        // Get initial route from URL (category/section and optional project)
         const initialRoute = this.urlRouter.getInitialRoute();
         
-        // Set the initial category in the data before building UI
-        if (window.portfolioData && window.portfolioData.setActiveFilter) {
+        // Set the initial category in the data before building UI (only for category routes)
+        if (initialRoute.type === 'category' && window.portfolioData && window.portfolioData.setActiveFilter) {
             window.portfolioData.setActiveFilter(initialRoute.category);
         }
         
@@ -56,13 +56,21 @@ class App {
         // Update URL to reflect initial route (use replace to not add to history)
         // Add delay to ensure all components are initialized
         setTimeout(() => {
-            this.urlRouter.replaceURL(initialRoute.category, initialRoute.projectSlug);
-            
-            // If there's a project slug, navigate to it after initialization
-            if (initialRoute.projectSlug) {
+            if (initialRoute.type === 'section') {
+                this.urlRouter.replaceSectionURL(initialRoute.section);
+                // Navigate to the section after all components are loaded
                 setTimeout(() => {
-                    this.urlRouter.navigateToProject(initialRoute.projectSlug);
+                    this.urlRouter.navigateToSection(initialRoute.section);
                 }, 300);
+            } else {
+                this.urlRouter.replaceURL(initialRoute.category, initialRoute.projectSlug);
+                
+                // If there's a project slug, navigate to it after initialization
+                if (initialRoute.projectSlug) {
+                    setTimeout(() => {
+                        this.urlRouter.navigateToProject(initialRoute.projectSlug);
+                    }, 300);
+                }
             }
         }, 100);
         

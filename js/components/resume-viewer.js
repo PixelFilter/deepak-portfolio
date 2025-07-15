@@ -321,6 +321,12 @@ class ResumeViewer {
         // Update navigation buttons when resume viewer is closed
         this.updateNavigationButtons();
 
+        // Navigate back to current portfolio category when viewer is closed
+        if (window.urlRouter && window.contentManager) {
+            const currentCategory = window.contentManager.activeFilter || 'games';
+            window.urlRouter.navigateToCategory(currentCategory, true);
+        }
+
         // Track analytics if available
         if (typeof gtag !== 'undefined') {
             gtag('event', 'resume_viewer_closed', {

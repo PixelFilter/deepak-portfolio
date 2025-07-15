@@ -156,6 +156,12 @@ class ContactCardManager {
         // Update navigation buttons when contact card is closed
         this.updateNavigationButtons();
         
+        // Navigate back to current portfolio category when card is closed
+        if (window.urlRouter && window.contentManager) {
+            const currentCategory = window.contentManager.activeFilter || 'games';
+            window.urlRouter.navigateToCategory(currentCategory, true);
+        }
+        
         // Trigger custom event
         document.dispatchEvent(new CustomEvent('contactCardClose'));
     }
