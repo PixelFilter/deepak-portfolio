@@ -18,12 +18,22 @@ class URLRouter {
     // Parse current URL to extract category, section, or project
     parseCurrentURL() {
         const hash = window.location.hash.slice(1); // Remove #
-        const parts = hash.split('/');
-        
-        const firstPart = parts[0] || this.defaultCategory;
+        const parts = hash.split('/').filter(Boolean);
+
+        // If hash is empty, use default category
+        if (parts.length === 0) {
+            return {
+                type: 'category',
+                category: this.defaultCategory,
+                projectSlug: null,
+                section: null
+            };
+        }
+
+        const firstPart = parts[0];
         const secondPart = parts[1] || null;
-        
-        // Check if first part is a valid section (about, resume, contact)
+
+        // Check if first part is a valid section (about, resume, connect)
         if (this.validSections.includes(firstPart)) {
             return {
                 type: 'section',
@@ -32,11 +42,11 @@ class URLRouter {
                 projectSlug: null
             };
         }
-        
+
         // Otherwise, treat as category/project navigation
         const category = this.validCategories.includes(firstPart) ? firstPart : this.defaultCategory;
-        const projectSlug = secondPart || null;
-        
+        const projectSlug = secondPart && secondPart.length > 0 ? secondPart : null;
+
         return {
             type: 'category',
             category,

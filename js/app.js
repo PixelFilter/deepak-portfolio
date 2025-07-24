@@ -67,9 +67,19 @@ class App {
                 
                 // If there's a project slug, navigate to it after initialization
                 if (initialRoute.projectSlug) {
-                    setTimeout(() => {
-                        this.urlRouter.navigateToProject(initialRoute.projectSlug);
-                    }, 300);
+                    // Wait until timelineManager is initialized and timeline items are available
+                    const tryNavigateToProject = () => {
+                        if (
+                            window.timelineManager &&
+                            window.timelineManager.timelineItems &&
+                            window.timelineManager.timelineItems.length > 0
+                        ) {
+                            this.urlRouter.navigateToProject(initialRoute.projectSlug);
+                        } else {
+                            setTimeout(tryNavigateToProject, 100);
+                        }
+                    };
+                    tryNavigateToProject();
                 }
             }
         }, 100);
