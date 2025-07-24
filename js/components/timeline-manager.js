@@ -18,7 +18,7 @@ class TimelineManager {
         this.maxVerticalSwipe = 100; // Maximum vertical movement to still count as horizontal swipe
         // Auto-transition properties
         this.autoTransitionTimer = null;
-        this.autoTransitionDelay = 10000; // 10 seconds of inactivity before auto-transition
+        this.autoTransitionDelay = 3000; // 3 seconds of inactivity before auto-transition
         this.isAutoTransitioning = false;
         this.autoTransitionEnabled = false; // Default to disabled, enabled after loading
         this.lastUserActivity = Date.now();
