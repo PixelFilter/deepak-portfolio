@@ -9,6 +9,7 @@ class VideoBackground {
         this.timeChecker = null;
         this.zoomVideo = true; // Default to zoom enabled
         this.isMuted = true; // Default to muted for mobile autoplay compatibility
+        this.userMutePreference = true; // Persist user mute/unmute preference
         this.init();
     }
     init() {
@@ -55,7 +56,8 @@ class VideoBackground {
         // Set mute state based on category and device
         // For mobile devices, start muted even for press videos to enable autoplay, then unmute
         const isMobile = this.isMobileDevice();
-        const shouldBeMuted = isMobile ? true : (category !== 'press');
+        // Use user's mute preference for all videos
+        const shouldBeMuted = this.userMutePreference;
         
         if (this.isMuted !== shouldBeMuted) {
             this.isMuted = shouldBeMuted;
@@ -63,7 +65,7 @@ class VideoBackground {
         }
         
         // Store the desired final mute state for press videos on mobile
-        this.targetMuteState = category !== 'press' ? true : false;
+        this.targetMuteState = category === 'press' ? false : true;
         
         // Create a unique identifier for this video configuration
         const videoId = `${trailerUrl}_${videoStart || 'none'}_${videoEnd || 'none'}`;
@@ -167,24 +169,30 @@ class VideoBackground {
         // Add error handling for autoplay failures on mobile
         iframe.addEventListener('load', () => {
             const isMobile = this.isMobileDevice();
+            // Always attempt to autoplay and unmute for press videos after load
             if (isMobile) {
-                // Add interaction listeners to enable autoplay after user interaction
                 this.setupMobileAutoplayFallback();
-                
+
                 // Add a small delay then check if video is playing
                 setTimeout(() => {
-                    // If autoplay failed, try to force playback through the API
                     if (this.player && typeof this.player.getPlayerState === 'function') {
                         const state = this.player.getPlayerState();
                         // If video is not playing (-1 = unstarted, 2 = paused)
                         if (state === -1 || state === 2) {
-                            // Apply current mute state and try to play
-                            if (this.isMuted) {
-                                this.player.mute();
-                            } else {
-                                this.player.unMute();
-                            }
+                            this.player.mute();
                             this.player.playVideo();
+                        }
+                        // For press category, always try to unmute after play
+                        if (this.targetMuteState === false) {
+                            setTimeout(() => {
+                                try {
+                                    this.player.unMute();
+                                    this.isMuted = false;
+                                    this.updateSoundToggleUI();
+                                } catch (error) {
+                                    console.log('Failed to unmute after autoplay:', error);
+                                }
+                            }, 500);
                         }
                     }
                 }, 1000);
@@ -451,6 +459,7 @@ class VideoBackground {
     toggleSound() {
         const soundToggle = document.getElementById('sound-toggle');
         this.isMuted = !this.isMuted;
+        this.userMutePreference = this.isMuted; // Persist user preference
         this.updateSoundToggleUI();
         
         // Update current video if playing
@@ -495,12 +504,12 @@ class VideoBackground {
             // Try to play any current video
             if (this.currentVideo && this.player) {
                 try {
-                    // Start muted to ensure autoplay works
+                    // Always start muted to ensure autoplay works
                     this.player.mute();
                     this.player.playVideo();
                     
-                    // If this is a press video and we want it unmuted, unmute after successful play
-                    if (!this.targetMuteState) {
+                    // For press videos, unmute after user interaction
+                    if (this.targetMuteState === false) {
                         setTimeout(() => {
                             try {
                                 this.player.unMute();
