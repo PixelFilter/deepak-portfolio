@@ -9,6 +9,16 @@ class ContentManager {
         this.activeFilter = activeFilterData ? activeFilterData.id : 'games';
         
         this.init();
+        // Intersection check on resize, initial load, and mouseup (not on scroll)
+        // Debounced intersection check after resizing stops
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => this.checkDescriptionImageIntersection(), 200);
+        });
+        // Initial check on load
+        window.addEventListener('DOMContentLoaded', () => this.checkDescriptionImageIntersection());
+        setTimeout(() => this.checkDescriptionImageIntersection(), 100);
     }
     init() {
         this.setupFilterListeners();
@@ -301,6 +311,10 @@ class ContentManager {
                 contributionsBtn: !!contributionsBtn
             });
         }
+    // After updating content, check for intersection
+    setTimeout(() => {
+        this.checkDescriptionImageIntersection();
+    }, 50);
     }
     hideBackgroundText() {
         const backgroundText = document.getElementById('backgroundText');
@@ -587,7 +601,67 @@ class ContentManager {
                 }
             }
         });
+        // Also check intersection on resize
+        this.checkDescriptionImageIntersection();
+    }
+    // Helper: Check intersection between description and image, add debug indication
+    checkDescriptionImageIntersection() {
+        const description = document.querySelector('.background-description');
+        const image = document.getElementById('backgroundProjectImage');
+        // Inject CSS for smooth transition and intersection class if not present
+        if (!document.getElementById('desc-intersect-style')) {
+            const style = document.createElement('style');
+            style.id = 'desc-intersect-style';
+            style.textContent = `
+                .background-description {
+                    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+                }
+                .background-description.intersecting {
+                    width: 60% !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        if (!description || !image || image.style.display === 'none' || !image.classList.contains('visible')) {
+            // Remove debug styles if not visible
+            if (description) {
+            }
+            if (image) {
+            }
+            return;
+        }
+        const descRect = description.getBoundingClientRect();
+        const imgRect = image.getBoundingClientRect();
+        const intersects = !(descRect.right < imgRect.left ||
+                            descRect.left > imgRect.right ||
+                            descRect.bottom < imgRect.top ||
+                            descRect.top > imgRect.bottom);
+        if (intersects) {
+            description.classList.add('intersecting');
+        } else {
+            description.classList.remove('intersecting');
+        }
+        // Extra: run again after 100ms in case layout is still settling
+        clearTimeout(this._intersectionTimeout);
+        this._intersectionTimeout = setTimeout(() => {
+            // Only run if elements are still in DOM
+            if (document.body.contains(description) && document.body.contains(image)) {
+                const descRect2 = description.getBoundingClientRect();
+                const imgRect2 = image.getBoundingClientRect();
+                const intersects2 = !(descRect2.right < imgRect2.left ||
+                                    descRect2.left > imgRect2.right ||
+                                    descRect2.bottom < imgRect2.top ||
+                                    descRect2.top > imgRect2.bottom);
+                if (intersects2) {
+                    description.classList.add('intersecting');
+                }
+            }
+        }, 100);
+        // Also: run on image load
+        image.onload = () => {
+            this.checkDescriptionImageIntersection();
+        };
     }
 }
-// Export for use in other modules
-window.ContentManager = ContentManager;
+ // Export for use in modules
+ window.ContentManager = ContentManager;
