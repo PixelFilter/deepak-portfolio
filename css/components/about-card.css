@@ -25,9 +25,54 @@
     width: 800px;
     max-width: 90vw;
     min-height: 400px;
-    max-height: 75vh;
+    max-height: calc(100vh - 40px);
     position: relative;
     transition: transform 0.3s ease-out;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Ensure modal never gets cut off and always scrolls vertically if needed */
+}
+/* Custom scrollbar for about-card modal (matches resume modal) */
+.about-card::-webkit-scrollbar {
+    display: block !important;
+    width: 8px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px;
+}
+
+.about-card::-webkit-scrollbar:hover {
+    width: 10px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.about-card::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px;
+}
+
+.about-card::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 10px;
+    transition: background 0.3s ease !important;
+    min-height: 20px;
+}
+
+.about-card::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.about-card::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.about-card::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Firefox scrollbar styling for about-card */
+.about-card {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
 }
 
 .about-card:hover {
