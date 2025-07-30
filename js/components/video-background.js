@@ -199,12 +199,12 @@ class VideoBackground {
         // Apply mobile video alignment
         this.applyMobileVideoAlignment();
 
-        // Add mute/unmute toggle on tap for mobile (attach directly to iframe)
+        // Add mute/unmute toggle on tap for mobile (attach to video container, not iframe)
         if (this.isMobileDevice()) {
             const toggleMute = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                if (this.player) {
+                if (this.player && typeof this.player.mute === 'function' && typeof this.player.unMute === 'function') {
                     this.isMuted = !this.isMuted;
                     if (this.isMuted) {
                         this.player.mute();
@@ -214,7 +214,7 @@ class VideoBackground {
                     this.updateSoundToggleUI();
                 }
             };
-            iframe.addEventListener('touchstart', toggleMute, true);
+            this.videoContainer.addEventListener('touchstart', toggleMute, true);
         }
 
         // Show video with fade-in effect
