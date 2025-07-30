@@ -64,8 +64,8 @@ class VideoBackground {
             this.updateSoundToggleUI();
         }
         
-        // Store the desired final mute state for press videos on mobile
-        this.targetMuteState = category === 'press' ? false : true;
+        // Always keep videos muted for autoplay on mobile, regardless of category
+        this.targetMuteState = true;
         
         // Create a unique identifier for this video configuration
         const videoId = `${trailerUrl}_${videoStart || 'none'}_${videoEnd || 'none'}`;
@@ -187,28 +187,6 @@ class VideoBackground {
                 }, 1000);
             }
         });
-
-        // On mobile, listen for user gesture to unmute press videos
-        if (this.isMobileDevice() && this.targetMuteState === false) {
-            const unmuteOnGesture = () => {
-                if (this.player && typeof this.player.unMute === 'function') {
-                    try {
-                        this.player.unMute();
-                        this.isMuted = false;
-                        this.updateSoundToggleUI();
-                    } catch (error) {
-                        console.log('Failed to unmute after gesture:', error);
-                    }
-                }
-                // Remove listeners after first gesture
-                ['touchstart', 'touchend', 'click', 'keydown'].forEach(event => {
-                    document.removeEventListener(event, unmuteOnGesture, true);
-                });
-            };
-            ['touchstart', 'touchend', 'click', 'keydown'].forEach(event => {
-                document.addEventListener(event, unmuteOnGesture, true);
-            });
-        }
         
         this.videoContainer.appendChild(iframe);
         this.currentVideo = iframe;
