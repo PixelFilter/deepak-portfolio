@@ -204,12 +204,14 @@ class VideoBackground {
             const toggleMute = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                if (this.player && typeof this.player.mute === 'function' && typeof this.player.unMute === 'function') {
-                    this.isMuted = !this.isMuted;
+                if (this.player && typeof this.player.mute === 'function' && typeof this.player.unMute === 'function' && typeof this.player.playVideo === 'function') {
                     if (this.isMuted) {
-                        this.player.mute();
-                    } else {
                         this.player.unMute();
+                        this.player.playVideo();
+                        this.isMuted = false;
+                    } else {
+                        this.player.mute();
+                        this.isMuted = true;
                     }
                     this.updateSoundToggleUI();
                 }
