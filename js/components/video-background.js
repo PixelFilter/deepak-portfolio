@@ -198,6 +198,25 @@ class VideoBackground {
         this.adjustVideoSize();
         // Apply mobile video alignment
         this.applyMobileVideoAlignment();
+
+        // Add mute/unmute toggle on tap for mobile
+        if (this.isMobileDevice()) {
+            const toggleMute = (e) => {
+                e.preventDefault();
+                if (this.player) {
+                    this.isMuted = !this.isMuted;
+                    if (this.isMuted) {
+                        this.player.mute();
+                    } else {
+                        this.player.unMute();
+                    }
+                    this.updateSoundToggleUI();
+                }
+            };
+            this.videoContainer.addEventListener('touchstart', toggleMute, true);
+            this.videoContainer.addEventListener('click', toggleMute, true);
+        }
+
         // Show video with fade-in effect
         setTimeout(() => {
             this.videoContainer.classList.add('visible');
