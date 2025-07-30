@@ -199,25 +199,7 @@ class VideoBackground {
         // Apply mobile video alignment
         this.applyMobileVideoAlignment();
 
-        // Add mute/unmute toggle on tap for mobile (attach to video container, not iframe)
-        if (this.isMobileDevice()) {
-            const toggleMute = (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (this.player && typeof this.player.mute === 'function' && typeof this.player.unMute === 'function' && typeof this.player.playVideo === 'function') {
-                    if (this.isMuted) {
-                        this.player.unMute();
-                        this.player.playVideo();
-                        this.isMuted = false;
-                    } else {
-                        this.player.mute();
-                        this.isMuted = true;
-                    }
-                    this.updateSoundToggleUI();
-                }
-            };
-            this.videoContainer.addEventListener('touchstart', toggleMute, true);
-        }
+        // No mobile-specific mute/unmute logic; mute/unmute only via sound toggle (same as desktop)
 
         // Show video with fade-in effect
         setTimeout(() => {
