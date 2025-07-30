@@ -78,6 +78,8 @@ class VideoBackground {
         this.zoomVideo = zoomVideo;
         this.currentMobileVideoAlign = mobileVideoAlign;
         this.currentAlignmentOffset = alignmentOffset;
+        // Reset autoplayAttempted for each new video
+        this.autoplayAttempted = false;
         // If instant transition is requested, use subtle fade instead of black overlay
         if (isInstant && this.videoContainer.innerHTML !== '') {
             // Use a subtle fade transition instead of black overlay
@@ -169,7 +171,6 @@ class VideoBackground {
         // Add error handling for autoplay failures on mobile
         iframe.addEventListener('load', () => {
             const isMobile = this.isMobileDevice();
-            // Always attempt to autoplay and unmute for press videos after load
             if (isMobile) {
                 this.setupMobileAutoplayFallback();
 
@@ -182,22 +183,32 @@ class VideoBackground {
                             this.player.mute();
                             this.player.playVideo();
                         }
-                        // For press category, always try to unmute after play
-                        if (this.targetMuteState === false) {
-                            setTimeout(() => {
-                                try {
-                                    this.player.unMute();
-                                    this.isMuted = false;
-                                    this.updateSoundToggleUI();
-                                } catch (error) {
-                                    console.log('Failed to unmute after autoplay:', error);
-                                }
-                            }, 500);
-                        }
                     }
                 }, 1000);
             }
         });
+
+        // On mobile, listen for user gesture to unmute press videos
+        if (this.isMobileDevice() && this.targetMuteState === false) {
+            const unmuteOnGesture = () => {
+                if (this.player && typeof this.player.unMute === 'function') {
+                    try {
+                        this.player.unMute();
+                        this.isMuted = false;
+                        this.updateSoundToggleUI();
+                    } catch (error) {
+                        console.log('Failed to unmute after gesture:', error);
+                    }
+                }
+                // Remove listeners after first gesture
+                ['touchstart', 'touchend', 'click', 'keydown'].forEach(event => {
+                    document.removeEventListener(event, unmuteOnGesture, true);
+                });
+            };
+            ['touchstart', 'touchend', 'click', 'keydown'].forEach(event => {
+                document.addEventListener(event, unmuteOnGesture, true);
+            });
+        }
         
         this.videoContainer.appendChild(iframe);
         this.currentVideo = iframe;
