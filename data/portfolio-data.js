@@ -509,7 +509,7 @@ const portfolioData = {
                             description: "Hyperbolic Chamber is a platform to showcase immersive, experimental electronic music from underground artists including us.",
                             company: "Passion Project",
                             role: "Co-Founder",
-                            trailerUrl: "https://www.youtube.com/embed/sB-UvVvmUfk",
+                            trailerUrl: "https://www.youtube.com/embed/7B9Kr_DX7HI",
                             videoStart: 2738,
                             videoEnd: 2838,
                             zoomVideo: false,
